@@ -1,0 +1,21 @@
+= My Document Title
+:data-uri:
+:icons:
+:toc2:
+:numbered:
+
+== Chapter 1
+some content
+
+== Chapter 2
+some more content
+
+.Some Table
+|====
+^| Heading1 ^| Heading2
+| row1 column1 content |
+| | row2 column2 content
+|====
+
+.Some Figure
+image::screenshot.png[Screenshot Text]
