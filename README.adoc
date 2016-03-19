@@ -1,0 +1,50 @@
+////
+ README.adoc
+
+-------------------------------------------------------------------------------
+   Copyright 2016 Kevin Morey <kevin@redhat.com>
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-------------------------------------------------------------------------------
+////
+
+= Welcome to the CloudForms Essentials Project
+
+This project is designed to augment Red Hat(R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms] in the following ways:
+
+* Automate
+** IT Process automation
+** Task/Event processing
+** Lifecycle provisioning & retirement
+** Additional Integrations into the providers that CF currently supports (I.e. EC2, vCenter, RHEV, Satellite, OpenStack, etc...)
+
+* Dialogs
+** Sample service dialogs for provisioning VMs and performing other tasks
+
+* Control
+** Control policies and profiles
+
+* Alerts
+** Alert profiles
+
+* Reports
+** Reports and dashboard widgets
+
+* Buttons
+** Custom buttons to perform day-2 operations
+
+== Want to contribute?
+* See our link:style_guide.adoc[Style Guide]
+* Fork the project and submite PRs
+
+
