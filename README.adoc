@@ -20,31 +20,19 @@
 
 = Welcome to the CloudForms Essentials Project
 
-This project is designed to augment Red Hat(R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms] in the following ways:
-
-* Automate
-** IT Process automation
-** Task/Event processing
-** Lifecycle provisioning & retirement
-** Additional Integrations into the providers that CF currently supports (I.e. EC2, vCenter, RHEV, Satellite, OpenStack, etc...)
-
-* Dialogs
-** Sample service dialogs for provisioning VMs and performing other tasks
-
-* Control
-** Control policies and profiles
+This project was designed to augment Red Hat (R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms] in the following ways:
 
 * Alerts
-** Alert profiles
-
-* Reports
-** Reports and dashboard widgets
-
+* Automation
 * Buttons
-** Custom buttons to perform day-2 operations
+* Control
+* Dialogs
+* Reports
 
-== Want to contribute?
-* See our link:style_guide.adoc[Style Guide]
-* Fork the project and submite PRs
+<<top>>
 
+== Installation Instructions
+* See our https://github.com/ramrexx/CloudForms_Essentials/wiki[CloudForms Essentials wiki]
+
+<<top>>
 
