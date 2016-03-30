@@ -1,0 +1,1274 @@
+---
+- description: 
+  buttons: submit,cancel
+  label: rhev_add_comments_to_vm
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: RHEV VM
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: description
+        description: 
+        type: DialogFieldTextAreaBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options: {}
+        label: Description
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: rhev_create_snapshot
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: RHEV
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Create Snapshot
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: snapshot_description
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Description
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: rhev_list_vm_snapshots
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: RHEV
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: VM Snapshots
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: snapshot_ref
+        description: 
+        type: DialogFieldDropDownList
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values:
+        - - 
+          - "<Script error>"
+        values_method: 
+        values_method_options: {}
+        options: {}
+        label: Description
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: true
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/RHEV
+          ae_class: DynamicDialogs
+          ae_instance: list_rhev_vm_snapshot_refs
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: rhev_catalogItem
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: RHEV Provisioning
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Service Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: service_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_0_environment
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values:
+        - - dev
+          - Development
+        - - prod
+          - Production
+        - - test
+          - Test
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Environment
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: 
+      display: edit
+      label: VM Information
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: option_1_vm_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: VM Name
+        position: 0
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_cores_per_socket
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        - - '4'
+          - '4'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: CPUs *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_vm_memory
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1024'
+        values:
+        - - '1024'
+          - 1GB
+        - - '2048'
+          - 2GB
+        - - '4096'
+          - 4GB
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Memory *
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_1_function
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values:
+        - - app
+          - Application Server
+        - - db
+          - Database Server
+        - - web
+          - Web Server
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Function *
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: rhev_build_request_admin
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: RHEV Build Request
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Service Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: service_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_0_environment
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: test
+        values:
+        - - dev
+          - Development
+        - - prod
+          - Production
+        - - qa
+          - Quality Assurance
+        - - test
+          - Test
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Environment *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: ''
+      display: edit
+      label: VM Information
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: option_1_provider_id
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '2'
+        values:
+        - - 2
+          - 'rhevm_rdu in '
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Provider *
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/RHEV
+          ae_class: DynamicDialogs
+          ae_instance: list_rhev_provider_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_guid
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: a96ee524-e6ec-11e5-a282-5254001018da
+        values:
+        - - a96ee524-e6ec-11e5-a282-5254001018da
+          - AEP on rhevm_rdu
+        - - a97c5434-e6ec-11e5-a282-5254001018da
+          - Bootcamp-Template on rhevm_rdu
+        - - a98bb078-e6ec-11e5-a282-5254001018da
+          - cfme54_latest on rhevm_rdu
+        - - a99d7fce-e6ec-11e5-a282-5254001018da
+          - cfme55_ga on rhevm_rdu
+        - - a9af613a-e6ec-11e5-a282-5254001018da
+          - cf-openshift-demo on rhevm_rdu
+        - - a9be26fc-e6ec-11e5-a282-5254001018da
+          - cf-ose-template on rhevm_rdu
+        - - a9d41e26-e6ec-11e5-a282-5254001018da
+          - CloudForms4_Beta2 on rhevm_rdu
+        - - a9e26d28-e6ec-11e5-a282-5254001018da
+          - DEMO-rhel7-template on rhevm_rdu
+        - - a9efcedc-e6ec-11e5-a282-5254001018da
+          - GreyLifeDB on rhevm_rdu
+        - - a9fd2c94-e6ec-11e5-a282-5254001018da
+          - joeg-rhel7-mpl on rhevm_rdu
+        - - aa0ac516-e6ec-11e5-a282-5254001018da
+          - josborne-jdg-demo on rhevm_rdu
+        - - aa17ee62-e6ec-11e5-a282-5254001018da
+          - lab7-sa-training on rhevm_rdu
+        - - aa24da14-e6ec-11e5-a282-5254001018da
+          - lab7-sa-training-v3 on rhevm_rdu
+        - - aa3365de-e6ec-11e5-a282-5254001018da
+          - lab7-upgradetesting on rhevm_rdu
+        - - aa4201c0-e6ec-11e5-a282-5254001018da
+          - plumgrid on rhevm_rdu
+        - - aa50950a-e6ec-11e5-a282-5254001018da
+          - RedHat_CFME-5.5.0.13 on rhevm_rdu
+        - - aa6195e4-e6ec-11e5-a282-5254001018da
+          - RHEL65Template on rhevm_rdu
+        - - aa6f8f5a-e6ec-11e5-a282-5254001018da
+          - rhel6-cloudinitdemo on rhevm_rdu
+        - - aa7d8682-e6ec-11e5-a282-5254001018da
+          - rhel6_template on rhevm_rdu
+        - - aa8af0f6-e6ec-11e5-a282-5254001018da
+          - rhel6_template_iso on rhevm_rdu
+        - - aa98f872-e6ec-11e5-a282-5254001018da
+          - rhel6_template_rhs on rhevm_rdu
+        - - aaa663fe-e6ec-11e5-a282-5254001018da
+          - rhel7_clone on rhevm_rdu
+        - - aab3f03c-e6ec-11e5-a282-5254001018da
+          - rhel7_template on rhevm_rdu
+        - - aac1394a-e6ec-11e5-a282-5254001018da
+          - rhel7wf on rhevm_rdu
+        - - aace99e6-e6ec-11e5-a282-5254001018da
+          - sat6-provision-template on rhevm_rdu
+        - - aadc0f72-e6ec-11e5-a282-5254001018da
+          - win7 on rhevm_rdu
+        - - aaeb3696-e6ec-11e5-a282-5254001018da
+          - Windows2008R2 on rhevm_rdu
+        - - e925607a-f048-11e5-b86e-5254001018da
+          - jmann-rhel72-rhui on rhevm_rdu
+        - - e55c2d38-f698-11e5-a9f2-5254001018da
+          - RedHat_CFME-5.6.0.0 on rhevm_rdu
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Template *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/RHEV
+          ae_class: DynamicDialogs
+          ae_instance: list_rhev_template_guids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_customization_template_id
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '11'
+        values:
+        - - 11
+          - rhev_server
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Customization Template *
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/RHEV
+          ae_class: DynamicDialogs
+          ae_instance: list_rhev_cloudinit_template_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_flavor
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: xsmall
+        values:
+        - - xsmall
+          - xSmall (1x1)
+        - - small
+          - Small (1x2)
+        - - medium
+          - Medium (2x4)
+        - - large
+          - Large (4x8)
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :none
+          :sort_order: :ascending
+        label: Flavor *
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_vm_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Name
+        position: 4
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_number_of_vms
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Number of VMs
+        position: 5
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: rhev_create_volume
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: RHEV
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: option_1_volume_1_size
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Volume Size in GB
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: rhev_build_request_user
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: RHEV Build Request
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Service Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: service_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_0_environment
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: test
+        values:
+        - - dev
+          - Development
+        - - prod
+          - Production
+        - - qa
+          - Quality Assurance
+        - - test
+          - Test
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Environment *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: ''
+      display: edit
+      label: VM Information
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: option_1_guid
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: a96ee524-e6ec-11e5-a282-5254001018da
+        values:
+        - - a96ee524-e6ec-11e5-a282-5254001018da
+          - AEP on rhevm_rdu
+        - - a97c5434-e6ec-11e5-a282-5254001018da
+          - Bootcamp-Template on rhevm_rdu
+        - - a98bb078-e6ec-11e5-a282-5254001018da
+          - cfme54_latest on rhevm_rdu
+        - - a99d7fce-e6ec-11e5-a282-5254001018da
+          - cfme55_ga on rhevm_rdu
+        - - a9af613a-e6ec-11e5-a282-5254001018da
+          - cf-openshift-demo on rhevm_rdu
+        - - a9be26fc-e6ec-11e5-a282-5254001018da
+          - cf-ose-template on rhevm_rdu
+        - - a9d41e26-e6ec-11e5-a282-5254001018da
+          - CloudForms4_Beta2 on rhevm_rdu
+        - - a9e26d28-e6ec-11e5-a282-5254001018da
+          - DEMO-rhel7-template on rhevm_rdu
+        - - a9efcedc-e6ec-11e5-a282-5254001018da
+          - GreyLifeDB on rhevm_rdu
+        - - a9fd2c94-e6ec-11e5-a282-5254001018da
+          - joeg-rhel7-mpl on rhevm_rdu
+        - - aa0ac516-e6ec-11e5-a282-5254001018da
+          - josborne-jdg-demo on rhevm_rdu
+        - - aa17ee62-e6ec-11e5-a282-5254001018da
+          - lab7-sa-training on rhevm_rdu
+        - - aa24da14-e6ec-11e5-a282-5254001018da
+          - lab7-sa-training-v3 on rhevm_rdu
+        - - aa3365de-e6ec-11e5-a282-5254001018da
+          - lab7-upgradetesting on rhevm_rdu
+        - - aa4201c0-e6ec-11e5-a282-5254001018da
+          - plumgrid on rhevm_rdu
+        - - aa50950a-e6ec-11e5-a282-5254001018da
+          - RedHat_CFME-5.5.0.13 on rhevm_rdu
+        - - aa6195e4-e6ec-11e5-a282-5254001018da
+          - RHEL65Template on rhevm_rdu
+        - - aa6f8f5a-e6ec-11e5-a282-5254001018da
+          - rhel6-cloudinitdemo on rhevm_rdu
+        - - aa7d8682-e6ec-11e5-a282-5254001018da
+          - rhel6_template on rhevm_rdu
+        - - aa8af0f6-e6ec-11e5-a282-5254001018da
+          - rhel6_template_iso on rhevm_rdu
+        - - aa98f872-e6ec-11e5-a282-5254001018da
+          - rhel6_template_rhs on rhevm_rdu
+        - - aaa663fe-e6ec-11e5-a282-5254001018da
+          - rhel7_clone on rhevm_rdu
+        - - aab3f03c-e6ec-11e5-a282-5254001018da
+          - rhel7_template on rhevm_rdu
+        - - aac1394a-e6ec-11e5-a282-5254001018da
+          - rhel7wf on rhevm_rdu
+        - - aace99e6-e6ec-11e5-a282-5254001018da
+          - sat6-provision-template on rhevm_rdu
+        - - aadc0f72-e6ec-11e5-a282-5254001018da
+          - win7 on rhevm_rdu
+        - - aaeb3696-e6ec-11e5-a282-5254001018da
+          - Windows2008R2 on rhevm_rdu
+        - - e925607a-f048-11e5-b86e-5254001018da
+          - jmann-rhel72-rhui on rhevm_rdu
+        - - e55c2d38-f698-11e5-a9f2-5254001018da
+          - RedHat_CFME-5.6.0.0 on rhevm_rdu
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Template *
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/RHEV
+          ae_class: DynamicDialogs
+          ae_instance: list_rhev_template_guids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_customization_template_id
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '11'
+        values:
+        - - 11
+          - rhev_server
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Customization Template *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/RHEV
+          ae_class: DynamicDialogs
+          ae_instance: list_rhev_cloudinit_template_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_flavor
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: xsmall
+        values:
+        - - xsmall
+          - xSmall (1x1)
+        - - small
+          - Small (1x2)
+        - - medium
+          - Medium (2x4)
+        - - large
+          - Large (4x8)
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :none
+          :sort_order: :ascending
+        label: Flavor *
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_vm_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Name
+        position: 3
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_number_of_vms
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Number of VMs
+        position: 4
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}

@@ -1,0 +1,1163 @@
+---
+- description: 
+  buttons: submit,cancel
+  label: flex_processing
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: Flex
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: miq_alert_description
+        description: 
+        type: DialogFieldTextAreaBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: My VM needs flexing
+        values: 
+        values_method: 
+        values_method_options: {}
+        options: {}
+        label: Flex Reason
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: retire_extend
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: Retirement
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: retire_extend_days
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '3'
+        values:
+        - - '0'
+          - 0 Days
+        - - '30'
+          - 1 Month
+        - - '7'
+          - 1 Week
+        - - '14'
+          - 2 Weeks
+        - - '3'
+          - 3 Days
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Number of days *
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: cloudforms_add_user_to_group
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: CloudForms
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: user_id
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - 3
+          - 'userid: clouduser@example.org id: 3'
+        - - 2
+          - 'userid: clouduser1@example.org id: 2'
+        - - 4
+          - 'userid: clouduser2@example.org id: 4'
+        - - 1
+          - "(CURRENT) userid: admin id: 1"
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: User ID
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: true
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/CloudForms
+          ae_class: DynamicDialogs
+          ae_instance: list_cloudforms_user_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: group_id
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '2'
+        values:
+        - - 1
+          - 'group: Tenant My Company access id: 1'
+        - - 2
+          - "(CURRENT) group: EvmGroup-super_administrator id: 2"
+        - - 3
+          - 'group: EvmGroup-operator id: 3'
+        - - 4
+          - 'group: EvmGroup-user id: 4'
+        - - 5
+          - 'group: EvmGroup-administrator id: 5'
+        - - 6
+          - 'group: EvmGroup-approver id: 6'
+        - - 7
+          - 'group: EvmGroup-auditor id: 7'
+        - - 8
+          - 'group: EvmGroup-support id: 8'
+        - - 9
+          - 'group: EvmGroup-vm_user id: 9'
+        - - 10
+          - 'group: EvmGroup-security id: 10'
+        - - 11
+          - 'group: EvmGroup-desktop id: 11'
+        - - 12
+          - 'group: EvmGroup-user_self_service id: 12'
+        - - 13
+          - 'group: EvmGroup-user_limited_self_service id: 13'
+        - - 14
+          - 'group: EvmGroup-tenant_administrator id: 14'
+        - - 15
+          - 'group: EvmGroup-tenant_quota_administrator id: 15'
+        - - 16
+          - 'group: Tenant RedHat/cftenant1 access id: 16'
+        - - 17
+          - 'group: Tenant RedHat/cftenant2 access id: 17'
+        - - 18
+          - 'group: Tenant RedHat/cftenant3 access id: 18'
+        - - 19
+          - 'group: group_tenant1 id: 19'
+        - - 20
+          - 'group: group_tenant2 id: 20'
+        - - 21
+          - 'group: group_tenant3 id: 21'
+        - - 22
+          - 'group: cloudusers id: 22'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Group ID
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: true
+        read_only: false
+        auto_refresh: true
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/RedHat/CloudForms
+          ae_class: DynamicDialogs
+          ae_instance: list_cloudforms_group_ids
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: generic_build_vmprovision_request_based_on_env_and_os
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: Build a VM
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Service Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: service_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_0_environment
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: prod
+        values:
+        - - dev
+          - Development (OpenStack)
+        - - prod
+          - Production (VMware)
+        - - qa
+          - QA (RHEV)
+        - - test
+          - Test (Amazon)
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Environment *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: ''
+      display: edit
+      label: VM Information
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: option_1_os
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: linux
+        values:
+        - - linux
+          - Linux
+        - - windows
+          - Windows
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: OS *
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_vm_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: VM Name
+        position: 1
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_flavor
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: small
+        values:
+        - - large
+          - Large - 4 vCPU x 8 GB RAM
+        - - medium
+          - Medium - 2 vCPU x 4 GB RAM
+        - - small
+          - Small - 1 vCPU x 2 GB RAM
+        - - xlarge
+          - xLarge - 8 vCPU x 16 GB RAM
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Flavor *
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_volume_1_size
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: '0'
+        values:
+        - - '10'
+          - 10 GB
+        - - '20'
+          - 20 GB
+        - - '0'
+          - "<Default>"
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :none
+          :sort_order: :ascending
+        label: Additional Disk
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_1_flex_monitor
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: 'false'
+        values:
+        - - 'false'
+          - 'False'
+        - - 'true'
+          - 'True'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Flex Monitor
+        position: 4
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_1_flex_maximum
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Flex Maximum
+        position: 5
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_number_of_vms
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Number of VMs
+        position: 6
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: generic_build_vmprovision_request_based_on_choosing_a_template
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: Build a VM
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Service Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: service_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_0_environment
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: prod
+        values:
+        - - dev
+          - Development
+        - - prod
+          - Production
+        - - qa
+          - QA
+        - - test
+          - Test
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Environment *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: ''
+      display: edit
+      label: VM Information
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: option_1_guid
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 4c9e9a88-e6ec-11e5-8be2-5254001018da
+        values:
+        - - 4c9e9a88-e6ec-11e5-8be2-5254001018da
+          - rdu_rhel6_template on vcenter_rdu
+        - - 4cc448dc-e6ec-11e5-8be2-5254001018da
+          - rdu-cent71-template-good on vcenter_rdu
+        - - 4cdd5e4e-e6ec-11e5-8be2-5254001018da
+          - rdu-rhel71-template on vcenter_rdu
+        - - 4cf7469c-e6ec-11e5-8be2-5254001018da
+          - rdu-rhel6-x86_64 on vcenter_rdu
+        - - 4cb33308-e6ec-11e5-8be2-5254001018da
+          - rdu-win2K8R2 on vcenter_rdu
+        - - a4b54d16-e6ec-11e5-99ce-5254001018da
+          - ec2_west_rhel71_template on amazon_ec2
+        - - a4c29c14-e6ec-11e5-99ce-5254001018da
+          - ec2_west_rhel72_template on amazon_ec2
+        - - a4cd5f6e-e6ec-11e5-99ce-5254001018da
+          - LinuxFlex_ami on amazon_ec2
+        - - a4d6b7bc-e6ec-11e5-99ce-5254001018da
+          - ec2_west_rhel6_template on amazon_ec2
+        - - a4e053b2-e6ec-11e5-99ce-5254001018da
+          - ec2_west_win2k8r2_template on amazon_ec2
+        - - a96ee524-e6ec-11e5-a282-5254001018da
+          - AEP on rhevm_rdu
+        - - a97c5434-e6ec-11e5-a282-5254001018da
+          - Bootcamp-Template on rhevm_rdu
+        - - a98bb078-e6ec-11e5-a282-5254001018da
+          - cfme54_latest on rhevm_rdu
+        - - a99d7fce-e6ec-11e5-a282-5254001018da
+          - cfme55_ga on rhevm_rdu
+        - - a9af613a-e6ec-11e5-a282-5254001018da
+          - cf-openshift-demo on rhevm_rdu
+        - - a9be26fc-e6ec-11e5-a282-5254001018da
+          - cf-ose-template on rhevm_rdu
+        - - a9d41e26-e6ec-11e5-a282-5254001018da
+          - CloudForms4_Beta2 on rhevm_rdu
+        - - a9e26d28-e6ec-11e5-a282-5254001018da
+          - DEMO-rhel7-template on rhevm_rdu
+        - - a9efcedc-e6ec-11e5-a282-5254001018da
+          - GreyLifeDB on rhevm_rdu
+        - - a9fd2c94-e6ec-11e5-a282-5254001018da
+          - joeg-rhel7-mpl on rhevm_rdu
+        - - aa0ac516-e6ec-11e5-a282-5254001018da
+          - josborne-jdg-demo on rhevm_rdu
+        - - aa17ee62-e6ec-11e5-a282-5254001018da
+          - lab7-sa-training on rhevm_rdu
+        - - aa24da14-e6ec-11e5-a282-5254001018da
+          - lab7-sa-training-v3 on rhevm_rdu
+        - - aa3365de-e6ec-11e5-a282-5254001018da
+          - lab7-upgradetesting on rhevm_rdu
+        - - aa4201c0-e6ec-11e5-a282-5254001018da
+          - plumgrid on rhevm_rdu
+        - - aa50950a-e6ec-11e5-a282-5254001018da
+          - RedHat_CFME-5.5.0.13 on rhevm_rdu
+        - - aa6195e4-e6ec-11e5-a282-5254001018da
+          - RHEL65Template on rhevm_rdu
+        - - aa6f8f5a-e6ec-11e5-a282-5254001018da
+          - rhel6-cloudinitdemo on rhevm_rdu
+        - - aa7d8682-e6ec-11e5-a282-5254001018da
+          - rhel6_template on rhevm_rdu
+        - - aa8af0f6-e6ec-11e5-a282-5254001018da
+          - rhel6_template_iso on rhevm_rdu
+        - - aa98f872-e6ec-11e5-a282-5254001018da
+          - rhel6_template_rhs on rhevm_rdu
+        - - aaa663fe-e6ec-11e5-a282-5254001018da
+          - rhel7_clone on rhevm_rdu
+        - - aab3f03c-e6ec-11e5-a282-5254001018da
+          - rhel7_template on rhevm_rdu
+        - - aac1394a-e6ec-11e5-a282-5254001018da
+          - rhel7wf on rhevm_rdu
+        - - aace99e6-e6ec-11e5-a282-5254001018da
+          - sat6-provision-template on rhevm_rdu
+        - - aadc0f72-e6ec-11e5-a282-5254001018da
+          - win7 on rhevm_rdu
+        - - aaeb3696-e6ec-11e5-a282-5254001018da
+          - Windows2008R2 on rhevm_rdu
+        - - 760277b8-e7a6-11e5-b4b7-5254001018da
+          - overcloud-full on ospdirector_rdu
+        - - 76059984-e7a6-11e5-b4b7-5254001018da
+          - overcloud-full-vmlinuz on ospdirector_rdu
+        - - 75f80b70-e7a6-11e5-b4b7-5254001018da
+          - bm-deploy-kernel on ospdirector_rdu
+        - - 75fc374a-e7a6-11e5-b4b7-5254001018da
+          - bm-deploy-ramdisk on ospdirector_rdu
+        - - 75ff6d66-e7a6-11e5-b4b7-5254001018da
+          - overcloud-full-initrd on ospdirector_rdu
+        - - 043b2e64-eb15-11e5-b658-5254001018da
+          - cirros on osp_rdu
+        - - 64e54850-eadc-11e5-8129-5254001018da
+          - rhel-guest-image-7 on ospdirector_rdu
+        - - 59534c2a-eb05-11e5-9537-5254001018da
+          - rhel72 on osp_rdu
+        - - e925607a-f048-11e5-b86e-5254001018da
+          - jmann-rhel72-rhui on rhevm_rdu
+        - - e55c2d38-f698-11e5-a9f2-5254001018da
+          - RedHat_CFME-5.6.0.0 on rhevm_rdu
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Template *
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service
+          ae_class: DynamicDialogs
+          ae_instance: list_template_guids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_vm_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: VM Name
+        position: 1
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_flavor
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: small
+        values:
+        - - large
+          - Large - 4 vCPU x 8 GB RAM
+        - - medium
+          - Medium - 2 vCPU x 4 GB RAM
+        - - small
+          - Small - 1 vCPU x 2 GB RAM
+        - - xlarge
+          - xLarge - 8 vCPU x 16 GB RAM
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Flavor *
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_volume_1_size
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: '0'
+        values:
+        - - '10'
+          - 10 GB
+        - - '20'
+          - 20 GB
+        - - '0'
+          - "<Default>"
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :none
+          :sort_order: :ascending
+        label: Additional Disk
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_1_flex_monitor
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: 'false'
+        values:
+        - - 'false'
+          - 'False'
+        - - 'true'
+          - 'True'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Flex Monitor
+        position: 4
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_1_flex_maximum
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Flex Maximum
+        position: 5
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_number_of_vms
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Number of VMs
+        position: 6
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
