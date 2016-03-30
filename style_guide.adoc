@@ -30,6 +30,7 @@ The following is a list of suggested style guidelines to follow when contributin
 * <<Reports>>
 
 == General Guidelines
+
 * Be as descriptive as possible. Nothing worse then looking at something and not knowing what it is or what it is suppose to do.
 * Use snake_case when possible.
 * Start names with the product if you are writing for a provider product.
@@ -40,38 +41,44 @@ NOTE: I.e. vcenter_mount_cdrom, openstack_create_load_balancer, rhev_evacuate_vm
 <<top>>
 
 == Alerts
+
 * Name the alerts something meaningful.
 
 <<top>>
 
 == Automate
+
 * Automate domains are not case-sensitive however we have found that standardizing on a particular style improves usability
 ** Namespace - Use CamelCase (i.e. FooNameSpace || FooMIQTestNamespace)
 ** Classe - Use CamelCase (i.e. FooClass || FooMIQTestClass)
 ** Instance - Use snake_case (foo_instance)
 ** Method - Use snake_case (foo_method)
-*** There is more to come on methods
+*** There is more to come regarding methods
 
 <<top>>
 
 == Buttons
+
 * For dialogs associated with buttons try and keep the name the same as the request name. This way it is easy to tell which button belongs to a dialog and request.
 * For dialogs associated with service catalog items review the <<General Guidelines>>.
 
 <<top>>
 
 == Control
+
 * Name the policy/profiles something meaningful. For instance, compliance_vm_shell_shock_check tells us that this is a compliance policy for vms and checks for the shell shock vulnerability
 
 <<top>>
 
 == Dialogs
+
 * For dialogs associated with buttons please try and keep the name the same as the request name. This way it is easy to tell which button belongs to a dialog and request.
 * For dialogs associated with service catalog items review the <<General Guidelines>>.
 
 <<top>>
 
 == Reports
+
 * Start the report name with what table the report is based on. I.e. vm, real-time performance, cluster, etc...
 * Altough it is not mandatory it is good practice to create a dashboard widget to with the report.
 

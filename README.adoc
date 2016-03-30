@@ -20,19 +20,150 @@
 
 = Welcome to the CloudForms Essentials Project
 
-This project was designed to augment Red Hat (R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms] in the following ways:
+This project was designed to augment Red Hat (R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms]
+installations. This repo contains imports for the following areas of the product.
 
-* Alerts
 * Automation
-* Buttons
-* Control
 * Dialogs
+* Buttons
 * Reports
+* Control
+* Alerts
+* Roles
+* Services
 
 <<top>>
 
-== Installation Instructions
-* See our https://github.com/ramrexx/CloudForms_Essentials/wiki[CloudForms Essentials wiki]
+= Installation Instructions
+
+* Download the repo at https://github.com/ramrexx/CloudForms_Essentials/archive/master.zip[CloudForms Essentials]
+* Extract to a temporary location your desktop
+* Follow each step below to complete the inmport process
+
+** <<Automate>>
+** <<Dialog>>
+** <<Button>>
+** <<Report>>
+** <<Control>>
+** <<Alert>>
+** <<Role>>
+** <<Service>>
+
+<<top>>
+
+
+=== Automate
+Automate domain contains enhancements for IT Process automation, lifecycle provisioning,
+integrations with providers that Red Hat CloudForms currently supports i.e.
+EC2, vCenter, RHEV, Satellite, OpenStack, etc...
+
+IMPORTANT: 3rd party integrations will be included in a separate repo in the near future.
+
+Follow these steps to install the CloudForms_Essentials automate domain:
+
+* Compress/zip the Automate / CloudForms_Essentials directory
+* Log into your CloudForms/ManageIQ UI as an administrator
+* Navigate to Automate / ImportExport
+* Upload the zip file. This can take 60-90 seconds.
+* When done, navigate to Automate / Explorer
+* You will need to edit the new CloudForms_Essentials domain and check the "enable" box.
+* The CloudForms_Essentials automate domain is ready to use!.
+
+TIP: The CloudForms_Essentials automate model is locked by default. To modify something simply create
+     a new domain and copy the moethod, class, etc... to the new domain. This preserves the domain and makes
+     it easy to see what changes were made. Great for PRs!
+
+<<top>>
+
+
+=== Dialog
+Sample service dialogs for provisioning VMs and performing other tasks via custom buttons.
+
+Follow these steps to install the CloudForms_Essentials dialogs:
+
+* Log into your CloudForms/ManageIQ UI as an administrator
+* Navigate to Automate / Customization / ImportExport (This is located in the bottom left of your accordion)
+* Import the dialog(s) in the Dialog director
+
+<<top>>
+
+
+=== Button
+Sample buttons to perform day-2 operations for various object types.
+
+Follow these steps to install the CloudForms_Essentials buttons:
+
+* Steps coming soon
+
+<<top>>
+
+
+=== Report
+Sample reports and dashboard widgets
+
+Follow these steps to install the CloudForms_Essentials reports:
+
+* Log into your CloudForms/ManageIQ UI as an administrator
+* Navigate to Cloud Intelligence / Reports / ImportExport (This is located in the bottom left of your accordion)
+* Import the reports(s) in the Reports directory
+* Import the widgets(s) in the Reports directory
+
+<<top>>
+
+
+=== Control
+Sample policies that perform event drive actions.
+
+Follow these steps to install the CloudForms_Essentials control policies:
+
+* Log into your CloudForms/ManageIQ UI as an administrator
+* Navigate to Control / ImportExport.
+* Import the Policies.yml found in the Alerts directory
+
+<<top>>
+
+
+=== Alert
+Sample alerts that perform actions
+
+Follow these steps to install the CloudForms_Essentials alerts:
+
+* Log into your CloudForms/ManageIQ UI as an administrator
+* Navigate to Control / ImportExport.
+* Import the Alerts.yml found in the Alerts directory
+
+<<top>>
+
+
+=== Role
+Sample roles for self-service users.
+
+Follow these steps to install the CloudForms_Essentials roles:
+
+* Steps coming soon
+
+<<top>>
+
+
+=== Service
+Sample preconfigured service catalog items for you to play around with.
+
+Follow these steps to install the CloudForms_Essentials services:
+
+* Steps coming soon
+
+<<top>>
+
+
+== Wiki
+* See our https://github.com/ramrexx/CloudForms_Essentials/wiki[CloudForms Essentials wiki] for more information
+
+<<top>>
+
+
+== Want to contribute?
+* See our link:style_guide.adoc[Style Guide]
+* Submit pull requests!
 
 <<top>>
 

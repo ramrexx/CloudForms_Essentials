@@ -1,0 +1,18 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: Provision VM from AMI
+    name: amazon_template
+    inherits: 
+    description: 
+  fields:
+  - Provision:
+      value: "/Cloud/VM/Provisioning/StateMachines/Methods/Provision"
+  - CheckProvisioned:
+      value: "/Cloud/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
+  - PostProvision2:
+      value: "/Integration/Amazon/EC2/Methods/EC2_Synchronize_Tags"
+  - AddVMToService:
+      value: "/System/CommonMethods/StateMachineMethods/Add_VM_to_Service"

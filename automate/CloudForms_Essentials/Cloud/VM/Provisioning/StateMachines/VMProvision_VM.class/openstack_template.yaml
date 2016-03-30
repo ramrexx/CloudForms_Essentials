@@ -1,0 +1,22 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: Provision VM from Glance
+    name: openstack_template
+    inherits: 
+    description: 
+  fields:
+  - RegisterDNS:
+      value: "/Integration/RedHat/OpenStack/Methods/openstack_create_volume"
+  - RegisterCMDB:
+      value: "/Integration/RedHat/OpenStack/Methods/openstack_create_volume_check"
+  - Provision:
+      value: "/Cloud/VM/Provisioning/StateMachines/Methods/Provision"
+  - CheckProvisioned:
+      value: "/Cloud/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
+  - PostProvision:
+      value: "/Integration/RedHat/OpenStack/Methods/openstack_attach_volume"
+  - AddVMToService:
+      value: "/System/CommonMethods/StateMachineMethods/Add_VM_to_Service"
