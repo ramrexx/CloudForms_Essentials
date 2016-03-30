@@ -44,7 +44,7 @@ This repo contains imports for the following areas of the product:
 * Follow each step below to complete the import process
 
 ** <<Automate>>
-** <<Dialog>>
+** <<Dialogs>>
 ** <<Buttons>>
 ** <<Reports>>
 ** <<Control>>
