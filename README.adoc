@@ -101,7 +101,7 @@ Follow these steps to install the CloudForms_Essentials buttons:
 <<top>>
 
 
-=== Report
+=== Reports
 Sample reports and dashboard widgets
 
 Follow these steps to install the CloudForms_Essentials reports:
