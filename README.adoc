@@ -26,14 +26,14 @@ Current supported appliance version: #5.5.x#
 
 This repo contains imports for the following areas of the product:
 
-* Automation
+* Automate
 * Dialogs
 * Buttons
 * Reports
 * Control
 * Alerts
 * Roles
-* Services
+* Service_Catalogs
 
 <<top>>
 
@@ -45,12 +45,12 @@ This repo contains imports for the following areas of the product:
 
 ** <<Automate>>
 ** <<Dialog>>
-** <<Button>>
-** <<Report>>
+** <<Buttons>>
+** <<Reports>>
 ** <<Control>>
-** <<Alert>>
-** <<Role>>
-** <<Service>>
+** <<Alerts>>
+** <<Roles>>
+** <<Service_Catalogs>>
 
 <<top>>
 
@@ -79,7 +79,7 @@ TIP: The CloudForms_Essentials automate model is locked by default. To modify so
 <<top>>
 
 
-=== Dialog
+=== Dialogs
 Sample service dialogs for provisioning VMs and performing other tasks via custom buttons.
 
 Follow these steps to install the CloudForms_Essentials dialogs:
@@ -91,7 +91,7 @@ Follow these steps to install the CloudForms_Essentials dialogs:
 <<top>>
 
 
-=== Button
+=== Buttons
 Sample buttons to perform day-2 operations for various object types.
 
 Follow these steps to install the CloudForms_Essentials buttons:
@@ -126,7 +126,7 @@ Follow these steps to install the CloudForms_Essentials control policies:
 <<top>>
 
 
-=== Alert
+=== Alerts
 Sample alerts that perform actions
 
 Follow these steps to install the CloudForms_Essentials alerts:
@@ -138,7 +138,7 @@ Follow these steps to install the CloudForms_Essentials alerts:
 <<top>>
 
 
-=== Role
+=== Roles
 Sample roles for self-service users.
 
 Follow these steps to install the CloudForms_Essentials roles:
@@ -148,7 +148,7 @@ Follow these steps to install the CloudForms_Essentials roles:
 <<top>>
 
 
-=== Service
+=== Service_Catalogs
 Sample preconfigured service catalog items for you to play around with.
 
 Follow these steps to install the CloudForms_Essentials services:
