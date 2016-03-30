@@ -2,8 +2,9 @@
  README.adoc
 -------------------------------------------------------------------------------
    Copyright 2016 Kevin Morey <kevin@redhat.com>
- 
+<<<<<<< HEAD
   Hi Kevin
+>>>>>>> 647baa8fb972c4692556ae337e1d76789529b83a
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
