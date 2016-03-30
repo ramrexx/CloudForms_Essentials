@@ -1,0 +1,79 @@
+---
+- Infrastructure Services:
+    name: Infrastructure Services
+    description: 
+    template:
+    - name: RHEV - Build a VM (admin)
+      description: RHEV - Build a VM (admin)
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Infrastructure Services
+      resource_actions:
+      - action: Provision
+        ae_namespace: Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: build_vm_provision_request
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: rhev_build_request_admin
+      custom_buttons: []
+      custom_button_sets: []
+    - name: vCenter - Build a VM (user)
+      description: vCenter - Build a VM (user)
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Infrastructure Services
+      resource_actions:
+      - action: Provision
+        ae_namespace: Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: build_vm_provision_request
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: vcenter_build_request_user
+      - action: Retirement
+        ae_namespace: Service/Retirement/StateMachines
+        ae_class: ServiceRetirement
+        ae_instance: default
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: vcenter_build_request_user
+      custom_buttons: []
+      custom_button_sets: []
+    - name: RHEV - Build a VM (User)
+      description: RHEV - Build a VM (User)
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Infrastructure Services
+      resource_actions:
+      - action: Provision
+        ae_namespace: Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: build_vm_provision_request
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: rhev_build_request_admin
+      - action: Retirement
+        ae_namespace: Service/Retirement/StateMachines
+        ae_class: ServiceRetirement
+        ae_instance: default
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: rhev_build_request_admin
+      custom_buttons: []
+      custom_button_sets: []

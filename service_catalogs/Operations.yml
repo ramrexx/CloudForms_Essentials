@@ -1,0 +1,25 @@
+---
+- Operations:
+    name: Operations
+    description: Operations
+    template:
+    - name: CloudForms - Add User to Group
+      description: CloudForms - Add User to Group
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Operations
+      resource_actions:
+      - action: Provision
+        ae_namespace: Integration/RedHat/CloudForms
+        ae_class: StateMachines
+        ae_instance: cloudforms_add_user_to_group
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: cloudforms_add_user_to_group
+      custom_buttons: []
+      custom_button_sets: []

@@ -1,0 +1,160 @@
+---
+- Cloud Services:
+    name: Cloud Services
+    description: 
+    template:
+    - name: Amazon - Build A VM (Admin)
+      description: Amazon - Build A VM (Admin)
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Cloud Services
+      resource_actions:
+      - action: Retirement
+        ae_namespace: Service/Retirement/StateMachines
+        ae_class: ServiceRetirement
+        ae_instance: default
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: ec2_build_request_admin
+      - action: Provision
+        ae_namespace: Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: build_vm_provision_request
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: ec2_build_request_admin
+      custom_buttons: []
+      custom_button_sets: []
+    - name: OpenStack - Build a VM (Admin)
+      description: OpenStack - Build a VM (Admin)
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Cloud Services
+      resource_actions:
+      - action: Provision
+        ae_namespace: Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: build_vm_provision_request
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: openstack_build_request_admin
+      custom_buttons: []
+      custom_button_sets: []
+    - name: OpenStack - Clone VM
+      description: 'Clone multiple OpenStack VMs based on '
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Cloud Services
+      resource_actions:
+      - action: Provision
+        ae_namespace: Integration/RedHat/OpenStack
+        ae_class: StateMachines
+        ae_instance: openstack_clone_vms
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: openstack_clone_vm
+      - action: Retirement
+        ae_namespace: Service/Retirement/StateMachines
+        ae_class: ServiceRetirement
+        ae_instance: default
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: openstack_clone_vm
+      custom_buttons: []
+      custom_button_sets: []
+    - name: OpenStack - Create Tenant
+      description: Create an OpenStack tenant with option for quota & netw
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Cloud Services
+      resource_actions:
+      - action: Provision
+        ae_namespace: Integration/RedHat/OpenStack
+        ae_class: StateMachines
+        ae_instance: openstack_create_tenant_full
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: openstack_create_tenant
+      - action: Retirement
+        ae_namespace: Integration/RedHat/OpenStack
+        ae_class: StateMachines
+        ae_instance: openstack_delete_tenant
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: openstack_create_tenant
+      custom_buttons: []
+      custom_button_sets: []
+    - name: Amazon - Build a VM (User)
+      description: Amazon - Build a VM (User)
+      type: 
+      display: false
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: 
+      options: {}
+      service_template_catalog_name: Cloud Services
+      resource_actions:
+      - action: Provision
+        ae_namespace: Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: build_vm_provision_request
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: ec2_build_request_user
+      - action: Retirement
+        ae_namespace: Service/Retirement/StateMachines
+        ae_class: ServiceRetirement
+        ae_instance: default
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: ec2_build_request_user
+      custom_buttons: []
+      custom_button_sets: []
+    - name: OpenStack - Build a VM (User)
+      description: OpenStack - Build a VM (User)
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Cloud Services
+      resource_actions:
+      - action: Provision
+        ae_namespace: Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: build_vm_provision_request
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: openstack_build_request_user
+      - action: Retirement
+        ae_namespace: Service/Retirement/StateMachines
+        ae_class: ServiceRetirement
+        ae_instance: default
+        ae_message: 
+        ae_attributes: {}
+        dialog_label: openstack_build_request_user
+      custom_buttons: []
+      custom_button_sets: []
