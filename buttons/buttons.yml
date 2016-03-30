@@ -1,0 +1,1071 @@
+---
+:custom_buttons_sets:
+- name: Operations|Vm|
+  description: Operations
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: vm_retire_extend
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 5
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vm_retire_extend
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vm_retire_extend
+      dialog_label: retire_extend
+  - description: InspectMe
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 14
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: InspectMe
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: InspectMe
+  set_data:
+    :button_order:
+    - InspectMe
+    - vm_retire_extend
+    :button_image: 1
+    :display: true
+    :group_index: 1
+- name: Operations|Service|
+  description: Operations
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: service_retire_extend
+    applies_to_class: Service
+    applies_to_exp: 
+    options:
+      :button_image: 5
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: service_retire_extend
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: service_retire_extend
+      dialog_label: retire_extend
+  - description: InspectMe
+    applies_to_class: Service
+    applies_to_exp: 
+    options:
+      :button_image: 14
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: InspectMe
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: InspectMe
+  set_data:
+    :button_order:
+    - service_retire_extend
+    - InspectMe
+    :button_image: 1
+    :display: true
+    :group_index: 1
+- name: Operations|ExtManagementSystem|
+  description: Operations
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: InspectMe
+    applies_to_class: ExtManagementSystem
+    applies_to_exp: 
+    options:
+      :button_image: 14
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: InspectMe
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: InspectMe
+  set_data:
+    :button_order:
+    - InspectMe
+    :button_image: 1
+    :display: true
+    :group_index: 1
+- name: Operations|Storage|
+  description: Operations
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: InspectMe
+    applies_to_class: Storage
+    applies_to_exp: 
+    options:
+      :button_image: 14
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: InspectMe
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: InspectMe
+  set_data:
+    :button_order:
+    - InspectMe
+    :button_image: 1
+    :display: true
+    :group_index: 1
+- name: Operations|EmsCluster|
+  description: Operations
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: InspectMe
+    applies_to_class: EmsCluster
+    applies_to_exp: 
+    options:
+      :button_image: 14
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: InspectMe
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: InspectMe
+  set_data:
+    :button_order:
+    - InspectMe
+    :button_image: 1
+    :display: true
+    :group_index: 1
+- name: Operations|Host|
+  description: Operations
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: InspectMe
+    applies_to_class: Host
+    applies_to_exp: 
+    options:
+      :button_image: 14
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: InspectMe
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: InspectMe
+  set_data:
+    :button_order:
+    - InspectMe
+    :button_image: 1
+    :display: true
+    :group_index: 1
+- name: Operations|MiqTemplate|
+  description: Operations
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: InspectMe
+    applies_to_class: MiqTemplate
+    applies_to_exp: 
+    options:
+      :button_image: 14
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: InspectMe
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: InspectMe
+  set_data:
+    :button_order:
+    - InspectMe
+    :button_image: 1
+    :display: true
+    :group_index: 1
+- name: RHEV|Vm|
+  description: RHEV
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: rhev_create_snapshot
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 3
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rhev_create_snapshot
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rhev_create_snapshot
+      dialog_label: rhev_create_snapshot
+  - description: rhev_add_disk_to_vm
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 6
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rhev_add_disk_to_vm
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rhev_add_disk_to_vm
+      dialog_label: rhev_create_volume
+  - description: rhev_delete_snapshot
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 7
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rhev_delete_snapshot
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rhev_delete_snapshot
+      dialog_label: rhev_list_vm_snapshots
+  - description: rhev_add_comments_to_vm
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 13
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rhev_add_comments_to_vm
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rhev_add_comments_to_vm
+      dialog_label: rhev_add_comments_to_vm
+  - description: rhev_revert_snapshot
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 11
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rhev_revert_snapshot
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rhev_revert_snapshot
+      dialog_label: rhev_list_vm_snapshots
+  set_data:
+    :button_order:
+    - rhev_create_snapshot
+    - rhev_add_disk_to_vm
+    - rhev_delete_snapshot
+    - rhev_add_comments_to_vm
+    - rhev_revert_snapshot
+    :button_image: 8
+    :display: true
+    :group_index: 2
+- name: vCenter|Vm|
+  description: vCenter
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: vcenter_add_cpu_to_vm
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 1
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_add_cpu_to_vm
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_add_cpu_to_vm
+      dialog_label: vcenter_add_cpu_to_vm
+  - description: vcenter_add_ram_to_vm
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 12
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_add_ram_to_vm
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_add_ram_to_vm
+      dialog_label: vcenter_add_ram_to_vm
+  - description: vcenter_mount_tools_installer
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 4
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_mount_tools_installer
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_mount_tools_installer
+  - description: vcenter_reconfig_vm_hotadd_enabled
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 14
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_reconfig_vm_hotadd
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_reconfig_vm_hotadd_enabled
+      dialog_label: vcenter_reconfig_vm_hotadd_enabled
+  - description: vcenter_resize_disk
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 6
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_resize_disk
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_resize_disk
+      dialog_label: vcenter_resize_disk
+  - description: vcenter_vmotion_vm
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 12
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_vmotion_vm
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_vmotion_vm
+      dialog_label: vcenter_vmotion_vm
+  - description: vcenter_unmount_tools_installer
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 9
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_unmount_tools_installe
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_unmount_tools_installer
+  - description: vcenter_add_disk_to_vm
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 6
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_add_disk_to_vm
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_add_disk_to_vm
+      dialog_label: vcenter_add_disk_to_vm
+  - description: vcenter_mark_vm_as_template
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 10
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_mark_vm_as_template
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_mark_vm_as_template
+  - description: vcenter_reconfig_vm_guestid
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 2
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_reconfig_vm_guestid
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_reconfig_vm_guestid
+      dialog_label: vcenter_reconfig_vm_guestid
+  - description: vcenter_rename_vm
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 2
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_rename_vm
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_rename_vm
+      dialog_label: vcenter_reconfig_vm_rename
+  set_data:
+    :button_order:
+    - vcenter_add_cpu_to_vm
+    - vcenter_add_disk_to_vm
+    - vcenter_add_ram_to_vm
+    - vcenter_mark_vm_as_template
+    - vcenter_mount_tools_installer
+    - vcenter_reconfig_vm_guestid
+    - vcenter_reconfig_vm_hotadd
+    - vcenter_rename_vm
+    - vcenter_resize_disk
+    - vcenter_vmotion_vm
+    - vcenter_unmount_tools_installe
+    :button_image: 9
+    :display: true
+    :group_index: 3
+- name: OpenStack|Vm|
+  description: OpenStack
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: openstack_attach_volume
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 6
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: openstack_attach_volume
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: openstack_attach_volume
+      dialog_label: openstack_attach_volume
+  - description: openstack_create_volume
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 6
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: openstack_create_volume
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: openstack_create_volume
+      dialog_label: openstack_create_volume
+  - description: openstack_allocate_floating_ip
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 4
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: openstack_allocate_floating_ip
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: openstack_allocate_floating_ip
+      dialog_label: openstack_allocate_floatingip
+  - description: openstack_resize_instance
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 1
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: openstack_resize_instance
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: openstack_resize_instance
+      dialog_label: openstack_resize_instance
+  - description: openstack_release_floating_ip
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 3
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: openstack_release_floating_ip
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: openstack_release_floating_ip
+  - description: openstack_detach_interface
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 11
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: openstack_detach_interface
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: openstack_detach_interface
+      dialog_label: openstack_detach_interface
+  - description: openstack_attach_interface
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 12
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: openstack_attach_interface
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: openstack_attach_interface
+      dialog_label: openstack_attach_interface
+  - description: openstack_detach_volume
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 6
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: openstack_detach_volume
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: openstack_detach_volume
+      dialog_label: openstack_detach_volume
+  set_data:
+    :button_order:
+    - openstack_resize_instance
+    - openstack_release_floating_ip
+    - openstack_detach_interface
+    - openstack_attach_interface
+    - openstack_detach_volume
+    - openstack_attach_volume
+    - openstack_create_volume
+    - openstack_allocate_floating_ip
+    :button_image: 13
+    :display: true
+    :group_index: 4
+- name: RHEV|Host|
+  description: RHEV
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: rhev_host_deactivation
+    applies_to_class: Host
+    applies_to_exp: 
+    options:
+      :button_image: 9
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rhev_host_deactivation
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rhev_host_deactivation
+  - description: rhev_host_activation
+    applies_to_class: Host
+    applies_to_exp: 
+    options:
+      :button_image: 15
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rhev_host_activation
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rhev_host_activation
+  set_data:
+    :button_order:
+    - rhev_host_deactivation
+    - rhev_host_activation
+    :button_image: 8
+    :display: true
+    :group_index: 2
+- name: vCenter|MiqTemplate|
+  description: vCenter
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: vcenter_mark_template_as_vm
+    applies_to_class: MiqTemplate
+    applies_to_exp: 
+    options:
+      :button_image: 5
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: vcenter_mark_template_as_vm
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: vcenter_mark_template_as_vm
+      dialog_label: vcenter_mark_template_as_vm
+  set_data:
+    :button_order:
+    - vcenter_mark_template_as_vm
+    :button_image: 9
+    :display: true
+    :group_index: 2
+- name: EC2|Vm|
+  description: EC2
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: ec2_synchronize_tags
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 2
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: ec2_synchronize_tags
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: ec2_synchronize_tags
+  - description: ec2_allocate_elastic_ip
+    applies_to_class: Vm
+    applies_to_exp: 
+    options:
+      :button_image: 5
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: ec2_allocate_elastic_ip
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: ec2_allocate_elastic_ip
+  set_data:
+    :button_order:
+    - ec2_allocate_elastic_ip
+    - ec2_synchronize_tags
+    :button_image: 10
+    :display: true
+    :group_index: 5
+- name: RDS|Service|
+  description: RDS
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: rds_refresh_instance
+    applies_to_class: Service
+    applies_to_exp: 
+    options:
+      :button_image: 14
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rds_refresh_instance
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rds_refresh_instance
+  set_data:
+    :button_order:
+    - rds_refresh_instance
+    :button_image: 6
+    :display: true
+    :group_index: 2
+- name: OpenStack|ExtManagementSystem|
+  description: OpenStack
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: openstack_create_tenant_tags
+    applies_to_class: ExtManagementSystem
+    applies_to_exp: 
+    options:
+      :button_image: 1
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: openstack_create_tenant_tags
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: openstack_create_tenant_tags
+      dialog_label: openstack_create_tenant_tags
+  set_data:
+    :button_order:
+    - openstack_create_tenant_tags
+    :button_image: 13
+    :display: true
+    :group_index: 2
