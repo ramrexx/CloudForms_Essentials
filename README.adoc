@@ -1,6 +1,5 @@
 ////
  README.adoc
-
 -------------------------------------------------------------------------------
    Copyright 2016 Kevin Morey <kevin@redhat.com>
    Hi Kevin
