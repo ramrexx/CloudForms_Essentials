@@ -21,7 +21,11 @@
 = Welcome to the CloudForms Essentials Project
 
 This project was designed to augment Red Hat (R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms]
-installations. This repo contains imports for the following areas of the product.
+installations.
+
+Current supported appliance version: #5.5.x#
+
+This repo contains imports for the following areas of the product:
 
 * Automation
 * Dialogs
