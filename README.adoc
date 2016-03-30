@@ -41,7 +41,7 @@ This repo contains imports for the following areas of the product:
 
 * Download the repo at https://github.com/ramrexx/CloudForms_Essentials/archive/master.zip[CloudForms Essentials]
 * Extract to a temporary location your desktop
-* Follow each step below to complete the inmport process
+* Follow each step below to complete the import process
 
 ** <<Automate>>
 ** <<Dialog>>
