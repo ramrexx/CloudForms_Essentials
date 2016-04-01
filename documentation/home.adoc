@@ -17,7 +17,8 @@
    limitations under the License.
 -------------------------------------------------------------------------------
 ////
-= Welcome to the CloudForms_Essentials wiki!
+
+= Welcome to the CloudForms_Essentials Documentation Home
 
 == Table of Contents
 
@@ -26,7 +27,7 @@
 
 
 = Provisioning
-Methods link:methods.adoc[Methods]
+link:methods.adoc[Methods]
 
 <<top>>
 
