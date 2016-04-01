@@ -26,7 +26,7 @@
 * <<Want to contribute?>>
 
 
-= Provisioning
+== Provisioning
 link:methods.adoc[Methods]
 
 <<top>>
@@ -35,3 +35,4 @@ link:methods.adoc[Methods]
 * See our link:style_guide.adoc[Style Guide]
 * Submit pull requests!
 
+<<top>>
