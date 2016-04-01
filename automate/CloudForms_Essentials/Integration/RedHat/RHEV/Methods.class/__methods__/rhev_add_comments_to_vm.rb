@@ -3,7 +3,8 @@
 
  Author: Kevin Morey <kevin@redhat.com>
 
- Description: This method updates the VM description in RHEVM and can either be called via a button or during provisioning
+ Description: This method updates the VM description/comments in RHEVM 
+    and can either be called via a button or during provisioning
 -------------------------------------------------------------------------------
    Copyright 2016 Kevin Morey <kevin@redhat.com>
 
@@ -32,7 +33,7 @@ def retry_method(retry_time='1.minute', msg='RETRYING')
   exit MIQ_OK
 end
 
-def call_rhev(action, ref=nil, body_type=:xml, body=nil)
+def call_rhev(action, ref=nil, body_type=:json, body=nil)
   require 'rest_client'
   require 'json'
 
@@ -52,8 +53,14 @@ def call_rhev(action, ref=nil, body_type=:xml, body=nil)
   body_type == :json ? (params[:payload] = JSON.generate(body) if body) : (params[:payload] = body if body)
   log(:info, "Calling url: #{url} action: #{action} payload: #{params[:payload]}")
 
-  response = RestClient::Request.new(params).execute
-  log(:info, "response headers: #{response.headers.inspect}")
+  begin
+    response = RestClient::Request.new(params).execute
+  rescue => resterr
+    log(:info, "resterr: #{resterr.inspect}")
+    log(:info, "response: #{response.inspect}")
+  end
+
+  log(:info, "response headers: #{response.headers}")
   log(:info, "response code: #{response.code}")
   log(:info, "response: #{response.inspect}")
   return JSON.parse(response) rescue (return response)
@@ -72,9 +79,7 @@ begin
     @vm = @task.vm
 
     # Since this is provisioning we need to put in retry logic to wait the vm is present
-    if @vm.nil?
-      retry_method()
-    end
+    retry_method() if @vm.nil?
 
     unless @task.get_option(:vm_notes).nil?
       description = @task.get_option(:vm_notes)
@@ -92,16 +97,16 @@ begin
 
     # get description from button/service dialog
     description = $evm.root['dialog_description']
-  else
-    exit MIQ_OK
   end
 
-  log(:info, "Found VM:<#{@vm.name}> vendor:<#{@vm.vendor.downcase}>")
-  if @vm.vendor.downcase == 'redhat'
-    call_rhev(:put, @vm.ems_ref, :xml, "<vm><description>#{description}</description></vm>")
+  if @vm && @vm.vendor.downcase == 'redhat'
+    log(:info, "Found VM: #{@vm.name} vendor: #{@vm.vendor.downcase}")
+    body_hash = {
+      "description"=>description,
+      # "comment"=>'mycomment12'
+    }
+    call_rhev(:put, @vm.ems_ref, :json, body_hash)
     @vm.custom_set(:comments_added, 'true')
-  else
-    exit MIQ_OK
   end
 
 rescue => err
