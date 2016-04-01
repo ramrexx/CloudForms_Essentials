@@ -38,7 +38,7 @@ This repo contains imports for the following areas of the product:
 
 <<top>>
 
-More documentation can be found here: link:https://github.com/ramrexx/CloudForms_Essentials/blob/master/documentation/home.adoc[CloudForms Essentials Docs]
+More documentation can be found here: link:https://github.com/ramrexx/CloudForms_Essentials/blob/master/documentation/home.adoc[Docs]
 
 = Installation Instructions
 
