@@ -16,7 +16,7 @@
    limitations under the License.
 -------------------------------------------------------------------------------
 ////
-image::https://github.com/ramrexx/CloudForms_Essentials/blob/master/documentation/images/CloudForms.png[CloudForms,150,150,role="right"]
+image::https://github.com/ramrexx/CloudForms_Essentials/tree/master/documentation/images/CloudForms.png[CloudForms,150,150,role="right"]
 
 = Welcome to the CloudForms Essentials Project
 
@@ -38,7 +38,7 @@ This repo contains imports for the following areas of the product:
 
 <<top>>
 
-More documentation can be found here: link:https://github.com/ramrexx/CloudForms_Essentials/blob/master/documentation/home.adoc[Docs]
+More documentation can be found here: link:https://github.com/ramrexx/CloudForms_Essentials/tree/master/documentation/readme.adoc[Docs]
 
 = Installation Instructions
 
