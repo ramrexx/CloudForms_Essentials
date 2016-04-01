@@ -50,7 +50,7 @@ NOTE: I.e. vcenter_mount_cdrom, openstack_create_load_balancer, rhev_evacuate_vm
 
 * Automate domains are not case-sensitive however we have found that standardizing on a particular style improves usability
 ** Namespace - Use CamelCase (i.e. FooNameSpace || FooMIQTestNamespace)
-** Classe - Use CamelCase (i.e. FooClass || FooMIQTestClass)
+** Class - Use CamelCase (i.e. FooClass || FooMIQTestClass)
 ** Instance - Use snake_case (foo_instance)
 ** Method - Use snake_case (foo_method)
 *** There is more to come regarding methods
