@@ -96,13 +96,19 @@ Sample buttons to perform day-2 operations for various object types.
 
 Follow these steps to install the CloudForms_Essentials buttons:
 
-* Steps coming soon
+NOTE: You must complete the pre-req step and have the import utility & scripts installed. This process is documented <<Rake Import,here>>.
+
+. Use your utility of choice (i.e. scp) to upload the `buttons/buttons.yml` to the CloudForms/ManageIQ appliance
+. Log into your appliance console as root
+. Import the buttons using the miqimport utility:
+
+ /usr/bin/miqimport buttons /<full-path-to-upload-directory>/buttons.yml
 
 <<top>>
 
 
 === Reports
-Sample reports and dashboard widgets
+Sample reports and dashboard widgets.
 
 Follow these steps to install the CloudForms_Essentials reports:
 
@@ -127,7 +133,7 @@ Follow these steps to install the CloudForms_Essentials control policies:
 
 
 === Alerts
-Sample alerts that perform actions
+Sample alerts that perform actions.
 
 Follow these steps to install the CloudForms_Essentials alerts:
 
@@ -143,23 +149,50 @@ Sample roles for self-service users.
 
 Follow these steps to install the CloudForms_Essentials roles:
 
-* Steps coming soon
+NOTE: You must complete the pre-req step and have the import utility & scripts installed. This process is documented <<Rake Import,here>>.
+
+. Use your utility of choice (i.e. scp) to upload the `roles/roles.yml` to the CloudForms/ManageIQ appliance
+. Log into your appliance console as root
+. Import the roles using the miqimport utility:
+
+ /usr/bin/miqimport roles /<full-path-to-upload-directory>/roles.yml
 
 <<top>>
 
 
 === Service_Catalogs
-Sample preconfigured service catalog items for you to play around with.
+Sample preconfigured service catalog items for you to work with.
 
 Follow these steps to install the CloudForms_Essentials services:
 
-* Steps coming soon
+NOTE: You must complete the pre-req step and have the import utility & scripts installed. This process is documented <<Rake Import,here>>.
+
+. Use your utility of choice (i.e. scp) to upload the `service_catalogs/*.yml` to the CloudForms/ManageIQ appliance
+. Log into your appliance console as root
+. Import the catalogs using the miqimport utility:
+
+ /usr/bin/miqimport service_catalogs /<full-path-to-upload-directory>
+
+NOTE: service_catalogs import will look at all yaml files in a directory, so you do not need to specify individual files.
 
 <<top>>
 
 
-== Wiki
-* See our https://github.com/ramrexx/CloudForms_Essentials/wiki[CloudForms Essentials wiki] for more information
+=== Rake Import
+The rake scripts are required in order to import some of the items referenced on this page when a UI is not available.
+
+Follow these steps to install the miqimport/miqexport utilities:
+
+.  Install git on the CFME appliance
+.  While in `/root` directory, clone the rhconsulting repository:
+
+ git clone https://github.com/rhtconsulting/cfme-rhconsulting-scripts.git
+
+.  In the newly created `/root/cfme-rhconsulting-scripts` directory, install the rake scripts and utilities:
+
+ make install
+
+The `/usr/bin/miqimport` and `/usr/bin/miqexport` utilities are now available to assist you when importing and exporting from CFME.
 
 <<top>>
 
