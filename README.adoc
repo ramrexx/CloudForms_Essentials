@@ -16,13 +16,14 @@
    limitations under the License.
 -------------------------------------------------------------------------------
 ////
+image::https://https://github.com/ramrexx/CloudForms_Essentials/tree/master/documentation/images/cloudforms.png[CloudForms,150,150,role="right"]
 
 = Welcome to the CloudForms Essentials Project
 
 This project was designed to augment Red Hat (R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms]
 installations.
 
-Current supported appliance version: #5.5.x#
+Current supported appliance version: *5.5.x*
 
 This repo contains imports for the following areas of the product:
 
@@ -194,13 +195,6 @@ Follow these steps to install the miqimport/miqexport utilities:
  make install
 
 The `/usr/bin/miqimport` and `/usr/bin/miqexport` utilities are now available to assist you when importing and exporting from CFME.
-
-<<top>>
-
-
-== Want to contribute?
-* See our link:style_guide.adoc[Style Guide]
-* Submit pull requests!
 
 <<top>>
 
