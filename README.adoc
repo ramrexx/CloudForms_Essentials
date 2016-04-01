@@ -16,7 +16,7 @@
    limitations under the License.
 -------------------------------------------------------------------------------
 ////
-image::https://github.com/ramrexx/CloudForms_Essentials/tree/master/documentation/images/CloudForms.png
+image::documentation/images/cloudforms.png[alt="cloudforms", width="200", height="200", link="https://github.com/ramrexx/CloudForms_Essentials/blob/master/documentation/images/cloudforms.png"]
 
 = Welcome to the CloudForms Essentials Project
 
