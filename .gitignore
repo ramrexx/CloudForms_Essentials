@@ -3,6 +3,7 @@
 .settings
 .classpath
 .sass-cache/
+.manifest.yaml
 
 # begin exclude MAC OS X files
 __MACOSX
