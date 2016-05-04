@@ -1452,7 +1452,7 @@
           resource_type: DialogField
           ae_namespace: Integration/VMware/vCenter
           ae_class: DynamicDialogs
-          ae_instance: list_vm_disk_numbers
+          ae_instance: list_vcenter_vm_disk_numbers
           ae_message: 
           ae_attributes: {}
       - name: size
