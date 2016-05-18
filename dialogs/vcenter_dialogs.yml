@@ -737,7 +737,7 @@
       display_method_options: 
       position: 0
       dialog_fields:
-      - name: size
+      - name: volume_1_size
         description: 
         type: DialogFieldTextBox
         data_type: 
