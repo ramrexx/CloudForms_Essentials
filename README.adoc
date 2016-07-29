@@ -23,7 +23,7 @@ image::documentation/images/cloudforms.png[alt="cloudforms", width="200", height
 This project was designed to augment Red Hat (R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms]
 installations.
 
-Current supported appliance version: *5.5.x*
+Current supported appliance version: *5.6*
 
 This repo contains imports for the following areas of the product:
 
