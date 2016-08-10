@@ -28,7 +28,7 @@ end
 
 def process_customization(prov)
   # Choose the sections to process
-  set_vlan  = true
+  set_vlan  = false
   set_notes = true
 
   # Get information from the template platform
