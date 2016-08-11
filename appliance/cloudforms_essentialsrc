@@ -30,14 +30,14 @@ alias lib='cd /var/www/miq/lib'
 alias log='cd /var/www/miq/vmdb/log'
 
 # Tail aliases
-alias auto='tail -f /var/www/miq/vmdb/log/automation.log'
-alias evm='tail -f /var/www/miq/vmdb/log/evm.log'
-alias aws='tail -f /var/www/miq/vmdb/log/aws.log'
-alias foglog='tail -f /var/www/miq/vmdb/log/fog.log'
-alias rhevm='tail -f /var/www/miq/vmdb/log/rhevm.log'
-alias prod='tail -f /var/www/miq/vmdb/log/production.log'
-alias policy='tail -f /var/www/miq/vmdb/log/policy.log'
-alias pglog='tail -f /opt/rh/postgresql92/root/var/lib/pgsql/data/pg_log/postgresql.log'
+alias auto='less /var/www/miq/vmdb/log/automation.log'
+alias evm='less /var/www/miq/vmdb/log/evm.log'
+alias aws='less /var/www/miq/vmdb/log/aws.log'
+alias foglog='less /var/www/miq/vmdb/log/fog.log'
+alias rhevm='less /var/www/miq/vmdb/log/rhevm.log'
+alias prod='less /var/www/miq/vmdb/log/production.log'
+alias policy='less /var/www/miq/vmdb/log/policy.log'
+alias pglog='less /opt/rh/postgresql92/root/var/lib/pgsql/data/pg_log/postgresql.log'
 
 # Clean logging aliases
 alias clean="echo Cleaned: `date` > /var/www/miq/vmdb/log/automation.log;echo Cleaned: `date` > /var/www/miq/vmdb/log/evm.log;echo Cleaned: `date` > /var/www/miq/vmdb/log/production.log;clear;echo Logs cleaned..."
