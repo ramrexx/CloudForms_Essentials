@@ -77,7 +77,7 @@ Follow these steps to install the CloudForms_Essentials automate domain:
 . The CloudForms_Essentials automate domain is ready to use!.
 
 TIP: The CloudForms_Essentials automate model is locked by default. To modify something simply create
-     a new domain and copy the moethod, class, etc... to the new domain. This preserves the domain and makes
+     a new domain and copy the method, class, etc... to the new domain. This preserves the domain and makes
      it easy to see what changes were made. Great for PRs!
 
 <<top>>
