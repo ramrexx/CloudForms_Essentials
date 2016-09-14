@@ -43,8 +43,7 @@ end
 
 dump_root
 
-gem 'fog', '>=1.22.0'
-require 'fog'
+require 'fog/openstack'
 require 'netaddr'
 
 vm = $evm.root['vm']

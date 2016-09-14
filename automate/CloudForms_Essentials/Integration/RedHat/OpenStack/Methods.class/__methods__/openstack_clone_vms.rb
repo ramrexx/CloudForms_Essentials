@@ -31,12 +31,11 @@ def log(level, msg, update_message = false)
 end
 
 def get_fog_object(type='Compute', tenant='admin', endpoint='adminURL')
-  require 'fog'
+  require 'fog/openstack'
   (@provider.api_version == 'v2') ? (conn_ref = '/v2.0/tokens') : (conn_ref = '/v3/auth/tokens')
   (@provider.security_protocol == 'non-ssl') ? (proto = 'http') : (proto = 'https')
   
   connection_hash = {
-    :provider => 'OpenStack',
     :openstack_api_key => @provider.authentication_password,
     :openstack_username => @provider.authentication_userid,
     :openstack_auth_url => "#{proto}://#{@provider.hostname}:#{@provider.port}#{conn_ref}",
@@ -49,7 +48,7 @@ def get_fog_object(type='Compute', tenant='admin', endpoint='adminURL')
     connection_hash[:openstack_project_name] = tenant
     connection_hash[:openstack_auth_url] = "#{proto}://#{@provider.hostname}:35357/#{conn_ref}"
   end
-  return Object::const_get("Fog").const_get("#{type}").new(connection_hash)
+  return Object::const_get("Fog").const_get("#{type}").const_get("OpenStack").new(connection_hash)
 end
 
 def get_provider(provider_id=nil)

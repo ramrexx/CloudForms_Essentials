@@ -44,7 +44,7 @@ end
 
 $evm.root.attributes.sort.each { |k,v| log(:info, "Root:<$evm.root> Attribute - #{k}: #{v}") }
 
-require 'fog'
+require 'fog/openstack'
 
 name = nil
 
