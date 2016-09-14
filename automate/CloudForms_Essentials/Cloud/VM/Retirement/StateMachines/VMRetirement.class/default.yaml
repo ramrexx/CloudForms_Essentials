@@ -12,7 +12,5 @@ object:
       value: "/Cloud/VM/Retirement/StateMachines/Methods/RemoveFromProvider"
   - CheckRemovedFromProvider:
       value: "/Cloud/VM/Retirement/StateMachines/Methods/CheckRemovedFromProvider"
-  - PostDeleteFromProvider:
-      value: "/Integration/RedHat/OpenStack/Methods/openstack_delete_volume"
   - DeleteFromVMDB:
       value: "/Cloud/VM/Retirement/StateMachines/Methods/DeleteFromVMDB"
