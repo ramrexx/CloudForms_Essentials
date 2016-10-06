@@ -25,33 +25,25 @@
 #    limitations under the License.
 # -------------------------------------------------------------------------------
 
-# Directory aliases
-alias lib='cd /var/www/miq/lib'
-alias log='cd /var/www/miq/vmdb/log'
+# Directory settings
+VMDB_PATH='/var/www/miq/vmdb'
+alias log='cd $VMDB_PATH/log'
 
-# Tail aliases
-alias auto='less /var/www/miq/vmdb/log/automation.log'
-alias evm='less /var/www/miq/vmdb/log/evm.log'
-alias aws='less /var/www/miq/vmdb/log/aws.log'
-alias foglog='less /var/www/miq/vmdb/log/fog.log'
-alias rhevm='less /var/www/miq/vmdb/log/rhevm.log'
-alias prod='less /var/www/miq/vmdb/log/production.log'
-alias policy='less /var/www/miq/vmdb/log/policy.log'
-alias pglog='less /opt/rh/postgresql92/root/var/lib/pgsql/data/pg_log/postgresql.log'
+# Logging aliases
+alias auto='less +F $VMDB_PATH/log/automation.log'
+alias evm='less +F $VMDB_PATH/log/evm.log'
+alias prod='less +F $VMDB_PATH/log/production.log'
+alias policy='less +F $VMDB_PATH/log/policy.log'
+alias pglog='less +F $APPLIANCE_PG_DATA/pg_log/postgresql.log'
 
 # Clean logging aliases
-alias clean="echo Cleaned: `date` > /var/www/miq/vmdb/log/automation.log;echo Cleaned: `date` > /var/www/miq/vmdb/log/evm.log;echo Cleaned: `date` > /var/www/miq/vmdb/log/production.log;clear;echo Logs cleaned..."
-alias clean_evm="echo Cleaned: `date` > /var/www/miq/vmdb/log/evm.log"
-alias clean_aws="echo Cleaned: `date` > /var/www/miq/vmdb/log/aws.log"
-alias clean_rhevm="echo Cleaned: `date` > /var/www/miq/vmdb/log/rhevm.log"
-alias clean_fog="echo Cleaned: `date` > /var/www/miq/vmdb/log/fog.log"
-alias clean_auto="echo Cleaned: `date` > /var/www/miq/vmdb/log/automation.log"
-alias clean_prod="echo Cleaned: `date` > /var/www/miq/vmdb/log/production.log"
-alias clean_policy="echo Cleaned: `date` > /var/www/miq/vmdb/log/policy.log"
-alias clean_pgsql="echo Cleaned: `date` > /opt/rh/postgresql92/root/var/lib/pgsql/data/pg_log/postgresql.log"
+alias clean_evm="echo Cleaned: `date` > $VMDB_PATH/log/evm.log"
+alias clean_auto="echo Cleaned: `date` > $VMDB_PATH/log/automation.log"
+alias clean_prod="echo Cleaned: `date` > $VMDB_PATH/log/production.log"
+alias clean="clean_evm;clean_auto;clean_prod"
 
 # Rails Console
-alias railsc="cd /var/www/miq/vmdb;echo '\$evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)'; script/rails c"
+alias railsc="vmdb;echo '\$evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)'; script/rails c"
 
 # kill provision job.
 function kill_prov {
@@ -61,7 +53,7 @@ function kill_prov {
 }
 
 # Application Status
-alias status='echo "CloudForms Status:";service evmserverd status;echo " ";echo "HTTP Status:";service httpd status'
+alias status='systemctl status evmserverd httpd|more; evmserver.sh status'
 
 # Ignore duplicate history commands
 export HISTCONTROL=ignoredups
