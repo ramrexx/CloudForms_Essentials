@@ -4,7 +4,7 @@
     rpt_group: Custom
     rpt_type: Custom
     priority: 
-    db: Chargeback
+    db: ChargebackVm
     cols:
     - start_date
     - display_range
@@ -196,7 +196,7 @@
     rpt_group: Custom
     rpt_type: Custom
     priority: 
-    db: Chargeback
+    db: ChargebackVm
     cols:
     - start_date
     - display_range
@@ -388,7 +388,7 @@
     rpt_group: Custom
     rpt_type: Custom
     priority: 
-    db: Chargeback
+    db: ChargebackVm
     cols:
     - start_date
     - display_range
@@ -2383,7 +2383,7 @@
     rpt_group: Custom
     rpt_type: Custom
     priority: 
-    db: Chargeback
+    db: ChargebackVm
     cols:
     - start_date
     - display_range
