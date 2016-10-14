@@ -32,14 +32,14 @@ def retry_method(retry_time, msg)
   exit MIQ_OK
 end
 
-def get_aws_client(type='EC2')
+def aws_handler(type='EC2', constructor='Client', body_hash={})
   require 'aws-sdk'
-  AWS.config(
-    :access_key_id => @provider.authentication_userid,
-    :secret_access_key => @provider.authentication_password,
-    :region => @provider.provider_region
-  )
-  return Object::const_get("AWS").const_get("#{type}").new()
+
+  username = @provider.authentication_userid
+  password = @provider.authentication_password
+  Aws.config[:credentials] = Aws::Credentials.new(username, password)
+  Aws.config[:region]      = @provider.provider_region
+  return Aws::const_get("#{type}")::const_get("#{constructor}").new(body_hash)
 end
 
 def process_tags( category, category_description, single_value, tag, tag_description)
@@ -70,26 +70,28 @@ begin
   exit MIQ_OK unless (@vm.vendor.downcase rescue nil) == 'amazon'
 
   @provider = @vm.ext_management_system
-  ec2 = get_aws_client('EC2')
+  ec2_instance = aws_handler('EC2', 'Instance', {:id => @vm.ems_ref})
+  log(:info, "VM: #{@vm.name} EC2: #{ec2_instance}")
 
-  ec2_instance = ec2.instances[@vm.ems_ref]
-  log(:info, "VM: #{@vm.name} EC2: #{ec2_instance.id}")
-
-  ec2_instance.tags.each do |key, value|
+  ec2_instance.tags.each do |tag_element|
+    tag_hash = tag_element.to_h
+    log(:info, "tag_hash: #{tag_hash}")
+    key = tag_hash.delete(:key)
+    value = tag_hash.delete(:value)
     #next if key.starts_with?("cfme_")
-    next if key.downcase == "name"
+    next if key.downcase == "name" rescue next
     category_name, tag_name = process_tags(key, "EC2 Tag #{key}", true, value, value)
     unless @vm.tagged_with?(category_name,tag_name)
-      log(:info, "Assigning Tag: {#{category_name} => #{tag_name}} to VM: #{@vm.name}")
+      log(:info, "Assigning EC2 Tag: {#{category_name} => #{tag_name}} to VM: #{@vm.name}")
       @vm.tag_assign("#{category_name}/#{tag_name}")
     end
   end
 
   @vm.tags.each do |tag_element|
     #next if tag_element.starts_with?("folder_path")
-    tag = tag_element.split("/", 2)
-    log(:info, "Assigning Tag: {#{tag.first} => #{tag.last}} to EC2 Instance: #{@vm.ems_ref}", true)
-    ec2_instance.add_tag("#{tag.first}", :value => tag.last.to_s)
+    cf_tag = tag_element.split("/", 2)
+    log(:info, "Assigning cf_tag: {#{cf_tag.first} => #{cf_tag.last}} to EC2 Instance: #{@vm.ems_ref}", true)
+    ec2_instance.create_tags({:dry_run => false, :tags => [{:key => cf_tag.first, :value=> cf_tag.last,}]})
   end
 
 rescue => err

@@ -9,4 +9,4 @@ object:
     description: 
   fields:
   - Step2:
-      value: "/Integration/Amazon/EC2/Methods/ec2_allocate_elastic_ip"
+      value: METHOD::ec2_allocate_elastic_ip

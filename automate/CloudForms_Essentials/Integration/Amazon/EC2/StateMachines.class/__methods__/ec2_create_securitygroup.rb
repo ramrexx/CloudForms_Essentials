@@ -42,14 +42,14 @@ def get_provider(provider_id=nil)
   provider ? (return provider) : (return nil)
 end
 
-def get_aws_client(type='EC2')
+def get_aws_client(type='EC2', constructor='Client')
   require 'aws-sdk'
-  AWS.config(
-    :access_key_id => @provider.authentication_userid,
-    :secret_access_key => @provider.authentication_password,
-    :region => @provider.provider_region
-  )
-  return Object::const_get("AWS").const_get("#{type}").new().client
+
+  username = @provider.authentication_userid
+  password = @provider.authentication_password
+  Aws.config[:credentials] = Aws::Credentials.new(username, password)
+  Aws.config[:region]      = @provider.provider_region
+  return Aws::const_get("#{type}")::const_get("#{constructor}").new()
 end
 
 begin
@@ -74,8 +74,12 @@ begin
   ec2 = get_aws_client
   log(:info, "Got EC2 Object: #{ec2.inspect}")
 
-  vpc = ec2.vpcs.first
-  log(:info, "Deploying to VPC #{vpc.id} #{vpc.cidr_block}")
+  vpc = ec2.describe_vpcs.first.vpcs.first.to_h
+  # {:vpc_id=>"vpc-38a98d5c", :state=>"available", :cidr_block=>"172.16.0.0/16", :dhcp_options_id=>"dopt-a2bdaac0",
+  #   :tags=>[{:key=>"AWSServiceAccount", :value=>"180699916525"}], :instance_tenancy=>"default", :is_default=>false}
+  vpc_id = vpc[:vpc_id]
+  vpc_cidr_block = vpc[:cidr_block]
+  log(:info, "Deploying to VPC #{vpc_id} #{vpc_cidr_block}")
 
   tcp_ports = $evm.object['tcp_ports']
   tcp_source_cidr = $evm.object['tcp_source_cidr']
@@ -84,11 +88,25 @@ begin
   security_group = nil
   if tcp_ports
     log(:info, "Enabling TCP Ports: #{tcp_ports} from cidr #{tcp_source_cidr}")
-    security_group ||= ec2.security_groups.create("#{@task.get_option(:class_name)}-#{rand(36**3).to_s(36)}",
-                                                  { :vpc => vpc.id, :description => "Sec Group for #{@task.get_option(:class_name)}" })
+    security_group ||= ec2.create_security_group(
+      {
+        :group_name  => "#{@task.get_option(:class_name)}-#{rand(36**3).to_s(36)}",
+        :description => "Sec Group for #{@task.get_option(:class_name)}",
+        :vpc_id      => vpc_id
+      }
+    ).to_h
+    log(:info, "security_group id: #{security_group[:group_id]}")
+
     port_array = tcp_ports.split(',')
     port_array.each { |port|
-      security_group.authorize_ingress(:tcp, port.to_i, tcp_source_cidr)
+      ec2.authorize_security_group_ingress(
+        {
+          :group_id    => security_group[:group_id],
+          :from_port   => port, # use -1 for all ports
+          :cidr_ip     => tcp_source_cidr, # '0.0.0.0/0' for all cidr
+          :ip_protocol => 'tcp' # use '-1' for protocols
+        }
+      )
       log(:info, "Enabled ingress on tcp port #{port.to_i} from #{tcp_source_cidr}")
     }
   end
@@ -99,23 +117,29 @@ begin
 
   if udp_ports
     log(:info, "Enabling UDP Ports #{udp_ports} from cidr #{udp_source_cidr}")
-    security_group ||= ec2.security_groups.create("#{@task.get_option(:class_name)}-#{rand(36**3).to_s(36)}")
+    security_group ||= ec2.create_security_group(
+      {
+        :group_name  => "#{@task.get_option(:class_name)}-#{rand(36**3).to_s(36)}",
+        :description => "Sec Group for #{@task.get_option(:class_name)}",
+        :vpc_id      => vpc_id
+      }
+    ).to_h
+
     port_array = udp_ports.split(',')
     port_array.each { |port|
-      security_group.authorize_ingress(:udp, port.to_i, udp_source_cidr)
+      ec2.authorize_security_group_ingress(
+        {
+          :group_id    => security_group[:group_id],
+          :from_port   => port, # use -1 for all ports
+          :cidr_ip     => udp_source_cidr, # '0.0.0.0/0' for all cidr
+          :ip_protocol => 'udp' # use '-1' for protocols
+        }
+      )
       log(:info, "Enabled ingress on udp port #{port.to_i} from #{udp_source_cidr}")
     }
   end
 
   @service.custom_set("SECURITY_GROUP", "#{security_group.id}")
-
-  rds = get_aws_client
-  log(:info, "RDS Client: #{rds}")
-
-  rds_delete_status_hash = rds.delete_db_instance({:db_instance_identifier => db_instance_identifier, :skip_final_snapshot => true})
-
-  log(:info, "RDS instance:#{db_instance_identifier} Delete issued: #{rds_delete_status_hash.inspect}")
-  set_service_custom_variables(rds_delete_status_hash)
 
 rescue => err
   log(:error, "[#{err}]\n#{err.backtrace.join("\n")}")

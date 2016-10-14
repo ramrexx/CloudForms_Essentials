@@ -48,14 +48,14 @@ def set_service_custom_variables(hash)
   @service.custom_set('Last Refresh', Time.now.utc.strftime('%Y-%m-%d %H:%M:%S UTC'))
 end
 
-def get_aws_client(type='EC2')
+def get_aws_client(type='EC2', constructor='Client')
   require 'aws-sdk'
-  AWS.config(
-    :access_key_id => @provider.authentication_userid,
-    :secret_access_key => @provider.authentication_password,
-    :region => @provider.provider_region
-  )
-  return Object::const_get("AWS").const_get("#{type}").new()
+
+  username = @provider.authentication_userid
+  password = @provider.authentication_password
+  Aws.config[:credentials] = Aws::Credentials.new(username, password)
+  Aws.config[:region]      = @provider.provider_region
+  return Aws::const_get("#{type}")::const_get("#{constructor}").new()
 end
 
 begin
@@ -78,19 +78,25 @@ begin
   end
 
   ec2 = get_aws_client()
-  log(:info, "EC2 Client: #{ec2.inspect}")
 
   keypair_name = "keypair-#{Time.now.to_i}"
 
-  keypair = ec2.key_pairs.create(keypair_name)
-  log(:info, "Created Keypair: #{keypair.inspect}")
+  new_keypair = ec2.create_key_pair({:key_name => keypair_name}).to_h
+  # {:key_name=>"keypair-test", :key_fingerprint=>"50:d2:76:17:54:4a:46:4e:78:b3:4c:d7:1d:84:70:ce:69:16:be:a1", 
+  #   :key_material=>"-----BEGIN RSA PRIVATE KEY-----....})
+  log(:info, "new_keypair: #{new_keypair.inspect}")
+  keypair_name = new_keypair[:key_name]
+  private_key  = new_keypair[:key_material]
+  
+  # Note that if you want to delete this keypair you can do something like this
+  # ec2.delete_key_pair({:key_name =>"keypair-test"})
 
   if @task
-    @task.set_option(:aws_private_key, "#{keypair.private_key}")
-    @task.set_option(:aws_keypair, keypair_name)
+    @task.set_option(:aws_private_key, "#{private_key}")
+    @task.set_option(:aws_keypair, "#{keypair_name}")
   end
 
-  @service.custom_set("KEYPAIR_NAME", keypair_name)
+  @service.custom_set("KEYPAIR_NAME", keypair_name) if @service
 
 rescue => err
   log(:error, "[#{err}]\n#{err.backtrace.join("\n")}")
