@@ -22,4 +22,5 @@ yum install -y git nano
 
 git clone $GIT_ROOT
 cd CloudForms_Essentials
-make install
+
+./install.sh
