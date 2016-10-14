@@ -2394,7 +2394,7 @@
         rpt_group: Custom
         rpt_type: Custom
         priority: 
-        db: Chargeback
+        db: ChargebackVm
         cols:
         - start_date
         - display_range
@@ -2451,7 +2451,7 @@
         template_type: report
         where_clause: 
         db_options:
-          :rpt_type: chargeback
+          :rpt_type: ChargebackVm
           :options:
             :interval: weekly
             :interval_size: 4
@@ -2640,7 +2640,7 @@
         rpt_group: Custom
         rpt_type: Custom
         priority: 
-        db: Chargeback
+        db: ChargebackVm
         cols:
         - start_date
         - display_range
@@ -2697,7 +2697,7 @@
         template_type: report
         where_clause: 
         db_options:
-          :rpt_type: chargeback
+          :rpt_type: ChargebackVm
           :options:
             :interval: weekly
             :interval_size: 4
@@ -3576,7 +3576,7 @@
         rpt_group: Custom
         rpt_type: Custom
         priority: 
-        db: Chargeback
+        db: ChargebackVm
         cols:
         - start_date
         - display_range
@@ -3633,7 +3633,7 @@
         template_type: report
         where_clause: 
         db_options:
-          :rpt_type: chargeback
+          :rpt_type: ChargebackVm
           :options:
             :interval: weekly
             :interval_size: 4
@@ -3822,7 +3822,7 @@
         rpt_group: Custom
         rpt_type: Custom
         priority: 
-        db: Chargeback
+        db: ChargebackVm
         cols:
         - start_date
         - display_range
@@ -3879,7 +3879,7 @@
         template_type: report
         where_clause: 
         db_options:
-          :rpt_type: chargeback
+          :rpt_type: ChargebackVm
           :options:
             :interval: weekly
             :interval_size: 4
