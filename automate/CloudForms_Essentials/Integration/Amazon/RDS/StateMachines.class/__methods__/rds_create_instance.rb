@@ -90,14 +90,14 @@ def get_provider(provider_id=nil)
   provider ? (return provider) : (return nil)
 end
 
-def get_aws_client(type='RDS')
+def get_aws_client(type='RDS', constructor='Client', body_hash={})
   require 'aws-sdk'
-  AWS.config(
-    :access_key_id => @provider.authentication_userid,
-    :secret_access_key => @provider.authentication_password,
-    :region => @provider.provider_region
-  )
-  return Object::const_get("AWS").const_get("#{type}").new().client
+
+  username = @provider.authentication_userid
+  password = @provider.authentication_password
+  Aws.config[:credentials] = Aws::Credentials.new(username, password)
+  Aws.config[:region]      = @provider.provider_region
+  return Aws::const_get("#{type}")::const_get("#{constructor}").new(body_hash)
 end
 
 def yaml_data(option)
@@ -191,7 +191,7 @@ begin
   rds = get_aws_client
   log(:info, "RDS Client: #{rds}")
 
-  rds_create_instance_hash = rds.create_db_instance(rds_options_hash)
+  rds_create_instance_hash = rds.create_db_instance(rds_options_hash).to_h
   log(:info, "RDS Instance Created: #{rds_create_instance_hash.inspect}")
   log(:info, "RDS Instance Created: #{rds_create_instance_hash[:db_instance_identifier]}", true)
 

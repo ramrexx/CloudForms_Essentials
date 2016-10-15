@@ -4,9 +4,9 @@ version: 1.0
 object:
   attributes:
     display_name: 
-    name: rds_delete_instance_check
+    name: list_rds_provider_ids
     inherits: 
     description: 
   fields:
   - method1:
-      value: rds_delete_instance_check
+      value: list_rds_provider_ids

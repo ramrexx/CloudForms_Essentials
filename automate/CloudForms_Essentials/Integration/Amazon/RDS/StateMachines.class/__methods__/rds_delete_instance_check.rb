@@ -1,9 +1,9 @@
 =begin
- rds_create_instance_check.rb
+ rds_delete_instance_check.rb
 
  Author: David Costakos <dcostako@redhat.com>, Kevin Morey <kevin@redhat.com>
 
- Description: This method checks that the AWS RDS instances has been created
+ Description: This method checks that the AWS RDS instance has been deleted
 -------------------------------------------------------------------------------
    Copyright 2016 Kevin Morey <kevin@redhat.com>
 
@@ -47,14 +47,14 @@ def retry_method(retry_time='1.minute', msg='RETRYING', update_message=false)
   exit MIQ_OK
 end
 
-def get_aws_client(type='RDS')
+def get_aws_client(type='RDS', constructor='Client', body_hash={})
   require 'aws-sdk'
-  AWS.config(
-    :access_key_id => @provider.authentication_userid,
-    :secret_access_key => @provider.authentication_password,
-    :region => @provider.provider_region
-  )
-  return Object::const_get("AWS").const_get("#{type}").new().client
+
+  username = @provider.authentication_userid
+  password = @provider.authentication_password
+  Aws.config[:credentials] = Aws::Credentials.new(username, password)
+  Aws.config[:region]      = @provider.provider_region
+  return Aws::const_get("#{type}")::const_get("#{constructor}").new(body_hash)
 end
 
 def set_service_custom_variables(hash)
@@ -69,45 +69,32 @@ begin
   $evm.root.attributes.sort.each { |k, v| log(:info, "\t$evm.root Attribute - #{k}: #{v}")}
 
   case $evm.root['vmdb_object_type']
-  when 'service_template_provision_task'
-    @task = $evm.root['service_template_provision_task']
-    log(:info, "Task: #{@task.id} Request: #{@task.miq_request.id} Type:#{@task.type}")
-    @service = @task.destination
+  when 'service'
+    @service = $evm.root['service']
     log(:info,"Service: #{@service.name} Id: #{@service.id}")
+    provider_id   = @service.custom_get(:provider_id)
+    @provider ||= get_provider(provider_id)
   else
     exit MIQ_OK
   end
 
-  @provider = get_provider
-
   db_instance_identifier = @service.custom_get(:db_instance_identifier)
-  db_instance_identifier ||= @task.get_option(:db_instance_identifier)
-
-  db_engine = @task.get_option(:engine)
-  db_engine ||= @service.custom_get(:engine)
 
   rds = get_aws_client
   log(:info, "RDS Client: #{rds}")
-
-  log(:info, "Checking status on #{db_instance_identifier}")
-  rds_create_instance_check_hash = rds.describe_db_instances({:db_instance_identifier => db_instance_identifier})[:db_instances].first
-
-  log(:info, "Found DB Instance: #{rds_create_instance_check_hash.inspect rescue "NOT FOUND"}")
-  if rds_create_instance_check_hash[:db_instance_status] == 'available'
-    endpoint = "#{rds_create_instance_check_hash[:endpoint][:address]}:#{rds_create_instance_check_hash[:endpoint][:port]}"
-    @service.custom_set(:endpoint, "#{endpoint}")
-    set_service_custom_variables(rds_create_instance_check_hash)
-    status_message = "DB Instance: #{db_instance_identifier} status: #{rds_create_instance_check_hash[:db_instance_status]}"
-    log(:info, status_message, true)
-  else
-    set_service_custom_variables(rds_create_instance_check_hash)
-    status_message = "DB Instance: #{db_instance_identifier} status: #{rds_create_instance_check_hash[:db_instance_status]}"
+  begin
+    rds_delete_instnace_check_hash = rds.describe_db_instances({:db_instance_identifier => db_instance_identifier})[:db_instances].first.to_h
+    set_service_custom_variables(rds_delete_instnace_check_hash)
+    status_message = "DB Instance: #{db_instance_identifier} status: #{rds_delete_instnace_check_hash[:db_instance_status]}"
     log(:info, status_message, true)
     retry_method('1.minute', status_message)
+  rescue AWS::RDS::Errors::DBInstanceNotFound => dberr
+    log(:info, "Database instance: #{db_instance_identifier} has been deleted, #{dberr}", true)
+    @service.remove_from_vmdb if @service
+    exit MIQ_OK
   end
 
 rescue => err
   log(:error, "[#{err}]\n#{err.backtrace.join("\n")}")
-  @task.finished("#{err}") if @task
   exit MIQ_ABORT
 end

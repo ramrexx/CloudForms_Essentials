@@ -4,9 +4,9 @@ version: 1.0
 object:
   attributes:
     display_name: 
-    name: rds_dialog_parser
+    name: list_rds_availability_zone_ids
     inherits: 
     description: 
   fields:
   - method1:
-      value: rds_dialog_parser
+      value: list_rds_availability_zone_ids

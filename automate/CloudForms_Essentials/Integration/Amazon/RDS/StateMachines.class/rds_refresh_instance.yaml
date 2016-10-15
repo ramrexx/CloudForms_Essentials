@@ -9,4 +9,4 @@ object:
     description: 
   fields:
   - Step2:
-      value: "/Integration/Amazon/RDS/Methods/rds_refresh_instance"
+      value: METHOD::rds_refresh_instance

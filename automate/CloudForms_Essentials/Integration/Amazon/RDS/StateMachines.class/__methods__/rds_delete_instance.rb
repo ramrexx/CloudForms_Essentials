@@ -1,9 +1,9 @@
 =begin
- rds_refresh_instance.rb
+ rds_delete_instance.rb
 
- Author: Kevin Morey <kevin@redhat.com>
+ Author: David Costakos <dcostako@redhat.com>, Kevin Morey <kevin@redhat.com>
 
- Description: This method checks for a AWS RDS instances and updates the service
+ Description: This method delete an RDS instance in AWS
 -------------------------------------------------------------------------------
    Copyright 2016 Kevin Morey <kevin@redhat.com>
 
@@ -26,28 +26,30 @@ def log(level, msg, update_message = false)
 end
 
 def get_provider(provider_id=nil)
-  $evm.root.attributes.detect { |k,v| provider_id = v if k.end_with?('provider_id') } rescue nil
+  unless provider_id.nil?
+    $evm.root.attributes.detect { |k,v| provider_id = v if k.end_with?('provider_id') } rescue nil
+  end
   provider = $evm.vmdb(:ManageIQ_Providers_Amazon_CloudManager).find_by_id(provider_id)
-  $evm.log(:info, "Found provider: #{provider.name} via provider_id: #{provider.id}") if provider
+  log(:info, "Found provider: #{provider.name} via provider_id: #{provider.id}") if provider
 
   # set to true to default to the fist amazon provider
   use_default = true
   unless provider
     # default the provider to first openstack provider
     provider = $evm.vmdb(:ManageIQ_Providers_Amazon_CloudManager).first if use_default
-    $evm.log(:info, "Found amazon: #{provider.name} via default method") if provider && use_default
+    log(:info, "Found amazon: #{provider.name} via default method") if provider && use_default
   end
   provider ? (return provider) : (return nil)
 end
 
-def get_aws_client(type='RDS')
+def get_aws_client(type='RDS', constructor='Client', body_hash={})
   require 'aws-sdk'
-  AWS.config(
-    :access_key_id => @provider.authentication_userid,
-    :secret_access_key => @provider.authentication_password,
-    :region => @provider.provider_region
-  )
-  return Object::const_get("AWS").const_get("#{type}").new().client
+
+  username = @provider.authentication_userid
+  password = @provider.authentication_password
+  Aws.config[:credentials] = Aws::Credentials.new(username, password)
+  Aws.config[:region]      = @provider.provider_region
+  return Aws::const_get("#{type}")::const_get("#{constructor}").new(body_hash)
 end
 
 def set_service_custom_variables(hash)
@@ -76,14 +78,12 @@ begin
   rds = get_aws_client
   log(:info, "RDS Client: #{rds}")
 
-  log(:info, "Checking status on #{db_instance_identifier}")
-  rds_db_instance_check_hash = rds.describe_db_instances({:db_instance_identifier => db_instance_identifier})[:db_instances].first
+  rds_delete_status_hash = rds.delete_db_instance({:db_instance_identifier => db_instance_identifier, :skip_final_snapshot => true}).to_h
 
-  log(:info, "Found DB Instance: #{rds_db_instance_check_hash.inspect rescue "NOT FOUND"}")
-  set_service_custom_variables(rds_db_instance_check_hash)
+  log(:info, "RDS instance:#{db_instance_identifier} Delete issued: #{rds_delete_status_hash.inspect}")
+  set_service_custom_variables(rds_delete_status_hash)
 
 rescue => err
   log(:error, "[#{err}]\n#{err.backtrace.join("\n")}")
-  @task.finished("#{err}") if @task
   exit MIQ_ABORT
 end
