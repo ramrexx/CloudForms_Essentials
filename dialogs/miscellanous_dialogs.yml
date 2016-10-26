@@ -466,18 +466,18 @@
         required_method_options: {}
         default_value: small
         values:
-        - - large
-          - Large - 4 vCPU x 8 GB RAM
-        - - medium
-          - Medium - 2 vCPU x 4 GB RAM
-        - - small
+        - - 01_small
           - Small - 1 vCPU x 2 GB RAM
-        - - xlarge
+        - - 02_medium
+          - Medium - 2 vCPU x 4 GB RAM
+        - - 03_large
+          - Large - 4 vCPU x 8 GB RAM
+        - - 04_xlarge
           - xLarge - 8 vCPU x 16 GB RAM
         values_method: 
         values_method_options: {}
         options:
-          :sort_by: :description
+          :sort_by: :value
           :sort_order: :ascending
         label: Flavor *
         position: 2
@@ -959,18 +959,18 @@
         required_method_options: {}
         default_value: small
         values:
-        - - large
-          - Large - 4 vCPU x 8 GB RAM
-        - - medium
-          - Medium - 2 vCPU x 4 GB RAM
-        - - small
+        - - 01_small
           - Small - 1 vCPU x 2 GB RAM
-        - - xlarge
+        - - 02_medium
+          - Medium - 2 vCPU x 4 GB RAM
+        - - 03_large
+          - Large - 4 vCPU x 8 GB RAM
+        - - 04_xlarge
           - xLarge - 8 vCPU x 16 GB RAM
         values_method: 
         values_method_options: {}
         options:
-          :sort_by: :description
+          :sort_by: :value
           :sort_order: :ascending
         label: Flavor *
         position: 2

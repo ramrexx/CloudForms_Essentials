@@ -407,7 +407,7 @@ def get_flavor(build, merged_options_hash, merged_tags_hash)
     log(:info, "cloud_flavor: #{cloud_flavor}") if cloud_flavor
   else
     # Manually map compute flavors for VMware, RHEV and SCVMM
-    case flavor_search_criteria.match(/\w*$/)[0]
+    case flavor_search_criteria.gsub(/^\d*_/, '').match(/\w*$/)[0]
     when 'xsmall';  flavor_name, number_of_sockets, cores_per_socket, vm_memory = 'xsmall', 1, 1, 1024
     when 'small';   flavor_name, number_of_sockets, cores_per_socket, vm_memory = 'small', 1, 1, 2048
     when 'medium';  flavor_name, number_of_sockets, cores_per_socket, vm_memory = 'medium', 1, 2, 4096
@@ -415,7 +415,7 @@ def get_flavor(build, merged_options_hash, merged_tags_hash)
     when 'xlarge';  flavor_name, number_of_sockets, cores_per_socket, vm_memory = 'xlarge', 1, 8, 16384
     else
       # default to small
-      flavor_name, number_of_sockets, cores_per_socket, vm_memory = 'small', 1, 2, 2048
+      flavor_name, number_of_sockets, cores_per_socket, vm_memory = 'small', 1, 1, 2048
     end
   end
   if cloud_flavor
