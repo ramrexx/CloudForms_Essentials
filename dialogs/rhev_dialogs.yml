@@ -737,18 +737,18 @@
         required_method_options: {}
         default_value: xsmall
         values:
-        - - xsmall
+        - - 01_xsmall
           - xSmall (1x1)
-        - - small
+        - - 02_small
           - Small (1x2)
-        - - medium
+        - - 03_medium
           - Medium (2x4)
-        - - large
+        - - 04_large
           - Large (4x8)
         values_method: 
         values_method_options: {}
         options:
-          :sort_by: :none
+          :sort_by: :value
           :sort_order: :ascending
         label: Flavor *
         position: 3
@@ -1161,18 +1161,18 @@
         required_method_options: {}
         default_value: xsmall
         values:
-        - - xsmall
+        - - 01_xsmall
           - xSmall (1x1)
-        - - small
+        - - 02_small
           - Small (1x2)
-        - - medium
+        - - 03_medium
           - Medium (2x4)
-        - - large
+        - - 04_large
           - Large (4x8)
         values_method: 
         values_method_options: {}
         options:
-          :sort_by: :none
+          :sort_by: :value
           :sort_order: :ascending
         label: Flavor *
         position: 2
