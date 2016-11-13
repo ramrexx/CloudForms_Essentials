@@ -28,7 +28,7 @@ Current supported appliance version: *cf4.1*
 This repo contains imports for the following areas of the product:
 
 * Automate
-* Dialogs
+* Service_Dialogs
 * Buttons
 * Reports
 * Control
@@ -47,7 +47,7 @@ More documentation can be found here: link:https://github.com/ramrexx/CloudForms
 * Use instructions in following sections as applicable to your use cases
 
 ** <<Automate>>
-** <<Dialogs>>
+** <<Service_Dialogs>>
 ** <<Reports>>
 ** <<Control>>
 ** <<Alerts>>
@@ -83,14 +83,14 @@ TIP: The CloudForms_Essentials automate model is locked by default. To modify so
 <<top>>
 
 
-=== Dialogs
+=== Service_Dialogs
 Sample service dialogs for provisioning VMs and performing other tasks via custom buttons.
 
-Follow these steps to install the CloudForms_Essentials dialogs:
+Follow these steps to install the CloudForms_Essentials service_dialogs:
 
 . Log into your CloudForms/ManageIQ UI as an administrator
 . Navigate to Automate / Customization / ImportExport (This is located in the bottom left of your accordion)
-. Import the dialog(s) in the Dialog director
+. Import the dialog(s) in the Dialog directory
 
 <<top>>
 

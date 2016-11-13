@@ -1,0 +1,1614 @@
+---
+- description: 
+  buttons: submit,cancel
+  label: ec2_catalogItem
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: Amazon Provisioning
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Service Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: service_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_0_environment
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: test
+        values:
+        - - dev
+          - Development
+        - - prod
+          - Production
+        - - test
+          - Test
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Environment
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: 
+      display: edit
+      label: VM Information
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: option_1_vm_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: VM Name
+        position: 0
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_1_function
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: app
+        values:
+        - - app
+          - Application Server
+        - - db
+          - Database Server
+        - - web
+          - Web Server
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Function *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_keypair
+        description: Paste in your public SSH key
+        type: DialogFieldTextAreaBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options: {}
+        label: Key Pair
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: ''
+  buttons: submit,cancel
+  label: rds_create
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: RDS Provisioning
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: AWS Details (Region/AZ)
+      display: edit
+      label: AWS Details
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: provider_id
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values:
+        - - 
+          - "<Script error>"
+        values_method: 
+        values_method_options: {}
+        options: {}
+        label: Amazon Region
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon
+          ae_class: DynamicDialogs
+          ae_instance: List_Providers
+          ae_message: 
+          ae_attributes: {}
+      - name: availability_zone
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: 
+        values:
+        - - 
+          - "<Script error>"
+        values_method: 
+        values_method_options: {}
+        options: {}
+        label: Availability Zone
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon
+          ae_class: DynamicDialogs
+          ae_instance: List_Availability_Zones
+          ae_message: 
+          ae_attributes: {}
+    - description: 
+      display: edit
+      label: RDS Instance Details
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: rds_0_db_instance_identifier
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: rds_0_engine
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: postgres
+        values:
+        - - mariadb
+          - MariaDB
+        - - mysql
+          - MySQL
+        - - postgres
+          - PostgreSQL
+        - - sqlserver-ex
+          - SQL Server
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Engine
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: rds_0_db_instance_class
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: db.t1.micro
+        values:
+        - - db.m1.medium
+          - db.m1.medium
+        - - db.m1.small
+          - db.m1.small
+        - - db.t1.micro
+          - db.t1.micro
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Flavor
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: rds_0_allocated_storage
+        description: 
+        type: DialogFieldDropDownList
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '5'
+        values:
+        - - '5'
+          - 5GB
+        - - '10'
+          - 10GB
+        - - '15'
+          - 15GB
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :value
+          :sort_order: :ascending
+        label: Storage (in GB)
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: rds_0_master_username
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: dbadmin
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Username
+        position: 4
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: rds_0_master_user_password
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: Redhat1!
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: true
+        label: Password
+        position: 5
+        validator_type: regex
+        validator_rule: ".{8,}"
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: service_retires_on
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - 1 Day
+        - - '7'
+          - 1 Week
+        - - '3'
+          - 3 Days
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Retirement
+        position: 6
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: ec2_build_request_admin
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: EC2 Provisioning
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Service Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: service_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_0_environment
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: dev
+        values:
+        - - dev
+          - Development
+        - - prod
+          - Production
+        - - test
+          - Test
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Environment *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: ''
+      display: edit
+      label: VM Information
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: option_1_provider_id
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '3'
+        values:
+        - - 3
+          - amazon_ec2 - us-west-1
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Provider *
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon/EC2
+          ae_class: DynamicDialogs
+          ae_instance: list_ec2_provider_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_placement_availability_zone
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - 1
+          - us-west-1a on amazon_ec2
+        - - 2
+          - us-west-1b on amazon_ec2
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Availability Zone *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon/EC2
+          ae_class: DynamicDialogs
+          ae_instance: list_ec2_availability_zone_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_guid
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: a4b54d16-e6ec-11e5-99ce-5254001018da
+        values:
+        - - a4b54d16-e6ec-11e5-99ce-5254001018da
+          - ec2_west_rhel71_template on amazon_ec2
+        - - a4c29c14-e6ec-11e5-99ce-5254001018da
+          - ec2_west_rhel72_template on amazon_ec2
+        - - a4cd5f6e-e6ec-11e5-99ce-5254001018da
+          - LinuxFlex_ami on amazon_ec2
+        - - a4d6b7bc-e6ec-11e5-99ce-5254001018da
+          - ec2_west_rhel6_template on amazon_ec2
+        - - a4e053b2-e6ec-11e5-99ce-5254001018da
+          - ec2_west_win2k8r2_template on amazon_ec2
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Template *
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon/EC2
+          ae_class: DynamicDialogs
+          ae_instance: list_ec2_template_guids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_flavor
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - 1
+          - t2.nano on amazon_ec2
+        - - 2
+          - t2.micro on amazon_ec2
+        - - 3
+          - t2.small on amazon_ec2
+        - - 4
+          - t2.medium on amazon_ec2
+        - - 5
+          - t2.large on amazon_ec2
+        - - 6
+          - m3.medium on amazon_ec2
+        - - 7
+          - m3.large on amazon_ec2
+        - - 8
+          - m3.xlarge on amazon_ec2
+        - - 9
+          - m3.2xlarge on amazon_ec2
+        - - 10
+          - m4.large on amazon_ec2
+        - - 11
+          - m4.xlarge on amazon_ec2
+        - - 12
+          - m4.2xlarge on amazon_ec2
+        - - 13
+          - m4.4xlarge on amazon_ec2
+        - - 14
+          - m4.10xlarge on amazon_ec2
+        - - 15
+          - c3.large on amazon_ec2
+        - - 16
+          - c3.xlarge on amazon_ec2
+        - - 17
+          - c3.2xlarge on amazon_ec2
+        - - 18
+          - c3.4xlarge on amazon_ec2
+        - - 19
+          - c3.8xlarge on amazon_ec2
+        - - 20
+          - c4.large on amazon_ec2
+        - - 21
+          - c4.xlarge on amazon_ec2
+        - - 22
+          - c4.2xlarge on amazon_ec2
+        - - 23
+          - c4.4xlarge on amazon_ec2
+        - - 24
+          - c4.8xlarge on amazon_ec2
+        - - 25
+          - g2.2xlarge on amazon_ec2
+        - - 26
+          - g2.8xlarge on amazon_ec2
+        - - 27
+          - r3.large on amazon_ec2
+        - - 28
+          - r3.xlarge on amazon_ec2
+        - - 29
+          - r3.2xlarge on amazon_ec2
+        - - 30
+          - r3.4xlarge on amazon_ec2
+        - - 31
+          - r3.8xlarge on amazon_ec2
+        - - 32
+          - i2.xlarge on amazon_ec2
+        - - 33
+          - i2.2xlarge on amazon_ec2
+        - - 34
+          - i2.4xlarge on amazon_ec2
+        - - 35
+          - i2.8xlarge on amazon_ec2
+        - - 36
+          - d2.xlarge on amazon_ec2
+        - - 37
+          - d2.2xlarge on amazon_ec2
+        - - 38
+          - d2.4xlarge on amazon_ec2
+        - - 39
+          - d2.8xlarge on amazon_ec2
+        - - 40
+          - t1.micro on amazon_ec2
+        - - 41
+          - m1.small on amazon_ec2
+        - - 42
+          - m1.medium on amazon_ec2
+        - - 43
+          - m1.large on amazon_ec2
+        - - 44
+          - m1.xlarge on amazon_ec2
+        - - 45
+          - c1.medium on amazon_ec2
+        - - 46
+          - c1.xlarge on amazon_ec2
+        - - 47
+          - cc2.8xlarge on amazon_ec2
+        - - 48
+          - cg1.4xlarge on amazon_ec2
+        - - 49
+          - m2.xlarge on amazon_ec2
+        - - 50
+          - m2.2xlarge on amazon_ec2
+        - - 51
+          - m2.4xlarge on amazon_ec2
+        - - 52
+          - cr1.8xlarge on amazon_ec2
+        - - 53
+          - hi1.4xlarge on amazon_ec2
+        - - 54
+          - hs1.8xlarge on amazon_ec2
+        - - 55
+          - cc1.4xlarge on amazon_ec2
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Flavor *
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon/EC2
+          ae_class: DynamicDialogs
+          ae_instance: list_ec2_flavor_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_customization_template_id
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: '7'
+        values:
+        - - 7
+          - amazon_web_server
+        - - 8
+          - amazon_server
+        - - 9
+          - amazon_database
+        - - 10
+          - amazon_wordpress
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: User-Data *
+        position: 4
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon/EC2
+          ae_class: DynamicDialogs
+          ae_instance: list_ec2_cloudinit_template_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_security_groups
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - 1
+          - default on amazon_ec2
+        - - 2
+          - launch-wizard-1 on amazon_ec2
+        - - 3
+          - mw-workshop on amazon_ec2
+        - - 4
+          - ose_ehi on amazon_ec2
+        - - 5
+          - SALAB on amazon_ec2
+        - - 6
+          - test-nnc on amazon_ec2
+        - - 7
+          - test-qny on amazon_ec2
+        - - 8
+          - training1-sq on amazon_ec2
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Security Group *
+        position: 5
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon/EC2
+          ae_class: DynamicDialogs
+          ae_instance: list_ec2_securitygroup_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_guest_access_key_pair
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: '9'
+        values:
+        - - 9
+          - christian-mw-workshop on amazon_ec2
+        - - 10
+          - DAVE on amazon_ec2
+        - - 11
+          - foreman-167f21c53-bc52-4820-8b65-51d22da814ac on amazon_ec2
+        - - 12
+          - foreman-359f9f2b8-17ca-48ce-a6ab-98c833bdbd1c on amazon_ec2
+        - - 13
+          - SALAB on amazon_ec2
+        - - 14
+          - test-6qu on amazon_ec2
+        - - 15
+          - training1-u2j on amazon_ec2
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Key Pair *
+        position: 6
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon/EC2
+          ae_class: DynamicDialogs
+          ae_instance: list_ec2_keypair_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_vm_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Name
+        position: 7
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_number_of_vms
+        description: 
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - '1'
+          - '1'
+        - - '2'
+          - '2'
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Number of VMs
+        position: 8
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+- description: 
+  buttons: submit,cancel
+  label: ec2_build_request_user
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: EC2 Provisioning
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Service Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: service_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: 
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_0_environment
+        description: 
+        type: DialogFieldRadioButton
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: test
+        values:
+        - - dev
+          - Development
+        - - prod
+          - Production
+        - - test
+          - Test
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Environment *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: ''
+      display: edit
+      label: VM Information
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: option_1_guid
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: a4e053b2-e6ec-11e5-99ce-5254001018da
+        values:
+        - - a4e053b2-e6ec-11e5-99ce-5254001018da
+          - ec2_west_win2k8r2_template on amazon_ec2
+        - - a4d6b7bc-e6ec-11e5-99ce-5254001018da
+          - ec2_west_rhel6_template on amazon_ec2
+        - - a4cd5f6e-e6ec-11e5-99ce-5254001018da
+          - LinuxFlex_ami on amazon_ec2
+        - - a4c29c14-e6ec-11e5-99ce-5254001018da
+          - ec2_west_rhel72_template on amazon_ec2
+        - - a4b54d16-e6ec-11e5-99ce-5254001018da
+          - ec2_west_rhel71_template on amazon_ec2
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Template *
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon/EC2
+          ae_class: DynamicDialogs
+          ae_instance: list_ec2_template_guids
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_flavor
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '1'
+        values:
+        - - 1
+          - t2.nano on amazon_ec2
+        - - 2
+          - t2.micro on amazon_ec2
+        - - 3
+          - t2.small on amazon_ec2
+        - - 4
+          - t2.medium on amazon_ec2
+        - - 5
+          - t2.large on amazon_ec2
+        - - 6
+          - m3.medium on amazon_ec2
+        - - 7
+          - m3.large on amazon_ec2
+        - - 8
+          - m3.xlarge on amazon_ec2
+        - - 9
+          - m3.2xlarge on amazon_ec2
+        - - 10
+          - m4.large on amazon_ec2
+        - - 11
+          - m4.xlarge on amazon_ec2
+        - - 12
+          - m4.2xlarge on amazon_ec2
+        - - 13
+          - m4.4xlarge on amazon_ec2
+        - - 14
+          - m4.10xlarge on amazon_ec2
+        - - 15
+          - c3.large on amazon_ec2
+        - - 16
+          - c3.xlarge on amazon_ec2
+        - - 17
+          - c3.2xlarge on amazon_ec2
+        - - 18
+          - c3.4xlarge on amazon_ec2
+        - - 19
+          - c3.8xlarge on amazon_ec2
+        - - 20
+          - c4.large on amazon_ec2
+        - - 21
+          - c4.xlarge on amazon_ec2
+        - - 22
+          - c4.2xlarge on amazon_ec2
+        - - 23
+          - c4.4xlarge on amazon_ec2
+        - - 24
+          - c4.8xlarge on amazon_ec2
+        - - 25
+          - g2.2xlarge on amazon_ec2
+        - - 26
+          - g2.8xlarge on amazon_ec2
+        - - 27
+          - r3.large on amazon_ec2
+        - - 28
+          - r3.xlarge on amazon_ec2
+        - - 29
+          - r3.2xlarge on amazon_ec2
+        - - 30
+          - r3.4xlarge on amazon_ec2
+        - - 31
+          - r3.8xlarge on amazon_ec2
+        - - 32
+          - i2.xlarge on amazon_ec2
+        - - 33
+          - i2.2xlarge on amazon_ec2
+        - - 34
+          - i2.4xlarge on amazon_ec2
+        - - 35
+          - i2.8xlarge on amazon_ec2
+        - - 36
+          - d2.xlarge on amazon_ec2
+        - - 37
+          - d2.2xlarge on amazon_ec2
+        - - 38
+          - d2.4xlarge on amazon_ec2
+        - - 39
+          - d2.8xlarge on amazon_ec2
+        - - 40
+          - t1.micro on amazon_ec2
+        - - 41
+          - m1.small on amazon_ec2
+        - - 42
+          - m1.medium on amazon_ec2
+        - - 43
+          - m1.large on amazon_ec2
+        - - 44
+          - m1.xlarge on amazon_ec2
+        - - 45
+          - c1.medium on amazon_ec2
+        - - 46
+          - c1.xlarge on amazon_ec2
+        - - 47
+          - cc2.8xlarge on amazon_ec2
+        - - 48
+          - cg1.4xlarge on amazon_ec2
+        - - 49
+          - m2.xlarge on amazon_ec2
+        - - 50
+          - m2.2xlarge on amazon_ec2
+        - - 51
+          - m2.4xlarge on amazon_ec2
+        - - 52
+          - cr1.8xlarge on amazon_ec2
+        - - 53
+          - hi1.4xlarge on amazon_ec2
+        - - 54
+          - hs1.8xlarge on amazon_ec2
+        - - 55
+          - cc1.4xlarge on amazon_ec2
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Flavor *
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: true
+        show_refresh_button: true
+        load_values_on_init: true
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Amazon/EC2
+          ae_class: DynamicDialogs
+          ae_instance: list_ec2_flavor_ids
+          ae_message: 
+          ae_attributes: {}
+      - name: tag_1_role
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: server
+        values:
+        - - server
+          - Application Server
+        - - database
+          - Database Server
+        - - web
+          - Web Server
+        - - wordpress
+          - Wordpress Server
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+        label: Role *
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: 
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: option_1_vm_name
+        description: 
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Name
+        position: 3
+        validator_type: regex
+        validator_rule: "^[a-zA-Z0-9-]{0,12}$"
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
