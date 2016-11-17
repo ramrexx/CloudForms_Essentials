@@ -714,28 +714,6 @@
       ae_attributes:
         request: openstack_create_volume
       dialog_label: openstack_create_volume
-  - description: openstack_allocate_floating_ip
-    applies_to_class: Vm
-    applies_to_exp: 
-    options:
-      :button_image: 4
-      :display: true
-    userid: admin
-    wait_for_complete: 
-    name: openstack_allocate_floating_ip
-    visibility:
-      :roles:
-      - _ALL_
-    applies_to_id: 
-    resource_actions:
-      action: 
-      ae_namespace: SYSTEM
-      ae_class: PROCESS
-      ae_instance: Request
-      ae_message: 
-      ae_attributes:
-        request: openstack_allocate_floating_ip
-      dialog_label: openstack_allocate_floatingip
   - description: openstack_resize_instance
     applies_to_class: Vm
     applies_to_exp: 
@@ -758,27 +736,6 @@
       ae_attributes:
         request: openstack_resize_instance
       dialog_label: openstack_resize_instance
-  - description: openstack_release_floating_ip
-    applies_to_class: Vm
-    applies_to_exp: 
-    options:
-      :button_image: 3
-      :display: true
-    userid: admin
-    wait_for_complete: 
-    name: openstack_release_floating_ip
-    visibility:
-      :roles:
-      - _ALL_
-    applies_to_id: 
-    resource_actions:
-      action: 
-      ae_namespace: SYSTEM
-      ae_class: PROCESS
-      ae_instance: Request
-      ae_message: 
-      ae_attributes:
-        request: openstack_release_floating_ip
   - description: openstack_detach_interface
     applies_to_class: Vm
     applies_to_exp: 
@@ -848,13 +805,11 @@
   set_data:
     :button_order:
     - openstack_resize_instance
-    - openstack_release_floating_ip
     - openstack_detach_interface
     - openstack_attach_interface
     - openstack_detach_volume
     - openstack_attach_volume
     - openstack_create_volume
-    - openstack_allocate_floating_ip
     :button_image: 13
     :display: true
     :group_index: 4
