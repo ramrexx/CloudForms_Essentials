@@ -1,0 +1,57 @@
+---
+:custom_buttons_sets:
+- name: RHEV|Host|
+  description: RHEV
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: rhev_host_activation
+    applies_to_class: Host
+    applies_to_exp: 
+    options:
+      :button_image: 15
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rhev_host_activation
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rhev_host_activation
+  - description: rhev_host_deactivation
+    applies_to_class: Host
+    applies_to_exp: 
+    options:
+      :button_image: 9
+      :display: true
+    userid: admin
+    wait_for_complete: 
+    name: rhev_host_deactivation
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: rhev_host_deactivation
+  set_data:
+    :button_order:
+    - rhev_host_deactivation
+    - rhev_host_activation
+    :button_image: 8
+    :display: true
+    :group_index: 2

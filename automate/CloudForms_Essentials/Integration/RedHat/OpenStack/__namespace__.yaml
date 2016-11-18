@@ -6,6 +6,5 @@ object:
     name: OpenStack
     description: 
     display_name: 
-    system: 
     priority: 
     enabled: 

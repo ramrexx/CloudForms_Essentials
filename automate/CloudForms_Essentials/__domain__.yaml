@@ -6,7 +6,8 @@ object:
     name: CloudForms_Essentials
     description: 
     display_name: 
-    system: true
     priority: 2
     enabled: true
     tenant_id: 1
+    source: user
+    top_level_namespace: 
