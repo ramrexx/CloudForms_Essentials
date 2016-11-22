@@ -9,4 +9,3 @@ object:
     priority: 2
     enabled: true
     tenant_id: 1
-    top_level_namespace: 
