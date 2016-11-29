@@ -61,7 +61,7 @@ begin
 
   dialog_hash = {}
   $evm.vmdb(:miq_template).all.each do |template|
-    next unless obj.archived || obj.orphaned
+    next if template.archived || template.orphaned
     if object_eligible?(template)
       dialog_hash[template[:id]] = "#{template.name} on #{template.ext_management_system.name}"
     end
