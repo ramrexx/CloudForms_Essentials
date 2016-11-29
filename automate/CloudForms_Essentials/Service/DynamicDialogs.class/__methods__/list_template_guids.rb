@@ -68,7 +68,7 @@ begin
   end
 
   if dialog_hash.blank?
-    dialog_hash[''] = "< No templates found tagged with #{rbac_array} >"
+    dialog_hash[''] = "< No templates found tagged with #{@rbac_array} >"
   else
     $evm.object['default_value'] = dialog_hash.first[0]
   end
