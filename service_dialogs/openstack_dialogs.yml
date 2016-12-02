@@ -277,7 +277,7 @@
           ae_attributes: {}
 - description: 
   buttons: submit,cancel
-  label: openstack_detach_volume
+  label: openstack_chch_volume
   dialog_tabs:
   - description: 
     display: edit
@@ -1201,7 +1201,7 @@
           ae_attributes: {}
 - description: 
   buttons: submit,cancel
-  label: openstack_detach_interface
+  label: openstack_button_detach_interface
   dialog_tabs:
   - description: 
     display: edit

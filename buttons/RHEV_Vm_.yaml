@@ -28,28 +28,6 @@
       ae_attributes:
         request: rhev_add_comments_to_vm
       dialog_label: rhev_button_add_comments_to_vm
-  - description: rhev_delete_snapshot
-    applies_to_class: Vm
-    applies_to_exp: 
-    options:
-      :button_image: 7
-      :display: true
-    userid: admin
-    wait_for_complete: 
-    name: rhev_delete_snapshot
-    visibility:
-      :roles:
-      - _ALL_
-    applies_to_id: 
-    resource_actions:
-      action: 
-      ae_namespace: SYSTEM
-      ae_class: PROCESS
-      ae_instance: Request
-      ae_message: 
-      ae_attributes:
-        request: rhev_delete_snapshot
-      dialog_label: rhev_button_list_vm_snapshots
   - description: rhev_add_disk_to_vm
     applies_to_class: Vm
     applies_to_exp: 
@@ -75,7 +53,6 @@
   set_data:
     :button_order:
     - rhev_add_disk_to_vm
-    - rhev_delete_snapshot
     - rhev_add_comments_to_vm
     :button_image: 8
     :display: true
