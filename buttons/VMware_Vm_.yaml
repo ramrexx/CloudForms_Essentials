@@ -92,28 +92,6 @@
       ae_message: 
       ae_attributes:
         request: vcenter_unmount_tools_installer
-  - description: vcenter_vmotion_vm
-    applies_to_class: Vm
-    applies_to_exp: 
-    options:
-      :button_image: 12
-      :display: true
-    userid: admin
-    wait_for_complete: 
-    name: vcenter_vmotion_vm
-    visibility:
-      :roles:
-      - _ALL_
-    applies_to_id: 
-    resource_actions:
-      action: 
-      ae_namespace: SYSTEM
-      ae_class: PROCESS
-      ae_instance: Request
-      ae_message: 
-      ae_attributes:
-        request: vcenter_vmotion_vm
-      dialog_label: vcenter_button_vmotion_vm
   - description: vcenter_reconfig_vm_hotadd_enabled
     applies_to_class: Vm
     applies_to_exp: 
@@ -164,7 +142,6 @@
     - vcenter_reconfig_vm_guestid
     - vcenter_reconfig_vm_hotadd
     - vcenter_rename_vm
-    - vcenter_vmotion_vm
     - vcenter_unmount_tools_installe
     :button_image: 9
     :display: true
