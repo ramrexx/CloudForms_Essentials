@@ -1,11 +1,11 @@
 ---
 - description: 
   buttons: submit,cancel
-  label: rhev_button_add_comments_to_vm
+  label: rhv_button_add_comments_to_vm
   dialog_tabs:
   - description: 
     display: edit
-    label: RHEV VM
+    label: RHV VM
     display_method: 
     display_method_options: 
     position: 0
@@ -55,11 +55,11 @@
           ae_attributes: {}
 - description: 
   buttons: submit,cancel
-  label: rhev_catalogItem
+  label: rhv_catalogItem
   dialog_tabs:
   - description: 
     display: edit
-    label: RHEV Provisioning
+    label: RHV Provisioning
     display_method: 
     display_method_options: 
     position: 0
@@ -311,61 +311,6 @@
           :sort_order: :ascending
         label: Function *
         position: 3
-        validator_type: 
-        validator_rule: 
-        reconfigurable: 
-        dynamic: false
-        show_refresh_button: 
-        load_values_on_init: 
-        read_only: false
-        auto_refresh: 
-        trigger_auto_refresh: 
-        resource_action:
-          action: 
-          resource_type: DialogField
-          ae_namespace: 
-          ae_class: 
-          ae_instance: 
-          ae_message: 
-          ae_attributes: {}
-- description: 
-  buttons: submit,cancel
-  label: rhev_button_create_volume
-  dialog_tabs:
-  - description: 
-    display: edit
-    label: RHEV
-    display_method: 
-    display_method_options: 
-    position: 0
-    dialog_groups:
-    - description: 
-      display: edit
-      label: Information
-      display_method: 
-      display_method_options: 
-      position: 0
-      dialog_fields:
-      - name: option_1_volume_1_size
-        description: 
-        type: DialogFieldTextBox
-        data_type: 
-        notes: 
-        notes_display: 
-        display: edit
-        display_method: 
-        display_method_options: {}
-        required: false
-        required_method: 
-        required_method_options: {}
-        default_value: '1'
-        values: 
-        values_method: 
-        values_method_options: {}
-        options:
-          :protected: false
-        label: Volume Size in GB
-        position: 0
         validator_type: 
         validator_rule: 
         reconfigurable: 
