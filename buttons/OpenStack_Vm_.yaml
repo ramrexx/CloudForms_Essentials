@@ -27,7 +27,7 @@
       ae_message: 
       ae_attributes:
         request: openstack_attach_interface
-      dialog_label: openstack_attach_interface
+      dialog_label: openstack_button_attach_interface
   - description: openstack_detach_interface
     applies_to_class: Vm
     applies_to_exp: 
@@ -74,8 +74,8 @@
       dialog_label: openstack_button_create_volume
   set_data:
     :button_order:
-    - openstack_detach_interface
     - openstack_attach_interface
+    - openstack_detach_interface
     - openstack_create_volume
     :button_image: 13
     :display: true
