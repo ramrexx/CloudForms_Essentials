@@ -12,7 +12,7 @@ trap cleanup 0
 
 if !  subscription-manager status ; then
 	DID_REGISTER=yes
-	echo "You must subscribe to RHN to fetch some tools. This tool will unsubscribe	this appliance when it is finished."
+	echo "You must subscribe to RHN to fetch some tools. This tool will unsubscribe this appliance when it is finished."
 	subscription-manager register
 	subscription-manager attach
 fi

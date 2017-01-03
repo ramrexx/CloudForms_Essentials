@@ -2,8 +2,13 @@
 set -x 
 
 if [ ! -e /var/www/miq/vmdb/config/database.yml ]; then
-	echo "Please configure CFME through appliance_console. Can not continue."
-	exit 1
+	echo "Please configure CFME through appliance_console."
+	sleep 3
+	appliance_console
+	if [ ! -e /var/www/miq/vmdb/config/database.yml ]; then
+		echo "database still not configured. Exiting"
+		exit 1
+	fi
 fi
 
 
@@ -17,10 +22,10 @@ pushd automate
 miqimport domain CloudForms_Essentials `pwd`
 popd
 
-pushd dialogs
-miqimport provision_dialogs `pwd`
-miqimport service_dialogs `pwd`
-popd
+#pushd dialogs
+#miqimport provision_dialogs `pwd`
+#miqimport service_dialogs `pwd`
+#popd
 
 pushd buttons
 miqimport buttons `pwd`
