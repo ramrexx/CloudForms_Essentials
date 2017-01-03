@@ -11,8 +11,21 @@ if [ ! -e /var/www/miq/vmdb/config/database.yml ]; then
 	fi
 fi
 
-
 git clone https://github.com/rhtconsulting/cfme-rhconsulting-scripts.git
+
+FAIL=0
+MAXFAIL=60
+
+#I'm open to suggestions on a better way to see if things are actually up.
+while [ $(curl -k -u admin:smartvm https://127.0.0.1/api/ -w "%{http_code}" -o /dev/null 2>/dev/null ) -ne "200" ]; do
+	FAIL=$((FAIL + 1))
+	echo "Retrying $FAIL of $MAXFAIL"
+	sleep 1
+	if [ "$FAIL" -gt "$MAXFAIL" ]; then
+		echo "ERROR: server seems not to be up, so I'm giving up"
+		exit 1
+	fi
+done
 
 pushd cfme-rhconsulting-scripts
 make install
