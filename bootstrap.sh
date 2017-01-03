@@ -18,7 +18,7 @@ if !  subscription-manager status ; then
 fi
 
 
-yum install -y git nano rpmbuild
+yum install -y git nano rpm-build-libs
 
 git clone $GIT_ROOT
 cd CloudForms_Essentials
