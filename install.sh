@@ -1,6 +1,12 @@
 #!/bin/sh
 set -x 
 
+if [ ! -e /var/www/miq/vmdb/config/database.yml ]; then
+	echo "Please configure CFME through appliance_console. Can not continue."
+	exit 1
+fi
+
+
 git clone https://github.com/rhtconsulting/cfme-rhconsulting-scripts.git
 
 pushd cfme-rhconsulting-scripts
