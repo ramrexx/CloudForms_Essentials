@@ -6,6 +6,5 @@ object:
     name: Integration
     description: 
     display_name: 
-    system: 
     priority: 
     enabled: 

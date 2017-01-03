@@ -9,6 +9,6 @@ object:
     description: 
   fields:
   - Step2:
-      value: "/Integration/Amazon/RDS/Methods/rds_delete_instance"
+      value: METHOD::rds_delete_instance
   - Step3:
-      value: "/Integration/Amazon/RDS/Methods/rds_delete_instance_check"
+      value: METHOD::rds_delete_instance_check

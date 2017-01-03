@@ -6,6 +6,5 @@ object:
     name: EC2
     description: 
     display_name: 
-    system: 
     priority: 
     enabled: 

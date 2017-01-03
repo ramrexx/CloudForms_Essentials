@@ -43,7 +43,7 @@ alias clean_prod="echo Cleaned: `date` > $VMDB_PATH/log/production.log"
 alias clean="clean_evm;clean_auto;clean_prod"
 
 # Rails Console
-alias railsc="vmdb;echo '\$evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)'; script/rails c"
+alias railsc="vmdb;echo '\$evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)'; rails c"
 
 # kill provision job.
 function kill_prov {

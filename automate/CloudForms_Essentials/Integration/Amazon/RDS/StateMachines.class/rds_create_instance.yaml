@@ -9,8 +9,8 @@ object:
     description: 
   fields:
   - Step1:
-      value: "/Integration/Amazon/RDS/Methods/rds_dialog_parser"
+      value: METHOD::rds_dialog_parser
   - Step2:
-      value: "/Integration/Amazon/RDS/Methods/rds_create_instance"
+      value: METHOD::rds_create_instance
   - Step3:
-      value: "/Integration/Amazon/RDS/Methods/rds_create_instance_check"
+      value: METHOD::rds_create_instance_check

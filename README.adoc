@@ -23,12 +23,12 @@ image::documentation/images/cloudforms.png[alt="cloudforms", width="200", height
 This project was designed to augment Red Hat (R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms]
 installations.
 
-Current supported appliance version: *5.6*
+Current supported appliance version: *cf4.2*
 
 This repo contains imports for the following areas of the product:
 
 * Automate
-* Dialogs
+* Service_Dialogs
 * Buttons
 * Reports
 * Control
@@ -47,7 +47,7 @@ More documentation can be found here: link:https://github.com/ramrexx/CloudForms
 * Use instructions in following sections as applicable to your use cases
 
 ** <<Automate>>
-** <<Dialogs>>
+** <<Service_Dialogs>>
 ** <<Reports>>
 ** <<Control>>
 ** <<Alerts>>
@@ -83,14 +83,14 @@ TIP: The CloudForms_Essentials automate model is locked by default. To modify so
 <<top>>
 
 
-=== Dialogs
+=== Service_Dialogs
 Sample service dialogs for provisioning VMs and performing other tasks via custom buttons.
 
-Follow these steps to install the CloudForms_Essentials dialogs:
+Follow these steps to install the CloudForms_Essentials service_dialogs:
 
 . Log into your CloudForms/ManageIQ UI as an administrator
 . Navigate to Automate / Customization / ImportExport (This is located in the bottom left of your accordion)
-. Import the dialog(s) in the Dialog director
+. Import the dialog(s) in the Dialog directory
 
 <<top>>
 
@@ -187,12 +187,11 @@ The rake scripts are required in order to import some of the items referenced on
 
 Follow these steps to install the miqimport/miqexport utilities:
 
-.  Install git on the CFME appliance
-.  While in `/root` directory, clone the rhconsulting repository:
+.  While in `/root` directory, download the rhconsulting repository:
 
- git clone https://github.com/rhtconsulting/cfme-rhconsulting-scripts.git
+ curl -sL  https://github.com/rhtconsulting/cfme-rhconsulting-scripts/tarball/master | tar xvz
 
-.  In the newly created `/root/cfme-rhconsulting-scripts` directory, install the rake scripts and utilities:
+.  change to the newly created `/root/rhtconsulting-cfme-rhconsulting-scripts` directory, install the rake scripts and utilities:
 
  make install
 
