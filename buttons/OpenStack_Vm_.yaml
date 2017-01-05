@@ -6,28 +6,28 @@
   read_only: 
   mode: 
   custom_buttons:
-  - description: openstack_attach_interface
-    applies_to_class: Vm
-    applies_to_exp: 
-    options:
-      :button_image: 12
-      :display: true
-    userid: admin
-    wait_for_complete: 
-    name: openstack_attach_interface
-    visibility:
-      :roles:
-      - _ALL_
-    applies_to_id: 
-    resource_actions:
-      action: 
-      ae_namespace: SYSTEM
-      ae_class: PROCESS
-      ae_instance: Request
-      ae_message: 
-      ae_attributes:
-        request: openstack_attach_interface
-      dialog_label: openstack_button_attach_interface
+#  - description: openstack_attach_interface
+#    applies_to_class: Vm
+#    applies_to_exp: 
+#    options:
+#      :button_image: 12
+#      :display: true
+#    userid: admin
+#    wait_for_complete: 
+#    name: openstack_attach_interface
+#    visibility:
+#      :roles:
+#      - _ALL_
+#    applies_to_id: 
+#    resource_actions:
+#      action: 
+#      ae_namespace: SYSTEM
+#      ae_class: PROCESS
+#      ae_instance: Request
+#      ae_message: 
+#      ae_attributes:
+#        request: openstack_attach_interface
+#      dialog_label: openstack_button_attach_interface
   - description: openstack_detach_interface
     applies_to_class: Vm
     applies_to_exp: 

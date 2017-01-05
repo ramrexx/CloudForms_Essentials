@@ -1,5 +1,4 @@
 #!/bin/sh
-set -x 
 
 if [ ! -e /var/www/miq/vmdb/config/database.yml ]; then
 	echo "Please configure CFME through appliance_console."
@@ -20,7 +19,7 @@ MAXFAIL=60
 while [ $(curl -k -u admin:smartvm https://127.0.0.1/api/ -w "%{http_code}" -o /dev/null 2>/dev/null ) -ne "200" ]; do
 	FAIL=$((FAIL + 1))
 	echo "Retrying $FAIL of $MAXFAIL"
-	sleep 1
+	sleep 3
 	if [ "$FAIL" -gt "$MAXFAIL" ]; then
 		echo "ERROR: server seems not to be up, so I'm giving up"
 		exit 1
@@ -35,10 +34,9 @@ pushd automate
 miqimport domain CloudForms_Essentials `pwd`
 popd
 
-#pushd dialogs
-#miqimport provision_dialogs `pwd`
-#miqimport service_dialogs `pwd`
-#popd
+pushd service_dialogs
+miqimport service_dialogs `pwd`
+popd
 
 pushd buttons
 miqimport buttons `pwd`
