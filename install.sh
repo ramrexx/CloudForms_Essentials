@@ -61,3 +61,7 @@ popd
 pushd service_catalogs
 miqimport service_catalogs `pwd`
 popd
+
+pushd tags
+miqimport tags `pwd`
+popd
