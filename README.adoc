@@ -43,8 +43,10 @@ More documentation can be found here: link:https://github.com/ramrexx/CloudForms
 = Installation Instructions
 
 * Download the repo at https://github.com/ramrexx/CloudForms_Essentials/archive/master.zip[CloudForms Essentials]
-* Extract to a temporary location your desktop
-* Use instructions in following sections as applicable to your use cases
+* Extract to a temporary location, like your desktop.
+* Use the instructions in the sections below as applicable to your use cases.
+
+NOTE: Service_Catalogs should be imported last as they reference Dialogs and the Automate Domain(s).
 
 ** <<Automate>>
 ** <<Service_Dialogs>>
@@ -66,13 +68,15 @@ EC2, vCenter, RHEV, Satellite, OpenStack, etc...
 
 IMPORTANT: 3rd party integrations will be included in a separate repo in the near future.
 
-Follow these steps to install the CloudForms_Essentials automate domain:
+Follow these steps to install the CloudForms_Essentials Automate Domain:
 
-. Compress/zip the Automate / CloudForms_Essentials directory
+. Open the "automate" folder (e.g. cd /tmp/CloudForms_Essentials-master/automate/)
+. Compress/zip the `automate/CloudForms_Essentials` directory (e.g. `zip -r CloudForms_Essentials_Automate_Domain.zip CloudForms_Essentials/`)
 . Log into your CloudForms/ManageIQ UI as an administrator
-. Navigate to Automate / ImportExport
+. Navigate to the Automate -> Import / Export screen
 . Upload the zip file. This can take 60-90 seconds.
-. When done, navigate to Automate / Explorer
+. Select the namespaces you wish to import (e.g. select all) and click the Commit button.
+. When done, navigate to the Automate -> Explorer screen
 . You will need to edit the new CloudForms_Essentials domain and check the "enable" box.
 . The CloudForms_Essentials automate domain is ready to use!.
 
@@ -84,13 +88,16 @@ TIP: The CloudForms_Essentials automate model is locked by default. To modify so
 
 
 === Service_Dialogs
-Sample service dialogs for provisioning VMs and performing other tasks via custom buttons.
+Sample Service Dialogs for provisioning VMs and performing other tasks via custom buttons.
 
-Follow these steps to install the CloudForms_Essentials service_dialogs:
+Follow these steps to install the CloudForms_Essentials Service_Dialogs:
 
 . Log into your CloudForms/ManageIQ UI as an administrator
-. Navigate to Automate / Customization / ImportExport (This is located in the bottom left of your accordion)
-. Import the dialog(s) in the Dialog directory
+. Navigate to the Automate -> Customization screen, and click on the Import / Export section (located on the bottom of the accordion)
+. Upload each of the .yml files in the .../service_dialogs folder (e.g. vcenter_dialogs.yml, amazon_dialogs.yml, etc...)
+. Select all of the Dialogs from each .yml file, and press the Commit button.
+. Repeat for each of the .yml files
+
 
 <<top>>
 
@@ -101,33 +108,38 @@ Sample reports and dashboard widgets.
 Follow these steps to install the CloudForms_Essentials reports:
 
 . Log into your CloudForms/ManageIQ UI as an administrator
-. Navigate to Cloud Intelligence / Reports / ImportExport (This is located in the bottom left of your accordion)
-. Import the reports(s) in the Reports directory
-. Import the widgets(s) in the Reports directory
+. Navigate to the Cloud Intel -> Reports screen, and click on the Import / Export section (located on the bottom the accordion)
+. Click on Custom Reports, choose the file .../reports/reports.yml, and upload it.
+. Click on Widgets, choose the file .../reports/widgets.yml, and upload it.
+
 
 <<top>>
 
 
 === Control
-Sample policies that perform event drive actions.
+Sample Control policies that perform event driven actions.
 
 Follow these steps to install the CloudForms_Essentials control policies:
 
 . Log into your CloudForms/ManageIQ UI as an administrator
-. Navigate to Control / ImportExport.
-. Import the Policies.yml found in the Alerts directory
+. Navigate to the Control -> Import / Export screen
+. Import the .../control/policies.yaml file
+. Scroll to the bottom of the page and click the Commit button
+
 
 <<top>>
 
 
 === Alerts
-Sample alerts that perform actions.
+Sample Alerts that perform actions.
 
 Follow these steps to install the CloudForms_Essentials alerts:
 
 . Log into your CloudForms/ManageIQ UI as an administrator
-. Navigate to Control / ImportExport.
-. Import the Alerts.yml found in the Alerts directory
+. Navigate to the Control -> Import / Export screen
+. Import the .../alerts/alerts.yaml file
+. Scroll to the bottom of the page and click the Commit button
+
 
 <<top>>
 
@@ -139,11 +151,14 @@ Follow these steps to install the CloudForms_Essentials buttons:
 
 NOTE: You must complete the pre-req step and have the import utility & scripts installed. This process is documented <<Rake Import,here>>.
 
-. Use your utility of choice (i.e. scp) to upload the `buttons/buttons.yml` to the CloudForms/ManageIQ appliance
+. Use your utility of choice (i.e. scp) to upload the `.../buttons/` folder, and all of it's files, to the CloudForms/ManageIQ appliance
 . Log into your appliance console as root
 . Import the buttons using the miqimport utility:
 
- /usr/bin/miqimport buttons /<full-path-to-upload-directory>/buttons.yml
+ /usr/bin/miqimport buttons .../buttons/
+ 
+ NOTE: `miqimport buttons` will look at all yaml files in a directory, so you do not need to specify individual files.
+ 
 
 <<top>>
 
@@ -155,35 +170,37 @@ Follow these steps to install the CloudForms_Essentials roles:
 
 NOTE: You must complete the pre-req step and have the import utility & scripts installed. This process is documented <<Rake Import,here>>.
 
-. Use your utility of choice (i.e. scp) to upload the `roles/roles.yml` to the CloudForms/ManageIQ appliance
+. Use your utility of choice (i.e. scp) to upload the `.../roles/roles.yml` file to the CloudForms/ManageIQ appliance
 . Log into your appliance console as root
 . Import the roles using the miqimport utility:
 
- /usr/bin/miqimport roles /<full-path-to-upload-directory>/roles.yml
+ /usr/bin/miqimport roles .../roles/roles.yml
+
 
 <<top>>
 
 
 === Service_Catalogs
-Sample preconfigured service catalog items for you to work with.
+Sample pre-configured service catalog items for you to work with.
 
 Follow these steps to install the CloudForms_Essentials services:
 
 NOTE: You must complete the pre-req step and have the import utility & scripts installed. This process is documented <<Rake Import,here>>.
 
-. Use your utility of choice (i.e. scp) to upload the `service_catalogs/*.yml` to the CloudForms/ManageIQ appliance
+. Use your utility of choice (i.e. scp) to upload the `.../service_catalogs/` folder, and all of it's files to the CloudForms/ManageIQ appliance
 . Log into your appliance console as root
 . Import the catalogs using the miqimport utility:
 
- /usr/bin/miqimport service_catalogs /<full-path-to-upload-directory>
+ /usr/bin/miqimport service_catalogs .../service_catalogs/
 
 NOTE: service_catalogs import will look at all yaml files in a directory, so you do not need to specify individual files.
+
 
 <<top>>
 
 
 === Rake Import
-The rake scripts are required in order to import some of the items referenced on this page when a UI is not available.
+The rake scripts are required in order to import some of the items referenced on this page.
 
 Follow these steps to install the miqimport/miqexport utilities:
 
@@ -194,6 +211,8 @@ Follow these steps to install the miqimport/miqexport utilities:
 .  change to the newly created `/root/rhtconsulting-cfme-rhconsulting-scripts` directory, install the rake scripts and utilities:
 
  make install
+
+You can ignore the "/bin/sh: rpmbuild: command not found" warning message
 
 The `/usr/bin/miqimport` and `/usr/bin/miqexport` utilities are now available to assist you when importing and exporting from CFME.
 
