@@ -170,7 +170,7 @@ begin
 
   @service = vm.service || get_service(ws_values)
 
-  add_vm_to_service(vm, ws_values)
+  add_vm_to_service(vm, ws_values) unless @service
 
   # set_group_ownership(vm, ws_values)
 

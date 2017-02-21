@@ -6,6 +6,5 @@ object:
     name: Amazon
     description: 
     display_name: 
-    system: 
     priority: 
     enabled: 

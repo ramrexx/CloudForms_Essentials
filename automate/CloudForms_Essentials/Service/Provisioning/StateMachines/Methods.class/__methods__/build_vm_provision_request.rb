@@ -261,7 +261,7 @@ def get_cloud_tenant(build, merged_options_hash, merged_tags_hash)
       merged_options_hash[:cloud_tenant_id] = @tenant.id
       merged_tags_hash[:cloud_tenant]       = tenant_name
       log(:info, "Build: #{build} - tenant: #{merged_tags_hash[:cloud_tenant]} " \
-        "id: #{merged_options_hash[:cloud_tenant]}")
+          "id: #{merged_options_hash[:cloud_tenant]}")
     end
   end
   log(:info, "Processing get_cloud_tenant...Complete", true)
@@ -348,10 +348,10 @@ def get_network(build, merged_options_hash, merged_tags_hash)
       merged_options_hash[:guest_access_key_pair] = key_pair.id
       merged_options_hash[:guest_access_key_pair_name] = key_pair.name
       log(:info, "Build: #{build} guest_access_key_pair_name: #{merged_options_hash[:guest_access_key_pair_name]} " \
-        "guest_access_key_pair: #{merged_options_hash[:guest_access_key_pair]}")
+          "guest_access_key_pair: #{merged_options_hash[:guest_access_key_pair]}")
     end
 
-	# get the security_group from the cloud_tenant
+    # get the security_group from the cloud_tenant
     if merged_options_hash[:security_groups].blank?
       security_group = @tenant.security_groups.detect { |sg| object_eligible?(sg) } rescue nil
     else
@@ -366,10 +366,12 @@ def get_network(build, merged_options_hash, merged_tags_hash)
 
     # get the cloud_network from the cloud_tenant
     if merged_options_hash[:cloud_network].blank?
-      cloud_network = @tenant.cloud_networks.first
+      cloud_network = @tenant.cloud_networks.first if @tenant
     else
-      cloud_network = @tenant.cloud_networks.detect { |cn| cn.name == merged_options_hash[:cloud_network] } ||
-        @tenant.cloud_networks.detect { |cn| cn.id == merged_options_hash[:cloud_network].to_i }
+      if @tenant
+        cloud_network = @tenant.cloud_networks.detect { |cn| cn.name == merged_options_hash[:cloud_network] } ||
+          @tenant.cloud_networks.detect { |cn| cn.id == merged_options_hash[:cloud_network].to_i }
+      end
     end
     unless cloud_network.blank?
       merged_options_hash[:cloud_network] = cloud_network.id
