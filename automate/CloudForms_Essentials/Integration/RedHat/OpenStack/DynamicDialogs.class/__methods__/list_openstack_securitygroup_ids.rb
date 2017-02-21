@@ -154,7 +154,7 @@ end
 
 if dialog_hash.blank?
   dialog_hash[''] = "< no security groups found >"
-else
+elsif dialog_hash.detect { |k,v| v.include?('default') }
   $evm.object['default_value'] = dialog_hash.detect { |k,v| v.include?('default') }[0]
   log(:info, "dialog_hash contents: #{dialog_hash.inspect}")
 end
