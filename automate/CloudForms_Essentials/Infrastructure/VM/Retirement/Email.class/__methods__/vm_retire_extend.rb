@@ -65,7 +65,7 @@ begin
     log(:info, "Extending retirement #{vm_retire_extend_days} days for VM: #{@vm.name}")
 
     # Set new retirement date here
-    @vm.retires_on += vm_retire_extend_days
+    @vm.retires_on += vm_retire_extend_days.days
     dump_vm_retirement_attributes
 
     # Send email
