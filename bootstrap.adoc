@@ -1,0 +1,4 @@
+Live dangerously, and 
+```
+bash <(curl https://raw.githubusercontent.com/jeffwarnica/CloudForms_Essentials/master/bootstrap.sh)
+```

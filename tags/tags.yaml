@@ -1,0 +1,32 @@
+- description: OS
+  icon: 
+  read_only: false
+  syntax: string
+  single_value: true
+  example_text: Operating System
+  parent_id: 0
+  show: true
+  default: 
+  perf_by_tag: false
+  name: os
+  entries:
+  - description: Linux
+    icon: 
+    read_only: false
+    syntax: string
+    single_value: false
+    example_text: 
+    show: true
+    default: 
+    perf_by_tag: 
+    name: linux
+  - description: Windows
+    icon: 
+    read_only: false
+    syntax: string
+    single_value: false
+    example_text: 
+    show: true
+    default: 
+    perf_by_tag: 
+    name: windows
