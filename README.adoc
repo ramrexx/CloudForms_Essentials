@@ -16,15 +16,13 @@
    limitations under the License.
 -------------------------------------------------------------------------------
 ////
-image::documentation/images/cloudforms.png[alt="cloudforms", width="200", height="200", link="https://github.com/ramrexx/CloudForms_Essentials/blob/master/documentation/images/cloudforms.png"]
 
 = Welcome to the CloudForms Essentials Project
 
 This project was designed to augment Red Hat (R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms]
 installations.
 
-IMPORTANT: Make sure you are using the correct CloudForms version: 
-
+== Select the correct CloudForms version: 
 * link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.0[cf4.0]
 * link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.1[cf4.1]
 * link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.2[cf4.2]
