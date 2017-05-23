@@ -23,7 +23,8 @@ This project was designed to augment Red Hat (R) https://www.redhat.com/en/techn
 installations.
 
 == Select the correct CloudForms version: 
+
 * link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.0[cf4.0]
 * link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.1[cf4.1]
 * link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.2[cf4.2]
-link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.5[coming soon!]
+* [cf4.5 coming soon!]
