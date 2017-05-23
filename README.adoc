@@ -24,7 +24,7 @@ installations.
 
 == Select the correct CloudForms version: 
 
-* link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.0[cf4.0]
-* link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.1[cf4.1]
-* link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.2[cf4.2]
-* [cf4.5 coming soon!]
+* link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.0[CloudForms 4.0]
+* link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.1[CloudForms 4.1]
+* link:https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.2[CloudForms 4.2]
+* [CloudForms 4.5 coming soon!]
