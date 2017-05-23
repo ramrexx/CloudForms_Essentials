@@ -98,6 +98,23 @@ def yaml_data(option)
   @task.get_option(option).nil? ? nil : YAML.load(@task.get_option(option))
 end
 
+# fix_dialog_tags_hash to allow for support of Tag Control items in dialogs.  Previously, the Tag Control would
+# push values in as an array, which is not supported.  The fix_dialog_tag_hash parsed the dialog_tags_hash and changes
+# all array values to strings.
+def fix_dialog_tags_hash(dialog_tags_hash)
+  unless dialog_tags_hash.empty?
+    dialog_tags_hash.each do |build_num,build_tags_hash|
+      build_tags_hash.each do |k,v|
+        if v.is_a?(Array)
+          log(:info, "fix_dialog_tags_hash: Build #{build_num}: updating key <#{k}> with array value <#{v}> to <#{v.first}>")
+          build_tags_hash[k] = v.first if v.is_a?(Array)
+        end
+      end
+    end
+  end
+  dialog_tags_hash
+end
+
 # check to ensure that dialog_parser has ran
 def parsed_dialog_information
   dialog_options_hash = yaml_data(:parsed_dialog_options)
@@ -111,7 +128,7 @@ def parsed_dialog_information
   end
   log(:info, "dialog_options_hash: #{dialog_options_hash.inspect}")
   log(:info, "dialog_tags_hash: #{dialog_tags_hash.inspect}")
-  return dialog_options_hash, dialog_tags_hash
+  return dialog_options_hash, fix_dialog_tags_hash(dialog_tags_hash)
 end
 
 def merge_service_item_dialog_values(build, dialogs_hash)
