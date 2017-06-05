@@ -14,7 +14,6 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
 -->
 
 # Welcome to the CloudForms Essentials Project
@@ -25,7 +24,7 @@ installations.
 ## Current supported CloudForms version: 4.5
 
 
-## Previous CloudForms versions can be found here: 
+### Previous versions can be found here: 
 
 * [4.0](https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.0)
 * [4.1](https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.1)
