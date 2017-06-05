@@ -3,7 +3,7 @@ object_type: domain
 version: 1.0
 object:
   attributes:
-    name: CloudForms_Essentials_CORE
+    name: CloudForms_Essentials
     description: 
     display_name: 
     priority: 3
