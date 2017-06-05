@@ -1,0 +1,70 @@
+---
+- description: 
+  buttons: submit,cancel
+  label: button_service_retire_extend
+  blueprint_id: 
+  dialog_tabs:
+  - description: 
+    display: edit
+    label: Service Retirement Extension
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: 
+      display: edit
+      label: Information
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: retire_extend_days
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '30'
+        values:
+        - - '30'
+          - 1 month
+        - - '7'
+          - 1 week
+        - - '14'
+          - 2 weeks
+        - - '3'
+          - 3 days
+        - - 
+          - "<Choose>"
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: :description
+          :sort_order: :ascending
+          :force_multi_value: false
+        label: Number of days
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: 
+        dynamic: false
+        show_refresh_button: 
+        load_values_on_init: 
+        read_only: false
+        auto_refresh: 
+        trigger_auto_refresh: 
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}

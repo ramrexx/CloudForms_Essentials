@@ -1,0 +1,39 @@
+---
+:custom_buttons_sets:
+- name: Service Ops|Service|
+  description: Service Operations
+  set_type: CustomButtonSet
+  read_only: 
+  mode: 
+  custom_buttons:
+  - description: Service Extend Retirement
+    applies_to_class: Service
+    applies_to_exp: 
+    options:
+      :button_image: 2
+      :display: true
+      :open_url: false
+      :display_for: single
+      :submit_how: one
+    userid: admin
+    wait_for_complete: 
+    name: Service Extend Retirement
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id: 
+    resource_actions:
+      action: 
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message: 
+      ae_attributes:
+        request: service_retire_extend
+      dialog_label: button_service_retire_extend
+  set_data:
+    :button_order:
+    - Service Extend Retirement
+    :button_image: 1
+    :display: true
+    :group_index: 1

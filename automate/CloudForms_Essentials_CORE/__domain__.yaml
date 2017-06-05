@@ -1,0 +1,13 @@
+---
+object_type: domain
+version: 1.0
+object:
+  attributes:
+    name: CloudForms_Essentials_CORE
+    description: 
+    display_name: 
+    priority: 3
+    enabled: true
+    tenant_id: 1
+    source: user
+    top_level_namespace: 

@@ -29,3 +29,7 @@ installations.
 * [4.0](https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.0)
 * [4.1](https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.1)
 * [4.2](https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.2)
+
+
+## Installation (Coming Soon)
+

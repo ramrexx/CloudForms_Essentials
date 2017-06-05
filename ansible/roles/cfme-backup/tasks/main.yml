@@ -1,0 +1,20 @@
+---
+- name: getting datetimestamp
+  shell: date +%Y%m%d%H%M%S
+  register: datetimestamp
+
+#- debug: msg="datetimestamp {{ datetimestamp.stdout }}"        
+
+- name: dumping database     
+  shell: "pg_dump -v -F custom -p 5432 -U root -f {{ database_filename }} {{ database_name }};"
+  register: dumpout
+
+- name: archiving up CloudForms files
+  # ansible 2.3 required for archive module
+  archive:
+    path: "{{ backup_file_list }}"
+    dest: "{{ dest_path }}{{ dest_fileprefix }}-{{ datetimestamp.stdout }}.tgz"
+    format: gz
+  register: archived_files
+
+- debug: msg="backup file => {{ archived_files.dest }}"

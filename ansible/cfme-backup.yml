@@ -1,0 +1,11 @@
+---
+- name: CloudForms backup
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  user: root
+
+  roles:
+    - { role: cfme-backup }
+
+
