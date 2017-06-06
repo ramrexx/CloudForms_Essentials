@@ -3,10 +3,13 @@
   shell: date +%Y%m%d%H%M%S
   register: datetimestamp
 
-#- debug: msg="datetimestamp {{ datetimestamp.stdout }}"        
+#- debug: msg="datetimestamp {{ datetimestamp.stdout }}"
 
-- name: dumping database     
-  shell: pg_dump -v -F custom --dbname=postgresql{{":"}}//{{ database_user}}{{":"}}{{ database_password }}@{{ ansible_host }}{{":"}}{{ database_port }}/{{ database_name }} -f {{ database_filename }}
+- name: dumping database
+  shell: >
+    pg_dump -v -F custom 
+    --dbname=postgresql{{":"}}//{{ database_username }}{{":"}}{{ database_password }}@{{ ansible_host }}{{":"}}{{ database_port }}/{{ database_name }} 
+    -f {{ database_dumpfile }}
   register: dumpout
 
 - name: archiving up CloudForms files
@@ -17,4 +20,11 @@
     format: gz
   register: archived_files
 
+- debug: msg="{{ archived_files }}"
+
 - debug: msg="backup file => {{ archived_files.dest }}"
+
+- name: removing database dumpfile
+  file:
+    path: {{ database_dumpfile }}
+    state: absent
