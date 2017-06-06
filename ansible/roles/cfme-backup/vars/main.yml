@@ -1,6 +1,9 @@
 ---
 dest_fileprefix: cfmebackup
 dest_path: /tmp/
+database_username: root
+database_password: "{{ vault_database_password }}"
+database_port: 5432
 database_name: vmdb_production
 database_filename: "{{ dest_path }}{{ database_name }}.dump"
 backup_file_list:
