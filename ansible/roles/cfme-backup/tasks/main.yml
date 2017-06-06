@@ -6,7 +6,7 @@
 #- debug: msg="datetimestamp {{ datetimestamp.stdout }}"        
 
 - name: dumping database     
-  shell: "pg_dump -v -F custom -p 5432 -h {{ ansible_host }} -U root -f {{ database_filename }} {{ database_name }};"
+  shell: "pg_dump -v -F custom --dbname=postgresql{{":"}}//{{ database_user}}{{":"}}{{ database_password }}@{{ ansible_host }}{{":"}}{{ database_port }}/{{ database_name }} -f {{ database_filename }}"
   register: dumpout
 
 - name: archiving up CloudForms files
