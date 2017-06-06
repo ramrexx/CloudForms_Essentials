@@ -10,6 +10,9 @@
     pg_dump -v -F custom 
     --dbname=postgresql{{":"}}//{{ database_username }}{{":"}}{{ database_password }}@{{ ansible_host }}{{":"}}{{ database_port }}/{{ database_name }} 
     -f {{ database_dumpfile }}
+  become: true
+  become_method: sudo
+  become_user: postgres
   register: dumpout
 
 - name: archiving up CloudForms files
