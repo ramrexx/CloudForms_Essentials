@@ -26,5 +26,5 @@
 
 - name: removing database dumpfile
   file:
-    path: {{ database_dumpfile }}
+    path: "{{ database_dumpfile }}"
     state: absent
