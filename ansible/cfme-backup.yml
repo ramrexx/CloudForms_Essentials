@@ -1,9 +1,7 @@
 ---
 - name: CloudForms backup
-  hosts: localhost
-  connection: local
+  hosts: "{{ hosts }}"
   gather_facts: false
-  user: root
   become: true
   
   roles:
