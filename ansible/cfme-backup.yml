@@ -4,7 +4,8 @@
   connection: local
   gather_facts: false
   user: root
-
+  become: true
+  
   roles:
     - { role: cfme-backup }
 
