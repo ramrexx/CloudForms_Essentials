@@ -5,12 +5,14 @@
     --dbname=postgresql{{":"}}//{{ database_username }}{{":"}}{{ database_password }}@{{ ansible_host }}{{":"}}{{ database_port }}/{{ database_name }} 
     -f {{ database_dumpfile }}
   register: dumpout
-  debug: msg="{{ dumpout }}"
+  
+- debug: msg="{{ dumpout }}"
 
 - name: getting datetimestamp
   shell: date +%Y%m%d%H%M%S
   register: datetimestamp
-  debug: msg="datetimestamp {{ datetimestamp.stdout }}"
+  
+- debug: msg="datetimestamp {{ datetimestamp.stdout }}"
 
 - name: archiving up CloudForms files
   # ansible 2.3 required for archive module
@@ -19,8 +21,9 @@
     dest: "{{ dest_path }}{{ dest_fileprefix }}-{{ datetimestamp.stdout }}.tgz"
     format: gz
   register: archived_files
-  debug: msg="{{ archived_files }}"
-  debug: msg="backup file => {{ archived_files.dest }}"
+
+- debug: msg="{{ archived_files }}"
+- debug: msg="backup file => {{ archived_files.dest }}"
 
 - name: removing database dumpfile
   file:
