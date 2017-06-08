@@ -1,0 +1,56 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: provision
+    inherits: 
+    description: 
+  fields:
+  - start:
+      value: METHOD::start
+      on_entry: update_status(status => 'Processing Start')
+      on_exit: update_status(status => 'Processed Start')
+      on_error: update_status(status => 'Error Processing Start')
+  - pre0:
+      value: METHOD::generic_service_initialization
+      on_entry: update_status(status => 'Processing Pre0')
+      on_exit: update_status(status => 'Processed Pre0')
+      on_error: update_status(status => 'Error Processing Pre0)
+  - pre4:
+      value: METHOD::preprocess
+      on_entry: update_status(status => 'Processing Preprocess')
+      on_exit: update_status(status => 'Processed Preprocess')
+      on_error: update_status(status => 'Error Processing Preprocess')
+  - execute:
+      value: METHOD::execute
+      on_entry: update_status(status => 'Starting execute')
+      on_exit: update_status(status => 'Ending execute')
+      on_error: update_status(status => '${/#ae_reason}')
+  - check_completed:
+      value: METHOD::check_completed
+      on_exit: update_status(status => 'Processed check_completed')
+      on_error: update_status(status => 'Error Processing check_completed')
+  - refresh:
+      value: METHOD::refresh
+      on_entry: update_status(status => 'Processing refresh')
+      on_exit: update_status(status => 'Processed refresh')
+      on_error: update_status(status => '${/#ae_reason}')
+  - check_refreshed:
+      value: METHOD::check_refreshed
+      on_exit: update_status(status => 'Processed check_refreshed')
+      on_error: update_status(status => 'Error Processing check_refreshed')
+  - post0:
+      value: METHOD::postprocess
+      on_entry: update_status(status => 'Processing Postprocess')
+      on_exit: update_status(status => 'Processed Postprocess')
+      on_error: update_status(status => 'Error Processing Postprocess')
+  - email:
+      value: "/Service/Provisioning/Email/ServiceProvision_complete?event=service_provisioned"
+      on_entry: update_status(status => 'Emailing Owner')
+      on_exit: update_status(status => 'Emailed Owner')
+      on_error: update_status(status => 'Error Emailing Owner')
+  - finish:
+      value: METHOD::finish
+      on_exit: update_status(status => "${/#service_action} Completed Successfully")
