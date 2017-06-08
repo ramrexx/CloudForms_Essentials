@@ -2,7 +2,7 @@
 - name: CloudForms backup
   hosts: localhost
   gather_facts: false
-  user: root
+  remote_user: root
 
   roles:
     - { role: cfme-backup }
