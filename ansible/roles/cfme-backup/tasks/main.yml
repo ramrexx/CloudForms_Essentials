@@ -4,12 +4,14 @@
     /opt/rh/rh-postgresql95/root/usr/bin/pg_dump -v -F custom 
     --dbname=postgresql{{":"}}//{{ database_username }}{{":"}}{{ database_password }}@{{ ansible_host }}{{":"}}{{ database_port }}/{{ database_name }} 
     -f {{ database_dumpfile }}
+  args:
+    executable: /bin/bash
   register: dumpout
   
 - debug: msg="{{ dumpout }}"
 
 - name: getting datetimestamp
-  shell: date +%Y%m%d%H%M%S
+  command: date +%Y%m%d%H%M%S
   register: datetimestamp
   
 - debug: msg="datetimestamp {{ datetimestamp.stdout }}"

@@ -1,9 +1,9 @@
 ---
 - name: CloudForms backup
-  hosts: "{{ hosts }}"
+  hosts: localhost
   gather_facts: false
-  become: true
-  
+  user: root
+
   roles:
     - { role: cfme-backup }
 
