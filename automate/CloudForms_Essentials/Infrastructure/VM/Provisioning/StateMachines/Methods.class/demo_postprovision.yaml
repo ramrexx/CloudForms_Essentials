@@ -4,7 +4,7 @@ version: 1.0
 object:
   attributes:
     display_name: 
-    name: demo_postprovision
+    name: demo_PostProvision
     inherits: 
     description: 
   fields:
