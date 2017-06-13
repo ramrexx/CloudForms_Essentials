@@ -1,0 +1,60 @@
+---
+- MiqPolicySet:
+    name: 4a554d7c-21b4-11e2-a38c-0050568b19a3
+    description: 'Demo: VM-Operation Policies'
+    set_type: MiqPolicySet
+    guid: 4a554d7c-21b4-11e2-a38c-0050568b19a3
+    read_only: 
+    set_data: 
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 7408efa8-21b3-11e2-a38c-0050568b19a3
+      description: Power-Off Virtual Machines
+      expression: 
+      towhat: Vm
+      guid: 7408efa8-21b3-11e2-a38c-0050568b19a3
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      Condition:
+      - name: d514b2fa-21b3-11e2-a38c-0050568b19a3
+        description: VM with Workload Tag Messaging
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            CONTAINS:
+              tag: Vm.managed-function
+              value: messaging
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: d514b2fa-21b3-11e2-a38c-0050568b19a3
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 
+        notes: 
+        read_only: 

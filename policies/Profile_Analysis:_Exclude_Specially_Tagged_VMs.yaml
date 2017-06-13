@@ -1,0 +1,62 @@
+---
+- MiqPolicySet:
+    name: 43e76af6-3f8e-11e0-aaa0-00505688000a
+    description: 'Analysis: Exclude Specially Tagged VMs'
+    set_type: MiqPolicySet
+    guid: 43e76af6-3f8e-11e0-aaa0-00505688000a
+    read_only: 
+    set_data:
+      :notes: Prevents the analysis of vms tagged as do not analyze
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 'Do Not Analyze '
+      description: 'Analysis: Prevent Analysis of Selected VMs'
+      expression: 
+      towhat: Vm
+      guid: 3a7959c0-2866-11de-af2a-0050568026c2
+      created_by: 
+      updated_by: admin
+      notes: 'This policies prevents analysis ofany vm that is tagged as Do Not Analyze '
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        failure_synchronous: true
+        MiqEventDefinition:
+          name: request_vm_scan
+          description: VM Analysis Request
+          guid: e3292c46-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: prevent
+          description: Prevent current event from proceeding
+          guid: d885a118-519b-11e0-8d82-005056af0000
+          action_type: default
+          options: {}
+      Condition:
+      - name: Do Not Analyze
+        description: VM classified as DO_NOT_ANALYZE
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            CONTAINS:
+              tag: Vm.managed-exclusions
+              value: do_not_analyze
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 39ff4444-08e2-11de-829f-005056a164b2
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000001
+        notes: 
+        read_only: 

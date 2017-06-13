@@ -1,0 +1,278 @@
+---
+- MiqPolicySet:
+    name: 9284188c-d400-11e1-9935-000c2999f7f1
+    description: 'Compliance: VMware Security Hardening Guide v4.x & v5.x (DMZ)'
+    set_type: MiqPolicySet
+    guid: 9284188c-d400-11e1-9935-000c2999f7f1
+    read_only: 
+    set_data:
+      :notes: VMware Security Hardening Guide v4.x & v5.x (DMZ)
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 5e3a568e-cfe3-11e1-986c-000c29cc1a4c
+      description: VMWare SHG v4.x & v5.x - VSH05 - Install VMware vCenter Server
+        using a service account
+      expression: !ruby/object:MiqExpression
+        exp:
+          CONTAINS:
+            field: Vm.win32_services-name
+            value: vpxd
+        context_type: 
+      towhat: Vm
+      guid: 5e3a568e-cfe3-11e1-986c-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMWare SHG v4.x & v5.x - VSH05 - Install VMware vCenter Server using
+        a service account R1
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 9e841928-cfe8-11e1-986c-000c29cc1a4c
+        description: VMWare SHG v4.x & v5.x - VSH05 - Install VMware vCenter Server
+          using a service account
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                REGULAR EXPRESSION DOES NOT MATCH:
+                  field: Vm.win32_services-object_name
+                  value: "\\bLocalSystem"
+              search:
+                "=":
+                  field: Vm.win32_services-name
+                  value: vpxd
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 9e841928-cfe8-11e1-986c-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 4
+        notes: VMWare SHG v4.x & v5.x - VSH05 - Install VMware vCenter Server using
+          a service account R1
+        read_only: 
+    - name: 774404fc-c1c1-11e1-ae68-000c29cc1a4c
+      description: VMWare SHG v4.x & v5.x - VMX22 - Avoid using independent nonpersistent
+        disks.
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            value: VMware
+            field: Vm-vendor
+        context_type: 
+      towhat: Vm
+      guid: 774404fc-c1c1-11e1-ae68-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMWare SHG v4.x & v5.x - VMX22 - Avoid using independent nonpersistent
+        disks.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: b6c3548e-c1c1-11e1-ae68-000c29cc1a4c
+        description: VMWare SHG v4.x & v5.x - VMX22 - Avoid using independent nonpersistent
+          disks.
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkcount:
+                "=":
+                  value: '0'
+                  field: "<count>"
+              search:
+                INCLUDES:
+                  value: independent_nonpersistent
+                  field: Vm.hardware.disks-mode
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: b6c3548e-c1c1-11e1-ae68-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 3
+        notes: VMWare SHG v4.x & v5.x - VMX22 - Avoid using independent nonpersistent
+          disks. R1
+        read_only: 
+    - name: cee396f8-c1f0-11e1-ae68-000c29cc1a4c
+      description: VMware SHG v4.x & v5.x - VMX02 - Prevent other users from spying
+        on administrator remote consoles.
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            value: VMware
+            field: Vm-vendor
+        context_type: 
+      towhat: Vm
+      guid: cee396f8-c1f0-11e1-ae68-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG v4.x & v5.x - VMX02 - Prevent other users from spying on administrator
+        remote consoles.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 71089c6c-c1f1-11e1-ae68-000c29cc1a4c
+        description: VMware SHG v4.x & v5.x - VMX02 - Prevent other users from spying
+          on administrator remote consoles.
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                "=":
+                  value: '1'
+                  field: Vm.advanced_settings-value
+              search:
+                "=":
+                  value: RemoteDisplay.maxConnections
+                  field: Vm.advanced_settings-name
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 71089c6c-c1f1-11e1-ae68-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 2
+        notes: VMware SHG v4.x & v5.x - VMX02 - Prevent other users from spying on
+          administrator remote consoles. R1
+        read_only: 
+    - name: 17fce8ee-c39f-11e1-aed6-000c29cc1a4c
+      description: VMware SHG - VMX24 - Disable certain unexposed features.
+      expression: 
+      towhat: Vm
+      guid: 17fce8ee-c39f-11e1-aed6-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG - VMX24 - Disable certain unexposed features.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 98427d34-c39f-11e1-aed6-000c29cc1a4c
+        description: Disable certain unexposed features
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.unity.push.update.disable
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.ghi.launchmenu.change
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.memSchedFakeSampleStats.disable
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.getCreds.disable
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 98427d34-c39f-11e1-aed6-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 1
+        notes: 
+        read_only: 

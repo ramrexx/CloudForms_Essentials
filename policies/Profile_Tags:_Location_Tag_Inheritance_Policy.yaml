@@ -1,0 +1,68 @@
+---
+- MiqPolicySet:
+    name: fbc1c9bc-53f9-11e0-babf-00505688000a
+    description: 'Tags: Location Tag Inheritance Policy'
+    set_type: MiqPolicySet
+    guid: fbc1c9bc-53f9-11e0-babf-00505688000a
+    read_only: 
+    set_data:
+      :notes: This policy profile contains policies that enforce Host and VM inheritence
+        of parent cluster tags.
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 0c2517d8-1ea2-11e0-8e71-005056910000
+      description: 'Tag: VM Inherit Cluster Location Tag'
+      expression: 
+      towhat: Vm
+      guid: 0c2517d8-1ea2-11e0-8e71-005056910000
+      created_by: admin
+      updated_by: admin
+      notes: This policy allows a vm to inherit the location tag of it's parent cluster
+        on creation or completion of analysis
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_scan_complete
+          description: VM Analysis Complete
+          guid: f7b8361e-1139-11e1-9333-005056af009e
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 60e5d690-1ea2-11e0-8e71-005056910000
+          description: 'Tag: Inherit Cluster Location Tag'
+          guid: 60e5d690-1ea2-11e0-8e71-005056910000
+          action_type: inherit_parent_tags
+          options:
+            :parent_type: ems_cluster
+            :cats:
+            - location
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_create
+          description: VM Create Complete
+          guid: 4c0b4f12-37c0-11df-b567-005056a40709
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 60e5d690-1ea2-11e0-8e71-005056910000
+          description: 'Tag: Inherit Cluster Location Tag'
+          guid: 60e5d690-1ea2-11e0-8e71-005056910000
+          action_type: inherit_parent_tags
+          options:
+            :parent_type: ems_cluster
+            :cats:
+            - location
+      Condition: []

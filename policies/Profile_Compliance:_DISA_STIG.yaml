@@ -1,0 +1,276 @@
+---
+- MiqPolicySet:
+    name: a7fc3c18-306a-11de-971a-005056a12545
+    description: 'Compliance: DISA STIG'
+    set_type: MiqPolicySet
+    guid: a7fc3c18-306a-11de-971a-005056a12545
+    read_only: 
+    set_data:
+      :notes: DISA STIG ESX SERVER V1R1 - Based on Security Technical Implementation
+        Guide for ESX Server Version 1, Release 1 28 April 2008
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: de9aa7ec-3069-11de-971a-005056a12545
+      description: DISA Information Assurance Vulnerability Alert - MS08-67
+      expression: 
+      towhat: Vm
+      guid: de9aa7ec-3069-11de-971a-005056a12545
+      created_by: 
+      updated_by: 
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      Condition:
+      - name: 7e492e4c-3067-11de-971a-005056a12545
+        description: IAVA - MS08-067 for Windows 2000 Service Pack 4
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkall:
+                  STARTS WITH:
+                    value: 5.00.2195.7203
+                    field: Vm.filesystems-file_version
+                search:
+                  "=":
+                    value: c:/winnt/system32/netapi32.dll
+                    field: Vm.filesystems-name
+            - KEY EXISTS:
+                regkey: HKLM\SOFTWARE\Microsoft\Updates\Windows 2000\SP5\KB958644\Filelist
+        towhat: Vm
+        file_mtime: 
+        guid: 7e492e4c-3067-11de-971a-005056a12545
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            and:
+            - STARTS WITH:
+                value: Microsoft Windows 2000
+                field: Vm.operating_system-product_name
+            - "=":
+                value: Service Pack 4
+                field: Vm.operating_system-service_pack
+        miq_policy_id: 10000000000012
+        notes: 
+        read_only: 
+      - name: 8b0d83d0-3067-11de-971a-005056a12545
+        description: IAVA - MS08-067 for Windows Server 2003 Service Pack 1 & 2
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            or:
+            - and:
+              - "=":
+                  value: Service Pack 1
+                  field: Vm.operating_system-service_pack
+              - FIND:
+                  checkall:
+                    STARTS WITH:
+                      value: 5.2.3790.3229
+                      field: Vm.filesystems-file_version
+                  search:
+                    "=":
+                      value: c:/windows/system32/netapi32.dll
+                      field: Vm.filesystems-name
+            - and:
+              - "=":
+                  value: Service Pack 2
+                  field: Vm.operating_system-service_pack
+              - FIND:
+                  checkall:
+                    STARTS WITH:
+                      value: 5.2.3790.4392
+                      field: Vm.filesystems-file_version
+                  search:
+                    "=":
+                      value: c:/windows/system32/netapi32.dll
+                      field: Vm.filesystems-name
+        towhat: Vm
+        file_mtime: 
+        guid: 8b0d83d0-3067-11de-971a-005056a12545
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            and:
+            - STARTS WITH:
+                value: Microsoft Windows Server 2003
+                field: Vm.operating_system-product_name
+            - or:
+              - "=":
+                  value: Service Pack 1
+                  field: Vm.operating_system-service_pack
+              - "=":
+                  value: Service Pack 2
+                  field: Vm.operating_system-service_pack
+        miq_policy_id: 10000000000012
+        notes: 
+        read_only: 
+      - name: 9482beb2-3067-11de-971a-005056a12545
+        description: IAVA - MS08-067 for Windows XP Service Pack 2 & 3
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkall:
+                  STARTS WITH:
+                    value: 5.1.2600.3462
+                    field: Vm.filesystems-file_version
+                search:
+                  "=":
+                    value: c:/windows/system32/netapi32.dll
+                    field: Vm.filesystems-name
+            - KEY EXISTS:
+                regkey: HKLM\SOFTWARE\Microsoft\Updates\Windows XP\SP4\KB958644\Filelist
+        towhat: Vm
+        file_mtime: 
+        guid: 9482beb2-3067-11de-971a-005056a12545
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            and:
+            - STARTS WITH:
+                value: Microsoft Windows XP
+                field: Vm.operating_system-product_name
+            - or:
+              - "=":
+                  value: Service Pack 2
+                  field: Vm.operating_system-service_pack
+              - "=":
+                  value: Service Pack 3
+                  field: Vm.operating_system-service_pack
+        miq_policy_id: 10000000000012
+        notes: 
+        read_only: 
+    - name: 69b1559e-3068-11de-971a-005056a12545
+      description: DISA ESX Server STIG requires that the Virtual Machine Administrator
+        be responsible for the following
+      expression: 
+      towhat: Vm
+      guid: 69b1559e-3068-11de-971a-005056a12545
+      created_by: 
+      updated_by: 
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent: []
+      Condition:
+      - name: ed826874-3066-11de-971a-005056a12545
+        description: 'ESX1030: CAT II - Test and Development VMs must be seperated
+          from Production VMs'
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkcount:
+                  ">=":
+                    value: 1
+                    field: "<count>"
+                search:
+                  STARTS WITH:
+                    value: '192.168'
+                    field: Vm.hardware.networks-ipaddress
+            - CONTAINS:
+                tag: Vm.managed-environment
+                value: prod
+        towhat: Vm
+        file_mtime: 
+        guid: ed826874-3066-11de-971a-005056a12545
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000011
+        notes: 
+        read_only: 
+      - name: 28e35e32-3067-11de-971a-005056a12545
+        description: 'ESX0940: CAT II - prevent use of nonpersistent disk mode'
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkcount:
+                "=":
+                  value: 0
+                  field: "<count>"
+              search:
+                INCLUDES:
+                  value: nonpersistent
+                  field: Vm.hardware.disks-mode
+        towhat: Vm
+        file_mtime: 
+        guid: 28e35e32-3067-11de-971a-005056a12545
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000011
+        notes: 
+        read_only: 
+    - name: 56c4d50e-3069-11de-971a-005056a12545
+      description: DISA ESX Server STIG - ESX1170 requires IAO/SA to remove or disable
+        all unused hardware on VM
+      expression: 
+      towhat: Vm
+      guid: 56c4d50e-3069-11de-971a-005056a12545
+      created_by: 
+      updated_by: 
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent: []
+      Condition:
+      - name: 627379ac-3067-11de-971a-005056a12545
+        description: 'ESX1170: CAT II - Guest OS remove all unused hardware'
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkcount:
+                  "=":
+                    value: 0
+                    field: "<count>"
+                search:
+                  INCLUDES:
+                    value: floppy
+                    field: Vm.hardware.disks-device_type
+            - FIND:
+                checkcount:
+                  "=":
+                    value: 0
+                    field: "<count>"
+                search:
+                  INCLUDES:
+                    value: cdrom
+                    field: Vm.hardware.disks-device_type
+        towhat: Vm
+        file_mtime: 
+        guid: 627379ac-3067-11de-971a-005056a12545
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000010
+        notes: 
+        read_only: 

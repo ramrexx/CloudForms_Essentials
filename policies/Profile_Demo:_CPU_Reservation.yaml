@@ -1,0 +1,109 @@
+---
+- MiqPolicySet:
+    name: 17fa069a-480b-11df-badc-005056a7121f
+    description: 'Demo: CPU Reservation'
+    set_type: MiqPolicySet
+    guid: 17fa069a-480b-11df-badc-005056a7121f
+    read_only: 
+    set_data:
+      :notes: This policy profile analyzes a vm's configuration data when it's reconfigured
+        an sends an email if the cpu reservation is set to a value greater than 500.
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 2f2a1a1c-4806-11df-badc-005056a7121f
+      description: 'Analysis: VM Reconfiguration'
+      expression: 
+      towhat: Vm
+      guid: 2f2a1a1c-4806-11df-badc-005056a7121f
+      created_by: admin
+      updated_by: admin
+      notes: Performs an analysis on any vm that has been reconfigured
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_reconfigure
+          description: VM Settings Change
+          guid: 07367e62-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_analyze
+          description: Initiate SmartState Analysis for VM
+          guid: 5cbe1082-ce35-11de-a117-005056b0503e
+          action_type: default
+          options: {}
+      Condition: []
+    - name: 8a8f247a-480a-11df-badc-005056a7121f
+      description: 'Configuration: VM - CPU Reservation > 500Mhz'
+      expression: 
+      towhat: Vm
+      guid: 8a8f247a-480a-11df-badc-005056a7121f
+      created_by: admin
+      updated_by: admin
+      notes: Sends an email if CPU reservation is set to a value greater than 500Mhz
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_scan_complete
+          description: VM Analysis Complete
+          guid: f7b8361e-1139-11e1-9333-005056af009e
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 5189755e-480a-11df-badc-005056a7121f
+          description: Alert - CPU Reservation > 500Mhz
+          guid: 5189755e-480a-11df-badc-005056a7121f
+          action_type: evaluate_alerts
+          options:
+            :alert_guids:
+            - ca26a9c6-4802-11df-badc-005056a7121f
+      Condition: []
+    - name: 467f80ce-4808-11df-badc-005056a7121f
+      description: 'Analysis: VM Configuration Only Profile'
+      expression: 
+      towhat: Vm
+      guid: 467f80ce-4808-11df-badc-005056a7121f
+      created_by: admin
+      updated_by: admin
+      notes: 'This policy assigns an analysis profile that only gathers vm configuration
+        data. Note: the specified action requires that you create an analysis profile
+        that only scans vm configuration data. Once it has been created, associate
+        it with the specified action'
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_scan_start
+          description: VM Analysis Start
+          guid: 057b9baa-519c-11e0-8d82-005056af0000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: b52a86f0-4807-11df-badc-005056a7121f
+          description: 'Profile: VM configuration only'
+          guid: b52a86f0-4807-11df-badc-005056a7121f
+          action_type: assign_scan_profile
+          options:
+            :scan_item_set_name: vm configuration only
+      Condition: []

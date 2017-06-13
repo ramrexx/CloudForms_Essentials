@@ -1,0 +1,226 @@
+---
+- MiqPolicySet:
+    name: 612b936c-3d2d-11df-a7e9-005056a40709
+    description: 'POC - Analysis: Manage VMs'
+    set_type: MiqPolicySet
+    guid: 612b936c-3d2d-11df-a7e9-005056a40709
+    read_only: 
+    set_data:
+      :notes: |+
+        1) Assign this profile to desired provider(s) or cluster(s)
+        2) When SSA is run this policy will kick in and tag the VMs accordingly
+        3) Set up a Schedule to run as desired that will process the VMs that currently match the Global Filter. Ex: Analyze all VMs that are tagged with "Analysis Required".
+
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 07cea762-3d1b-11df-a7e9-005056a40709
+      description: 'Tag: VM if Analysis not successful'
+      expression: 
+      towhat: Vm
+      guid: 07cea762-3d1b-11df-a7e9-005056a40709
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_scan_abort
+          description: VM Analysis Failure
+          guid: 4c48a6fa-37c0-11df-b567-005056a40709
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: fc7f2dde-3d22-11df-a7e9-005056a40709
+          description: Tag VM that Fails Analysis
+          guid: fc7f2dde-3d22-11df-a7e9-005056a40709
+          action_type: tag
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :tags:
+            - "/managed/operations/analysis_failed"
+      Condition: []
+    - name: 0ce6cf38-3d2d-11df-a7e9-005056a40709
+      description: 'Tag: VM on Successful Analysis'
+      expression: 
+      towhat: Vm
+      guid: 0ce6cf38-3d2d-11df-a7e9-005056a40709
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_scan_complete
+          description: VM Analysis Complete
+          guid: f7b8361e-1139-11e1-9333-005056af009e
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: cd2f3222-3d2c-11df-a7e9-005056a40709
+          description: Tag VM after Successful Analysis
+          guid: cd2f3222-3d2c-11df-a7e9-005056a40709
+          action_type: tag
+          options:
+            :tags:
+            - "/managed/operations/analysis_success"
+      Condition: []
+    - name: b968f0a0-3d2e-11df-a7e9-005056a40709
+      description: 'Tag: VM that Requires Analysis'
+      expression: 
+      towhat: Vm
+      guid: b968f0a0-3d2e-11df-a7e9-005056a40709
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_reset
+          description: VM Reset
+          guid: 4c1b8a3a-37c0-11df-b567-005056a40709
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: a4ccd026-3d2e-11df-a7e9-005056a40709
+          description: Tag VM that Requires Analysis
+          guid: a4ccd026-3d2e-11df-a7e9-005056a40709
+          action_type: tag
+          options:
+            :tags:
+            - "/managed/operations/analysis_required"
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_create
+          description: VM Create Complete
+          guid: 4c0b4f12-37c0-11df-b567-005056a40709
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: a4ccd026-3d2e-11df-a7e9-005056a40709
+          description: Tag VM that Requires Analysis
+          guid: a4ccd026-3d2e-11df-a7e9-005056a40709
+          action_type: tag
+          options:
+            :tags:
+            - "/managed/operations/analysis_required"
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: a4ccd026-3d2e-11df-a7e9-005056a40709
+          description: Tag VM that Requires Analysis
+          guid: a4ccd026-3d2e-11df-a7e9-005056a40709
+          action_type: tag
+          options:
+            :tags:
+            - "/managed/operations/analysis_required"
+      Condition: []
+    - name: 'Do Not Analyze '
+      description: 'Analysis: Prevent Analysis of Selected VMs'
+      expression: 
+      towhat: Vm
+      guid: 3a7959c0-2866-11de-af2a-0050568026c2
+      created_by: 
+      updated_by: admin
+      notes: 'This policies prevents analysis ofany vm that is tagged as Do Not Analyze '
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        failure_synchronous: true
+        MiqEventDefinition:
+          name: request_vm_scan
+          description: VM Analysis Request
+          guid: e3292c46-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: prevent
+          description: Prevent current event from proceeding
+          guid: d885a118-519b-11e0-8d82-005056af0000
+          action_type: default
+          options: {}
+      Condition:
+      - name: Do Not Analyze
+        description: VM classified as DO_NOT_ANALYZE
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            CONTAINS:
+              tag: Vm.managed-exclusions
+              value: do_not_analyze
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 39ff4444-08e2-11de-829f-005056a164b2
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000001
+        notes: 
+        read_only: 

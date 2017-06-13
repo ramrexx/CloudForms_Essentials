@@ -1,0 +1,71 @@
+---
+- MiqPolicySet:
+    name: 19d0af60-9ce7-11e4-a535-00505693ad6a
+    description: 'Demo: Power On/Off VMs'
+    set_type: MiqPolicySet
+    guid: 19d0af60-9ce7-11e4-a535-00505693ad6a
+    read_only: 
+    set_data: 
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: d4640a18-e15d-11e1-acfa-005056b25af6
+      description: powervm
+      expression: 
+      towhat: Vm
+      guid: d4640a18-e15d-11e1-acfa-005056b25af6
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_poweroff
+          description: VM Power Off
+          guid: 48beeadc-ae7c-11e1-a76f-005056b25af6
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: b0138b70-e15d-11e1-8744-005056b25af6
+          description: powerVM
+          guid: b0138b70-e15d-11e1-8744-005056b25af6
+          action_type: custom_automation
+          options:
+            :ae_message: create
+            :ae_request: powerVM
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: b0138b70-e15d-11e1-8744-005056b25af6
+          description: powerVM
+          guid: b0138b70-e15d-11e1-8744-005056b25af6
+          action_type: custom_automation
+          options:
+            :ae_message: create
+            :ae_request: powerVM
+      - MiqEventDefinition:
+          name: request_vm_start
+          description: VM Power On Request
+          guid: 48b02c4a-ae7c-11e1-a76f-005056b25af6
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+      Condition: []

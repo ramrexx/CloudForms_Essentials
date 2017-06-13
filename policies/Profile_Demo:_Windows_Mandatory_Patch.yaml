@@ -1,0 +1,164 @@
+---
+- MiqPolicySet:
+    name: fc164798-3b81-11e0-9dc0-005056910001
+    description: 'Demo: Windows Mandatory Patch'
+    set_type: MiqPolicySet
+    guid: fc164798-3b81-11e0-9dc0-005056910001
+    read_only: 
+    set_data: 
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: c5d44cb2-4734-11df-b577-005056a7121f
+      description: 'Patch: MS10-008 Required'
+      expression: !ruby/object:MiqExpression
+        exp:
+          CONTAINS:
+            tag: Vm.managed-environment
+            value: prod
+        context_type: 
+      towhat: Vm
+      guid: c5d44cb2-4734-11df-b577-005056a7121f
+      created_by: admin
+      updated_by: admin
+      notes: Prevents a VM that does not have MS10-008 installed from running in the
+        virtual environment. It's scope limits it to vms tagged as production
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 722d25cc-56dc-11df-bb16-005056a7121f
+          description: VM Attribute - Fails patch policy
+          guid: 722d25cc-56dc-11df-bb16-005056a7121f
+          action_type: set_custom_attribute
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :value: Failed Windows Required Patch Policy
+            :attribute: EVM Policy
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: SendEmail
+          description: SendEmail
+          guid: abcf406c-02cd-11de-86d4-005056903dbc
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :from: evmadmin@manageiq.com
+            :to: evm_demo@manageiq.com
+      - qualifier: failure
+        failure_sequence: 3
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      Condition:
+      - name: a3089008-4734-11df-b577-005056a7121f
+        description: Verify KB978262 is installed
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            CONTAINS:
+              value: KB978262
+              field: Vm.patches-name
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: a3089008-4734-11df-b577-005056a7121f
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000071
+        notes: 
+        read_only: 

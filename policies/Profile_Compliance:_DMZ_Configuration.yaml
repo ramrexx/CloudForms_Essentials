@@ -1,0 +1,960 @@
+---
+- MiqPolicySet:
+    name: a884921a-d2e6-11de-b4f6-0050568a547d
+    description: 'Compliance: DMZ Configuration'
+    set_type: MiqPolicySet
+    guid: a884921a-d2e6-11de-b4f6-0050568a547d
+    read_only: 
+    set_data: 
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 66fbec86-d2ef-11de-b4f6-0050568a547d
+      description: 'Tag: VM Workload - DMZ'
+      expression: 
+      towhat: Vm
+      guid: 66fbec86-d2ef-11de-b4f6-0050568a547d
+      created_by: admin
+      updated_by: admin
+      notes: This policy will automatically apply a DMZ tag to a vm if it has access
+        to the external vlan
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_scan_complete
+          description: VM Analysis Complete
+          guid: f7b8361e-1139-11e1-9333-005056af009e
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: vm_scan_complete
+          description: VM Analysis Complete
+          guid: f7b8361e-1139-11e1-9333-005056af009e
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 330828a4-d2ef-11de-b4f6-0050568a547d
+          description: Tag as DMZ
+          guid: 330828a4-d2ef-11de-b4f6-0050568a547d
+          action_type: tag
+          options:
+            :tags:
+            - "/managed/network_location/dmz"
+      Condition:
+      - name: 8a975658-d2ef-11de-b4f6-0050568a547d
+        description: VM - DMZ check
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                IS NOT NULL:
+                  field: Vm.lans-created_on
+              search:
+                INCLUDES:
+                  value: External
+                  field: Vm.lans-name
+        towhat: Vm
+        file_mtime: 
+        guid: 8a975658-d2ef-11de-b4f6-0050568a547d
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000018
+        notes: 
+        read_only: 
+      - name: 1e6d326c-3043-11e3-93e5-001a4a034c5a
+        description: Apache
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            CONTAINS:
+              field: Vm.guest_applications-description
+              value: Apache
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 1e6d326c-3043-11e3-93e5-001a4a034c5a
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 
+        notes: 
+        read_only: 
+    - name: 98557866-d2ee-11de-b4f6-0050568a547d
+      description: 'Tag: Host Workload - DMZ'
+      expression: 
+      towhat: Host
+      guid: 98557866-d2ee-11de-b4f6-0050568a547d
+      created_by: admin
+      updated_by: admin
+      notes: This policy will automatically apply a DMZ tag to a host if it has access
+        to the external vlan
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: host_scan_complete
+          description: Host Analysis Complete
+          guid: ffcfb368-455d-11de-86a0-005056a81f62
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 330828a4-d2ef-11de-b4f6-0050568a547d
+          description: Tag as DMZ
+          guid: 330828a4-d2ef-11de-b4f6-0050568a547d
+          action_type: tag
+          options:
+            :tags:
+            - "/managed/network_location/dmz"
+      Condition:
+      - name: ed3edf84-d2ee-11de-b4f6-0050568a547d
+        description: Host - DMZ vlan check
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                IS NOT NULL:
+                  field: Host.lans-created_on
+              search:
+                INCLUDES:
+                  value: External
+                  field: Host.lans-name
+        towhat: Host
+        file_mtime: 
+        guid: ed3edf84-d2ee-11de-b4f6-0050568a547d
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000017
+        notes: 
+        read_only: 
+    - name: 39fbf6bc-d2fa-11de-b4f6-0050568a547d
+      description: 'Configuration: VM - DMZ Fully Collapsed Windows Services'
+      expression: 
+      towhat: Vm
+      guid: 39fbf6bc-d2fa-11de-b4f6-0050568a547d
+      created_by: admin
+      updated_by: admin
+      notes: This policies verifies that certain services are disabled on DMZ vms
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_migrate
+          description: VM Live Migration (VMOTION)
+          guid: 07500602-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: vm_migrate
+          description: VM Live Migration (VMOTION)
+          guid: 07500602-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_reconfigure
+          description: VM Settings Change
+          guid: 07367e62-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: vm_reconfigure
+          description: VM Settings Change
+          guid: 07367e62-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      Condition:
+      - name: ed4daf4e-d2fa-11de-b4f6-0050568a547d
+        description: dmz - windows alerter - disabled
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            "=":
+              regkey: HKLM\SYSTEM\CurrentControlSet\Services\Alerter
+              regval: Start
+              value: 4
+        towhat: Vm
+        file_mtime: 
+        guid: ed4daf4e-d2fa-11de-b4f6-0050568a547d
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000016
+        notes: 
+        read_only: 
+      - name: 469a8766-d2fb-11de-b4f6-0050568a547d
+        description: dmz - windows messenger - disabled
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            "=":
+              regkey: HKLM\SYSTEM\CurrentControlSet\Services\Messenger
+              regval: Start
+              value: 4
+        towhat: Vm
+        file_mtime: 
+        guid: 469a8766-d2fb-11de-b4f6-0050568a547d
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000016
+        notes: 
+        read_only: 
+      - name: 7f648a84-d2fa-11de-b4f6-0050568a547d
+        description: dmz - windows automatic update - disabled
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            "=":
+              regkey: HKLM\SYSTEM\CurrentControlSet\Services\wuauserv
+              regval: Start
+              value: 4
+        towhat: Vm
+        file_mtime: 
+        guid: 7f648a84-d2fa-11de-b4f6-0050568a547d
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000016
+        notes: 
+        read_only: 
+    - name: 6adebf82-d2e4-11de-b4f6-0050568a547d
+      description: 'Configuration: VM - DMZ  Fully Collapsed  Network'
+      expression: 
+      towhat: Vm
+      guid: 6adebf82-d2e4-11de-b4f6-0050568a547d
+      created_by: admin
+      updated_by: admin
+      notes: |-
+        created by: Rod Moore
+        purpose: validates vm vlan configuration
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_migrate
+          description: VM Live Migration (VMOTION)
+          guid: 07500602-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: vm_migrate
+          description: VM Live Migration (VMOTION)
+          guid: 07500602-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_reconfigure
+          description: VM Settings Change
+          guid: 07367e62-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: vm_reconfigure
+          description: VM Settings Change
+          guid: 07367e62-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      Condition:
+      - name: 278843f0-d2e6-11de-b4f6-0050568a547d
+        description: vm - vlan - webserver
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkany:
+                  IS NOT NULL:
+                    field: Vm.lans-created_on
+                search:
+                  INCLUDES:
+                    value: External
+                    field: Vm.lans-name
+            - CONTAINS:
+                tag: Vm.managed-function
+                value: web_server
+        towhat: Vm
+        file_mtime: 
+        guid: 278843f0-d2e6-11de-b4f6-0050568a547d
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000015
+        notes: 
+        read_only: 
+    - name: de3af0f2-d2f0-11de-b4f6-0050568a547d
+      description: 'Configuration: VM - Internal Network'
+      expression: 
+      towhat: Vm
+      guid: de3af0f2-d2f0-11de-b4f6-0050568a547d
+      created_by: admin
+      updated_by: admin
+      notes: This policy shutdown application or database vms that are incorrectly
+        configured to access the dmz network
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_migrate
+          description: VM Live Migration (VMOTION)
+          guid: 07500602-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: vm_migrate
+          description: VM Live Migration (VMOTION)
+          guid: 07500602-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_reconfigure
+          description: VM Settings Change
+          guid: 07367e62-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      - qualifier: failure
+        failure_sequence: 2
+        MiqEventDefinition:
+          name: vm_reconfigure
+          description: VM Settings Change
+          guid: 07367e62-449a-11de-bd4f-005056a83e5d
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      Condition:
+      - name: 020dd9c2-d2f1-11de-b4f6-0050568a547d
+        description: vm - internal vlan check
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkany:
+                  IS NOT NULL:
+                    field: Vm.lans-created_on
+                search:
+                  INCLUDES:
+                    value: Internal
+                    field: Vm.lans-name
+            - or:
+              - CONTAINS:
+                  tag: Vm.managed-function
+                  value: application_servers
+              - CONTAINS:
+                  tag: Vm.managed-function
+                  value: database
+        towhat: Vm
+        file_mtime: 
+        guid: 020dd9c2-d2f1-11de-b4f6-0050568a547d
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000014
+        notes: 
+        read_only: 
+    - name: c66e6d58-d2fc-11de-b4f6-0050568a547d
+      description: 'Configuration: Host - DMZ Fully Collapsed Advanced Settings'
+      expression: 
+      towhat: Host
+      guid: c66e6d58-d2fc-11de-b4f6-0050568a547d
+      created_by: admin
+      updated_by: admin
+      notes: This policy verifies designated host advanced settings values to ensure
+        that they meet DMZ requirements
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_scan_complete
+          description: Host Analysis Complete
+          guid: ffcfb368-455d-11de-86a0-005056a81f62
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          description: Email - DMZ
+          guid: 4ffb6baa-d2e6-11de-b4f6-0050568a547d
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :to: dmzalert@manageiq.com
+      Condition:
+      - name: 1ea32d10-d2fd-11de-b4f6-0050568a547d
+        description: host - dmz - advanced settings - ssl
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                "=":
+                  value: 'true'
+                  field: Host.advanced_settings-value
+              search:
+                "=":
+                  value: Config.Defaults.security.host.ruissl
+                  field: Host.advanced_settings-name
+        towhat: Host
+        file_mtime: 
+        guid: 1ea32d10-d2fd-11de-b4f6-0050568a547d
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000013
+        notes: 
+        read_only: 

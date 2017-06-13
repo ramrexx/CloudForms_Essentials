@@ -1,0 +1,80 @@
+---
+- MiqPolicySet:
+    name: 3a78daca-99da-11e1-a4bf-005056b057a8
+    description: 'Snapshots: Max of 2'
+    set_type: MiqPolicySet
+    guid: 3a78daca-99da-11e1-a4bf-005056b057a8
+    read_only: 
+    set_data: 
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: cf87e7fc-99d8-11e1-a4bf-005056b057a8
+      description: 'Snapshots: limit to max of 2'
+      expression: 
+      towhat: Vm
+      guid: cf87e7fc-99d8-11e1-a4bf-005056b057a8
+      created_by: admin
+      updated_by: admin
+      notes: This policy prevents a vm from starting if there are more than 2 snapshots.
+        If this number is exceeded, the vm is not allowed to start and the vm annotations
+        are updated in the VC
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 8d6ebd90-99d9-11e1-a4bf-005056b057a8
+          description: 'VM Attribute: Max Snapshots'
+          guid: 8d6ebd90-99d9-11e1-a4bf-005056b057a8
+          action_type: set_custom_attribute
+          options:
+            :value: Snapshot Limit Exceeded
+            :attribute: EVM Policy
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      Condition:
+      - name: 9db4783a-99d8-11e1-a4bf-005056b057a8
+        description: Snapshot Count >=3
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            ">=":
+              count: Vm.snapshots
+              value: '3'
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 9db4783a-99d8-11e1-a4bf-005056b057a8
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000079
+        notes: This condition checks to see if 3 or more snapshots exist
+        read_only: 

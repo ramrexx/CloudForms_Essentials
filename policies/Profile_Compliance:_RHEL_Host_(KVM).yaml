@@ -1,0 +1,300 @@
+---
+- MiqPolicySet:
+    name: 97fe0866-b8e5-11e2-87c6-001a4a034c7a
+    description: 'Compliance: RHEL Host (KVM)'
+    set_type: MiqPolicySet
+    guid: 97fe0866-b8e5-11e2-87c6-001a4a034c7a
+    read_only: 
+    set_data: 
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: c63b0560-fa45-11de-83ca-005056ba0614
+      description: Root Login via SSH should be Disabled
+      expression: 
+      towhat: Host
+      guid: c63b0560-fa45-11de-83ca-005056ba0614
+      created_by: admin
+      updated_by: admin
+      notes: This policy verifies that the root account cannot login to the host via
+        SSH.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 4435b6d6-fa46-11de-83ca-005056ba0614
+        description: PermitRootLogin = no in sshd_config file
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                REGULAR EXPRESSION MATCHES:
+                  value: "^\\s*PermitRootLogin\\s+no"
+                  field: Host.filesystems-contents
+              search:
+                "=":
+                  value: "/etc/ssh/sshd_config"
+                  field: Host.filesystems-name
+        towhat: Host
+        file_mtime: 
+        guid: 4435b6d6-fa46-11de-83ca-005056ba0614
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000042
+        notes: This condition checks the file /etc/ssh/sshd_config and verifies that
+          the PermitRootLogin parameter's value is set to no.
+        read_only: 
+    - name: af2d74ea-fa39-11de-83ca-005056ba0614
+      description: Firewall - Incoming Security Level
+      expression: 
+      towhat: Host
+      guid: af2d74ea-fa39-11de-83ca-005056ba0614
+      created_by: admin
+      updated_by: admin
+      notes: This policy verifies that only a defined set of incoming TCP and UDP
+        Ports are open.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: b4a0843a-fa43-11de-83ca-005056ba0614
+        description: Valid Incoming UDP Ports
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            LIMITED TO:
+              value: '427'
+              field: Host-enabled_udp_inbound_ports
+        towhat: Host
+        file_mtime: 
+        guid: b4a0843a-fa43-11de-83ca-005056ba0614
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000021
+        notes: This condition verifies that the only open incoming UDP port is 427.
+        read_only: 
+      - name: 03529e9e-f961-11de-9e9d-0050568a07c7
+        description: Valid Incoming TCP Ports
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            LIMITED TO:
+              value: '902,80,443,427,5989,22,5988'
+              field: Host-enabled_tcp_inbound_ports
+        towhat: Host
+        file_mtime: 
+        guid: 03529e9e-f961-11de-9e9d-0050568a07c7
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000021
+        notes: This condition verifies that the only open incoming TCP ports are 22,80,427,443,902,5988,and
+          5989.
+        read_only: 
+    - name: 04db603c-fa3a-11de-83ca-005056ba0614
+      description: Firewall - Outgoing Security Level
+      expression: 
+      towhat: Host
+      guid: 04db603c-fa3a-11de-83ca-005056ba0614
+      created_by: admin
+      updated_by: admin
+      notes: This policy verifies that only a defined set of outgoing TCP and UDP
+        Ports are open.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 1778fb28-fa44-11de-83ca-005056ba0614
+        description: Valid Outgoing UDP Ports
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            LIMITED TO:
+              value: '427,123,902'
+              field: Host-enabled_udp_outbound_ports
+        towhat: Host
+        file_mtime: 
+        guid: 1778fb28-fa44-11de-83ca-005056ba0614
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000020
+        notes: This condition verifies that the only open outgoing UDP ports are 123,427,
+          and 902.
+        read_only: 
+      - name: f0afd7d6-fa3a-11de-83ca-005056ba0614
+        description: Valid Outgoing TCP Ports
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            LIMITED TO:
+              value: '902,427,443,27000,27010'
+              field: Host-enabled_tcp_outbound_ports
+        towhat: Host
+        file_mtime: 
+        guid: f0afd7d6-fa3a-11de-83ca-005056ba0614
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000020
+        notes: This condition verifies that the only open outgoing TCP ports are 427,443,902,27000,
+          and 27010.
+        read_only: 
+    - name: 8cecc84c-fa46-11de-83ca-005056ba0614
+      description: Limit su Access to root Account
+      expression: 
+      towhat: Host
+      guid: 8cecc84c-fa46-11de-83ca-005056ba0614
+      created_by: admin
+      updated_by: admin
+      notes: This policy validates that only members of the group wheel can access
+        the su command.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 63b243fc-fa47-11de-83ca-005056ba0614
+        description: Only members of wheel group can execute su command
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                REGULAR EXPRESSION MATCHES:
+                  value: "^\\s*auth\\s+required\\s+.*pam_wheel\\.so\\s+use_uid"
+                  field: Host.filesystems-contents
+              search:
+                "=":
+                  value: "/etc/pam.d/su"
+                  field: Host.filesystems-name
+        towhat: Host
+        file_mtime: 
+        guid: 63b243fc-fa47-11de-83ca-005056ba0614
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000050
+        notes: This condition validates that the file /etc/pam.d/su contains a variation
+          of the string "auth required pam_wheel.so use_uid".
+        read_only: 
+    - name: 4ed279b2-fa55-11de-83ca-005056ba0614
+      description: Timekeeping - NTP Service Running
+      expression: 
+      towhat: Host
+      guid: 4ed279b2-fa55-11de-83ca-005056ba0614
+      created_by: admin
+      updated_by: admin
+      notes: This policy verifies that the NTP servers is configured to automatically
+        start.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 9a08d21e-fa55-11de-83ca-005056ba0614
+        description: Verify NTP is Running
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                INCLUDES:
+                  value: '3'
+                  field: Host.host_services-enable_run_levels
+              search:
+                "=":
+                  value: ntpd
+                  field: Host.host_services-name
+        towhat: Host
+        file_mtime: 
+        guid: 9a08d21e-fa55-11de-83ca-005056ba0614
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000031
+        notes: This condition verifies that the run level of the service ntpd is set
+          to three.
+        read_only: 

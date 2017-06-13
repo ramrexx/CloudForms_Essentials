@@ -1,0 +1,160 @@
+---
+- MiqPolicySet:
+    name: 63aaa3aa-53fa-11e0-babf-00505688000a
+    description: 'Demo: Prevent Cloning of Database VMs'
+    set_type: MiqPolicySet
+    guid: 63aaa3aa-53fa-11e0-babf-00505688000a
+    read_only: 
+    set_data:
+      :notes: This policy profile prevents database vms from being cloned. Database
+        vms are defined as those that have a workload tag value of database
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: Configuration Policy Restrict Cloning SQL Server
+      description: 'Operational: Prevent Cloning of Database VMs'
+      expression: 
+      towhat: Vm
+      guid: 39fdeba0-2866-11de-af2a-0050568026c2
+      created_by: 
+      updated_by: admin
+      notes: prevents cloning of vms with a workload tag value of database
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_clone_start
+          description: VM Clone Start
+          guid: e30f6720-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 4468f036-0b6d-11df-bd07-005056a7121f
+          description: VM Attribute - Prevent Clone of SQL Server
+          guid: 4468f036-0b6d-11df-bd07-005056a7121f
+          action_type: set_custom_attribute
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :value: Clone Prevented for SQL Server VM
+            :attribute: EVM Policy
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: vm_clone_start
+          description: VM Clone Start
+          guid: e30f6720-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: SendEmail
+          description: SendEmail
+          guid: abcf406c-02cd-11de-86d4-005056903dbc
+          action_type: email
+          options:
+            :variables:
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            - :value: ''
+              :oid: ''
+              :var_type: "<None>"
+            :from: evmadmin@manageiq.com
+            :to: evm_demo@manageiq.com
+      - qualifier: success
+        success_sequence: 3
+        MiqEventDefinition:
+          name: vm_clone_start
+          description: VM Clone Start
+          guid: e30f6720-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: cancel_task
+          description: Cancel vCenter Task
+          guid: e49bfee6-1e1e-11de-8918-0050568005db
+          action_type: default
+          options: {}
+      Condition:
+      - name: VMs running SQL Server
+        description: VMs with Workload - Database
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            CONTAINS:
+              tag: Vm.managed-function
+              value: database
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 121ecf62-01c6-11de-a701-005056903dbc
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000064
+        notes: 
+        read_only: 

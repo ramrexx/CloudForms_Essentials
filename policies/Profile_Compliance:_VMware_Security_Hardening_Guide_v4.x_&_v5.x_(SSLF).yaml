@@ -1,0 +1,283 @@
+---
+- MiqPolicySet:
+    name: a5c34544-d400-11e1-9935-000c2999f7f1
+    description: 'Compliance: VMware Security Hardening Guide v4.x & v5.x (SSLF)'
+    set_type: MiqPolicySet
+    guid: a5c34544-d400-11e1-9935-000c2999f7f1
+    read_only: 
+    set_data:
+      :notes: VMware Security Hardening Guide v4.x & v5.x (SSLF)
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 769b4b1e-c1f8-11e1-ae68-000c29cc1a4c
+      description: VMware SHG v4.x & v5.x - VMX30 - Disable remote operations within
+        the guest.
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            value: VMware
+            field: Vm-vendor
+        context_type: 
+      towhat: Vm
+      guid: 769b4b1e-c1f8-11e1-ae68-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG v4.x & v5.x - VMX30 - Disable remote operations within the
+        guest.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 8b7f39d2-c1f8-11e1-ae68-000c29cc1a4c
+        description: VMware SHG v4.x - VMX30 - Disable remote operations within the
+          guest.
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                "=":
+                  field: Vm.advanced_settings-value
+                  value: 'false'
+              search:
+                "=":
+                  field: Vm.advanced_settings-name
+                  value: guest.commands.enabled
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 8b7f39d2-c1f8-11e1-ae68-000c29cc1a4c
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            STARTS WITH:
+              value: '4'
+              field: Vm.host-vmm_version
+          context_type: 
+        miq_policy_id: 16
+        notes: VMware SHG v4.x - VMX30 - Disable remote operations within the guest.
+          R1
+        read_only: 
+    - name: 3a2acbde-d434-11e1-9935-000c2999f7f1
+      description: VMware SHG v4.x & v5.x - HCN06 - Disable Tech Support Mode unless
+        needed for diagnostics and break-fix
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: Host-vmm_product
+            value: ESXi
+        context_type: 
+      towhat: Host
+      guid: 3a2acbde-d434-11e1-9935-000c2999f7f1
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG v4.x & v5.x - HCN06 - Disable Tech Support Mode unless needed
+        for diagnostics and break-fix R1
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: e35c1be0-d434-11e1-9935-000c2999f7f1
+        description: VMware SHG v4.x & v5.x - HCN06 - Disable Tech Support Mode unless
+          needed for diagnostics and break-fix
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                "=":
+                  field: Host.host_services-running
+                  value: 'false'
+              search:
+                "=":
+                  field: Host.host_services-name
+                  value: TSM
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: e35c1be0-d434-11e1-9935-000c2999f7f1
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 15
+        notes: VMware SHG v4.x & v5.x - HCN06 - Disable Tech Support Mode unless needed
+          for diagnostics and break-fix R1
+        read_only: 
+    - name: 17fce8ee-c39f-11e1-aed6-000c29cc1a4c
+      description: VMware SHG - VMX24 - Disable certain unexposed features.
+      expression: 
+      towhat: Vm
+      guid: 17fce8ee-c39f-11e1-aed6-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG - VMX24 - Disable certain unexposed features.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 98427d34-c39f-11e1-aed6-000c29cc1a4c
+        description: Disable certain unexposed features
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.unity.push.update.disable
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.ghi.launchmenu.change
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.memSchedFakeSampleStats.disable
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.getCreds.disable
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 98427d34-c39f-11e1-aed6-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 1
+        notes: 
+        read_only: 
+    - name: e5871bee-d435-11e1-9935-000c2999f7f1
+      description: VMware SHG v4.x & v5.x - HCN05 - Disable DCUI to prevent all local
+        administrative control
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            value: ESXi
+            field: Host-vmm_product
+        context_type: 
+      towhat: Host
+      guid: e5871bee-d435-11e1-9935-000c2999f7f1
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG v4.x & v5.x - HCN05 - Disable DCUI to prevent all local administrative
+        control R1
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 0f6761b2-d436-11e1-9935-000c2999f7f1
+        description: VMware SHG v4.x & v5.x - HCN05 - Disable DCUI to prevent all
+          local administrative control
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                "=":
+                  value: 'false'
+                  field: Host.host_services-running
+              search:
+                "=":
+                  value: DCUI
+                  field: Host.host_services-name
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: 0f6761b2-d436-11e1-9935-000c2999f7f1
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 14
+        notes: VMware SHG v4.x & v5.x - HCN05 - Disable DCUI to prevent all local
+          administrative control R1
+        read_only: 

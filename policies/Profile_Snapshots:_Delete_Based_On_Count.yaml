@@ -1,0 +1,63 @@
+---
+- MiqPolicySet:
+    name: 5a7d53b4-53f9-11e0-babf-00505688000a
+    description: 'Snapshots: Delete Based On Count'
+    set_type: MiqPolicySet
+    guid: 5a7d53b4-53f9-11e0-babf-00505688000a
+    read_only: 
+    set_data:
+      :notes: This policy profile deletes the most recent snapshot when more that
+        2 snapshots exists
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 994efe7e-18e6-11e0-88b4-005056a7184a
+      description: 'Snapshots: Delete based on Count'
+      expression: 
+      towhat: Vm
+      guid: 994efe7e-18e6-11e0-88b4-005056a7184a
+      created_by: admin
+      updated_by: admin
+      notes: This policy deletes the most recent snapshot when more that 2 snapshots
+        exists
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_snapshot_complete
+          description: VM Snapshot Create Complete
+          guid: 7eb82802-135e-11e0-8706-005056a7184a
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: delete_most_recent_snapshot
+          description: Delete Most Recent Snapshot
+          guid: 7f6e2f8a-135e-11e0-8706-005056a7184a
+          action_type: default
+          options: {}
+      Condition:
+      - name: 992035fc-18e7-11e0-88b4-005056a7184a
+        description: Check for more than 2 snapshots
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            ">":
+              value: '2'
+              field: Vm-v_total_snapshots
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 992035fc-18e7-11e0-88b4-005056a7184a
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000075
+        notes: Checks to see if more than 2 snapshots exist
+        read_only: 

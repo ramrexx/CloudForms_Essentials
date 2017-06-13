@@ -1,0 +1,736 @@
+---
+- MiqPolicySet:
+    name: ba92efe6-c1c3-11e1-ae68-000c29cc1a4c
+    description: 'Compliance: VMware Security Hardening Guide v4.x & v5.x (Enterprise)'
+    set_type: MiqPolicySet
+    guid: ba92efe6-c1c3-11e1-ae68-000c29cc1a4c
+    read_only: 
+    set_data:
+      :notes: VMware Security Hardening Guide v4.x & v5.x (Enterprise)
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 2cd19756-c1ec-11e1-ae68-000c29cc1a4c
+      description: VMWare SHG v4.x & v5.x - VMX01 - Prevent virtual disk shrinking.
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            value: VMware
+            field: Vm-vendor
+        context_type: 
+      towhat: Vm
+      guid: 2cd19756-c1ec-11e1-ae68-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMWare SHG v4.x & v5.x - VMX01 - Prevent virtual disk shrinking. R1
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 11564bce-c1ed-11e1-ae68-000c29cc1a4c
+        description: VMWare SHG v4.x - VMX01 - Prevent virtual disk shrinking
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.diskShrink.disable
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.tools.diskWiper.disable
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 11564bce-c1ed-11e1-ae68-000c29cc1a4c
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            STARTS WITH:
+              value: '4'
+              field: Vm.host-vmm_version
+          context_type: 
+        miq_policy_id: 13
+        notes: VMWare SHG v4.x - VMX01 - Prevent virtual disk shrinking R1
+        read_only: 
+      - name: d4bd19f4-d7d6-11e1-b3e5-000c2999f7f1
+        description: VMWare SHG v5.x - VMX01 - Prevent virtual disk shrinking
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                "=":
+                  field: Vm.advanced_settings-value
+                  value: 'true'
+              search:
+                "=":
+                  field: Vm.advanced_settings-name
+                  value: isolation.tools.diskWiper.disable
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: d4bd19f4-d7d6-11e1-b3e5-000c2999f7f1
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            STARTS WITH:
+              field: Vm.host-vmm_version
+              value: '5'
+          context_type: 
+        miq_policy_id: 13
+        notes: VMWare SHG v5.x - VMX01 - Prevent virtual disk shrinking R1
+        read_only: 
+    - name: 1d60a788-c1f3-11e1-ae68-000c29cc1a4c
+      description: VMware SHG v4.x & v5.x - VMX11 Prevent unauthorized removal, connection
+        and modification of devices
+      expression: !ruby/object:MiqExpression
+        exp:
+          and:
+          - "=":
+              field: Vm-vendor
+              value: VMware
+          - STARTS WITH:
+              value: '5'
+              field: Vm.host-vmm_version
+        context_type: 
+      towhat: Vm
+      guid: 1d60a788-c1f3-11e1-ae68-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG v4.x & v5.x - VMX11 Prevent unauthorized removal, connection
+        and modification of devices
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 728e7050-c1f3-11e1-ae68-000c29cc1a4c
+        description: VMware SHG v5.x - VMX11 Prevent unauthorized removal, connection
+          and modification of devices
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkany:
+                "=":
+                  value: 'true'
+                  field: Vm.advanced_settings-value
+              search:
+                "=":
+                  value: isolation.device.connectable.disable
+                  field: Vm.advanced_settings-name
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 728e7050-c1f3-11e1-ae68-000c29cc1a4c
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            STARTS WITH:
+              field: Vm.host-vmm_version
+              value: '5'
+          context_type: 
+        miq_policy_id: 12
+        notes: VMware SHG v5.x - VMX11 Prevent unauthorized removal, connection and
+          modification of devices R1
+        read_only: 
+      - name: aaa64a08-d7d8-11e1-b3e5-000c2999f7f1
+        description: VMware SHG v4.x - VMX11 Prevent unauthorized removal, connection
+          and modification of devices
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - FIND:
+                checkany:
+                  "=":
+                    value: 'true'
+                    field: Vm.advanced_settings-value
+                search:
+                  "=":
+                    value: isolation.device.connectable.disable
+                    field: Vm.advanced_settings-name
+            - FIND:
+                checkany:
+                  "=":
+                    field: Vm.advanced_settings-value
+                    value: 'true'
+                search:
+                  "=":
+                    field: Vm.advanced_settings-name
+                    value: isolation.device.edit.disable
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: aaa64a08-d7d8-11e1-b3e5-000c2999f7f1
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            STARTS WITH:
+              value: '4'
+              field: Vm.host-vmm_version
+          context_type: 
+        miq_policy_id: 12
+        notes: VMware SHG v4.x - VMX11 Prevent unauthorized removal, connection and
+          modification of devices R1
+        read_only: 
+    - name: 86c84f3a-d005-11e1-986c-000c29cc1a4c
+      description: VMware SHG v4.x & v5.x - NCN10 - Ensure that port groups are configured
+        with a clear network label
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: Host-vmm_product
+            value: ESXi
+        context_type: 
+      towhat: Host
+      guid: 86c84f3a-d005-11e1-986c-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG v4.x & v5.x - NCN10 - Ensure that port groups are configured
+        with a clear network label R1
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: e1c666a0-d006-11e1-986c-000c29cc1a4c
+        description: VMware SHG v4.x & v5.x - NCN10 - Ensure that port groups are
+          configured with a clear network label
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            or:
+            - FIND:
+                checkcount:
+                  "=":
+                    field: "<count>"
+                    value: '0'
+                search:
+                  IS NULL:
+                    field: Host.lans-name
+                    value: ''
+            - FIND:
+                checkcount:
+                  "=":
+                    value: '0'
+                    field: "<count>"
+                search:
+                  IS EMPTY:
+                    value: ''
+                    field: Host.lans-name
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: e1c666a0-d006-11e1-986c-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 11
+        notes: VMware SHG v4.x & v5.x - NCN10 - Ensure that port groups are configured
+          with a clear network label R1
+        read_only: 
+    - name: e99a4c3e-d00b-11e1-986c-000c29cc1a4c
+      description: VMware SHG v4x. & v5.x - NCN11 - Ensure that all vSwitches have
+        a clear network label.
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            value: ESXi
+            field: Host-vmm_product
+        context_type: 
+      towhat: Host
+      guid: e99a4c3e-d00b-11e1-986c-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG v4x. & v5.x - NCN11 - Ensure that all vSwitches have a clear
+        network label. R1
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 5ca4abca-d00c-11e1-986c-000c29cc1a4c
+        description: VMware SHG v4x. & v5.x - NCN11 - Ensure that all vSwitches have
+          a clear network label.
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            or:
+            - FIND:
+                checkall:
+                  IS NOT NULL:
+                    value: ''
+                    field: Host.hardware.ports-device_name
+                search:
+                  "=":
+                    value: ethernet
+                    field: Host.hardware.ports-device_type
+            - FIND:
+                checkall:
+                  IS NOT EMPTY:
+                    field: Host.hardware.ports-device_name
+                    value: ''
+                search:
+                  "=":
+                    field: Host.hardware.ports-device_type
+                    value: ethernet
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: 5ca4abca-d00c-11e1-986c-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10
+        notes: VMware SHG v4x. & v5.x - NCN11 - Ensure that all vSwitches have a clear
+          network label. R1
+        read_only: 
+    - name: d7ed01f4-d00e-11e1-986c-000c29cc1a4c
+      description: "VMware SHG v4.x & v5.x - NCN05 -Ensure that the â\x80\x9CPromiscuous
+        Modeâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D"
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: Host-vmm_product
+            value: ESXi
+        context_type: 
+      towhat: Host
+      guid: d7ed01f4-d00e-11e1-986c-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: "VMware SHG v4.x & v5.x - NCN05 -Ensure that the â\x80\x9CPromiscuous
+        Modeâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D R1"
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: abb1772c-d00f-11e1-986c-000c29cc1a4c
+        description: "VMware SHG v4.x & v5.x - NCN05 -Ensure that the â\x80\x9CPromiscuous
+          Modeâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D"
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                "=":
+                  field: Host.lans-allow_promiscuous
+                  value: 'false'
+              search:
+                IS NOT NULL:
+                  field: Host.lans-name
+                  value: ''
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: abb1772c-d00f-11e1-986c-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 9
+        notes: "VMware SHG v4.x & v5.x - NCN05 -Ensure that the â\x80\x9CPromiscuous
+          Modeâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D R1"
+        read_only: 
+    - name: e4d7e0e6-d00e-11e1-986c-000c29cc1a4c
+      description: "VMware SHG v4.x & v5.x - NCN04 - Ensure that the â\x80\x9CForged
+        Transmitsâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D"
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: Host-vmm_product
+            value: ESXi
+        context_type: 
+      towhat: Host
+      guid: e4d7e0e6-d00e-11e1-986c-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: "VMware SHG v4.x & v5.x - NCN04 - Ensure that the â\x80\x9CForged Transmitsâ\x80\x9D
+        policy is set to â\x80\x9Creject.â\x80\x9D R1"
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: ed54d6d8-d00f-11e1-986c-000c29cc1a4c
+        description: "VMware SHG v4.x & v5.x - NCN04 - Ensure that the â\x80\x9CForged
+          Transmitsâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D"
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                "=":
+                  value: 'false'
+                  field: Host.lans-forged_transmits
+              search:
+                IS NOT NULL:
+                  value: ''
+                  field: Host.lans-name
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: ed54d6d8-d00f-11e1-986c-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 8
+        notes: "VMware SHG v4.x & v5.x - NCN04 - Ensure that the â\x80\x9CForged Transmitsâ\x80\x9D
+          policy is set to â\x80\x9Creject.â\x80\x9D R1"
+        read_only: 
+    - name: 197d032e-d016-11e1-986c-000c29cc1a4c
+      description: "VMware SHG v4.x & v5.x - NCN03 - Ensure that the â\x80\x9CMAC
+        Address Changeâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D"
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            value: ESXi
+            field: Host-vmm_product
+        context_type: 
+      towhat: Host
+      guid: 197d032e-d016-11e1-986c-000c29cc1a4c
+      created_by: admin
+      updated_by: admin
+      notes: "VMware SHG v4.x & v5.x - NCN03 - Ensure that the â\x80\x9CMAC Address
+        Changeâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D R1"
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 3531486e-d016-11e1-986c-000c29cc1a4c
+        description: "VMware SHG v4.x & v5.x - NCN03 - Ensure that the â\x80\x9CMAC
+          Address Changeâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D"
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                "=":
+                  value: 'false'
+                  field: Host.lans-mac_changes
+              search:
+                IS NOT NULL:
+                  value: ''
+                  field: Host.lans-name
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: 3531486e-d016-11e1-986c-000c29cc1a4c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 7
+        notes: "VMware SHG v4.x & v5.x - NCN03 - Ensure that the â\x80\x9CMAC Address
+          Changeâ\x80\x9D policy is set to â\x80\x9Creject.â\x80\x9D R1"
+        read_only: 
+    - name: 4dadd9bc-d443-11e1-9935-000c2999f7f1
+      description: VMware SHG v4.x & v5.x - HLG01 - Remote syslog should be configured
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            value: ESXi
+            field: Host-vmm_product
+        context_type: 
+      towhat: Host
+      guid: 4dadd9bc-d443-11e1-9935-000c2999f7f1
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG v4.x & v5.x - HLG01 - Remote syslog should be configured
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: b60247d2-d443-11e1-9935-000c2999f7f1
+        description: VMware SHG v5.x - HLG01 - Remote syslog should be configured
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                IS NOT EMPTY:
+                  value: ''
+                  field: Host.advanced_settings-value
+              search:
+                "=":
+                  value: Syslog.global.logHost
+                  field: Host.advanced_settings-name
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: b60247d2-d443-11e1-9935-000c2999f7f1
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            STARTS WITH:
+              field: Host-vmm_version
+              value: '5'
+          context_type: 
+        miq_policy_id: 6
+        notes: VMware SHG - HLG01 - Remote syslog should be configured VERSION 5.x
+          ONLY R1
+        read_only: 
+      - name: 456a882a-d7ce-11e1-b3e5-000c2999f7f1
+        description: VMware SHG v4.x - HLG01 - Remote syslog should be configured
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                IS NOT EMPTY:
+                  field: Host.advanced_settings-value
+                  value: ''
+              search:
+                "=":
+                  field: Host.advanced_settings-name
+                  value: Syslog.Remote.Hostname
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: 456a882a-d7ce-11e1-b3e5-000c2999f7f1
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            STARTS WITH:
+              field: Host-vmm_version
+              value: '4'
+          context_type: 
+        miq_policy_id: 6
+        notes: VMware SHG - HLG01 - Remote syslog should be configured VERSION 4.x
+          ONLY R1
+        read_only: 
+    - name: 36021318-d435-11e1-9935-000c2999f7f1
+      description: VMware SHG v4.x & v5.x - HCN07 - Set a timeout for Tech Support
+        Mode.
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: Host-vmm_product
+            value: ESXi
+        context_type: 
+      towhat: Host
+      guid: 36021318-d435-11e1-9935-000c2999f7f1
+      created_by: admin
+      updated_by: admin
+      notes: VMware SHG v4.x & v5.x - HCN07 - Set a timeout for Tech Support Mode.
+        R1
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 9f3b5376-d435-11e1-9935-000c2999f7f1
+        description: VMware SHG v4.x - HCN07 - Set a timeout for Tech Support Mode.
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            not:
+              FIND:
+                checkall:
+                  "=":
+                    field: Host.advanced_settings-value
+                    value: '0'
+                search:
+                  "=":
+                    field: Host.advanced_settings-name
+                    value: UserVars.TSMTimeOut
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: 9f3b5376-d435-11e1-9935-000c2999f7f1
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            STARTS WITH:
+              field: Host-vmm_version
+              value: '4'
+          context_type: 
+        miq_policy_id: 5
+        notes: VMware SHG v4.x - HCN07 - Set a timeout for Tech Support Mode. R1
+        read_only: 
+      - name: fc017d86-d7cf-11e1-b3e5-000c2999f7f1
+        description: VMware SHG v5.x - HCN07 - Set a timeout for Tech Support Mode.
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            not:
+              FIND:
+                checkall:
+                  "=":
+                    value: '0'
+                    field: Host.advanced_settings-value
+                search:
+                  "=":
+                    value: UserVars.ESXiShellTimeOut
+                    field: Host.advanced_settings-name
+          context_type: 
+        towhat: Host
+        file_mtime: 
+        guid: fc017d86-d7cf-11e1-b3e5-000c2999f7f1
+        filename: 
+        applies_to_exp: !ruby/object:MiqExpression
+          exp:
+            STARTS WITH:
+              value: '5'
+              field: Host-vmm_version
+          context_type: 
+        miq_policy_id: 5
+        notes: VMware SHG v5.x - HCN07 - Set a timeout for Tech Support Mode. R1
+        read_only: 

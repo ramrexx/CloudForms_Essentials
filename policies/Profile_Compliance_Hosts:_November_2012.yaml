@@ -1,0 +1,142 @@
+---
+- MiqPolicySet:
+    name: e4bcd3de-2480-11e2-b7d5-005056b25af6
+    description: 'Compliance Hosts: November 2012'
+    set_type: MiqPolicySet
+    guid: e4bcd3de-2480-11e2-b7d5-005056b25af6
+    read_only: 
+    set_data: 
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: de683aa6-fedf-11de-83dd-005056ba5e76
+      description: Network - Mac Changes not Allowed
+      expression: 
+      towhat: Host
+      guid: de683aa6-fedf-11de-83dd-005056ba5e76
+      created_by: admin
+      updated_by: admin
+      notes: This policy checks that MAC changes are not allowed on vSwitches and
+        vLans.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 3ed9fb4a-fee0-11de-83dd-005056ba5e76
+        description: Mac Changes Disabled in vLans
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            not:
+              CONTAINS:
+                value: 'false'
+                field: Host.lans-mac_changes
+        towhat: Host
+        file_mtime: 
+        guid: 3ed9fb4a-fee0-11de-83dd-005056ba5e76
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000028
+        notes: This condition verifies that MAC changes are not allowed on vLans.
+        read_only: 
+      - name: 0a6eb332-fee0-11de-83dd-005056ba5e76
+        description: Mac Changes Disabled in vSwitches
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            not:
+              CONTAINS:
+                value: 'false'
+                field: Host.switches-mac_changes
+        towhat: Host
+        file_mtime: 
+        guid: 0a6eb332-fee0-11de-83dd-005056ba5e76
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000028
+        notes: This condition verifies that MAC changes are not allowed on vSwitches.
+        read_only: 
+    - name: 61b355f2-fee1-11de-83dd-005056ba5e76
+      description: Network - Forged Transmits Must Be Disabled
+      expression: 
+      towhat: Host
+      guid: 61b355f2-fee1-11de-83dd-005056ba5e76
+      created_by: admin
+      updated_by: admin
+      notes: This policy insures that forged transmits are disabled on both vLans
+        and vSwitches.
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: host_compliance_check
+          description: Host Compliance Check
+          guid: b9abe0a8-f586-11de-8ebc-0050568a07c7
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: f246e3e0-fee1-11de-83dd-005056ba5e76
+        description: Forged Transmits Disabled in vLan
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            not:
+              CONTAINS:
+                value: 'false'
+                field: Host.lans-forged_transmits
+        towhat: Host
+        file_mtime: 
+        guid: f246e3e0-fee1-11de-83dd-005056ba5e76
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000022
+        notes: This condition verifies that forged transmits are disabled on vlans.
+        read_only: 
+      - name: a3ac5774-fee1-11de-83dd-005056ba5e76
+        description: Forged Transmits Disabled in vSwitch
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            not:
+              CONTAINS:
+                value: 'false'
+                field: Host.switches-forged_transmits
+        towhat: Host
+        file_mtime: 
+        guid: a3ac5774-fee1-11de-83dd-005056ba5e76
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000022
+        notes: This condition verifies that forged transmits are disabled on vSwitches.
+        read_only: 

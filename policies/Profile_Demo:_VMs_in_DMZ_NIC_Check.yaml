@@ -1,0 +1,164 @@
+---
+- MiqPolicySet:
+    name: 98eea278-8b9f-11e0-b8fc-005056a40e59
+    description: 'Demo: VMs in DMZ NIC Check'
+    set_type: MiqPolicySet
+    guid: 98eea278-8b9f-11e0-b8fc-005056a40e59
+    read_only: 
+    set_data:
+      :notes: This Policy Profile will check VM Network Adapter count and if > 1 will
+        Stop the VM. This will happen after VM Analysis is Complete or when the VM
+        is Powered On.
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 69fbd202-8ba3-11e0-b8fc-005056a40e59
+      description: DMZ - Shutdown VM after Analysis if it has more than 1 NIC
+      expression: !ruby/object:MiqExpression
+        exp:
+          "=":
+            value: 'on'
+            field: Vm-power_state
+        context_type: 
+      towhat: Vm
+      guid: 69fbd202-8ba3-11e0-b8fc-005056a40e59
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_scan_complete
+          description: VM Analysis Complete
+          guid: f7b8361e-1139-11e1-9333-005056af009e
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: evm_event
+          description: Show EVM Event on Timeline
+          guid: 16b1810c-44e8-11e0-acda-005056a40e59
+          action_type: default
+          options: {}
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: vm_scan_complete
+          description: VM Analysis Complete
+          guid: f7b8361e-1139-11e1-9333-005056af009e
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_shutdown_guest
+          description: Shutdown Virtual Machine Guest OS
+          guid: 26b84380-bbd5-11de-aaab-0050568a2c6a
+          action_type: default
+          options: {}
+      Condition:
+      - name: efcf3702-8b9e-11e0-b8fc-005056a40e59
+        description: DMZ - VM has more than 1 NIC
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            ">":
+              count: Vm.hardware.nics
+              value: '1'
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: efcf3702-8b9e-11e0-b8fc-005056a40e59
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000077
+        notes: 
+        read_only: 
+    - name: 0de66508-8b9f-11e0-b8fc-005056a40e59
+      description: DMZ - Shutdown VM after Starting if it has more than 1 NIC
+      expression: 
+      towhat: Vm
+      guid: 0de66508-8b9f-11e0-b8fc-005056a40e59
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: d91bbabc-b0be-11e1-b0dc-005056b057a8
+          description: 'VM Attribute: Allowed NIC Count Exceeded'
+          guid: d91bbabc-b0be-11e1-b0dc-005056b057a8
+          action_type: set_custom_attribute
+          options:
+            :attribute: EVM Policy
+            :value: Allowed NIC Limit Exceeded
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: evm_event
+          description: Show EVM Event on Timeline
+          guid: 16b1810c-44e8-11e0-acda-005056a40e59
+          action_type: default
+          options: {}
+      - qualifier: success
+        success_sequence: 3
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      Condition:
+      - name: efcf3702-8b9e-11e0-b8fc-005056a40e59
+        description: DMZ - VM has more than 1 NIC
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            ">":
+              count: Vm.hardware.nics
+              value: '1'
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: efcf3702-8b9e-11e0-b8fc-005056a40e59
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000077
+        notes: 
+        read_only: 

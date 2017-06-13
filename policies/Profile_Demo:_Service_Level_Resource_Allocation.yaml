@@ -1,0 +1,581 @@
+---
+- MiqPolicySet:
+    name: 3b818590-2866-11de-af2a-0050568026c2
+    description: 'Demo: Service Level Resource Allocation'
+    set_type: MiqPolicySet
+    guid: 3b818590-2866-11de-af2a-0050568026c2
+    read_only: 
+    set_data:
+      :notes: This policy demonstrates EVM's ability to check and , if necessary,
+        reconfigure a VM's vCPU and Memory configuration based on designated service
+        level
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: b265c970-3908-11de-b6d5-005056a11a54
+      description: Service Level Platinum - RAM must be 2GB and 2 vCPUs - off
+      expression: !ruby/object:MiqExpression
+        exp:
+          and:
+          - CONTAINS:
+              tag: Vm.managed-service_level
+              value: platinum
+          - "=":
+              value: 'off'
+              field: Vm-power_state
+        context_type: 
+      towhat: Vm
+      guid: b265c970-3908-11de-b6d5-005056a11a54
+      created_by: 
+      updated_by: admin
+      notes: This policy verifies that a vm that has a service level tag of platinum
+        has 2 vCPUs and 2GB of memory. If not it changes the vm to these values. This
+        policy is used on a powered off vm.
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_CPU_2
+          description: Set VM CPU to 2
+          guid: e2c3d64e-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_cpus
+          options:
+            :value: '2'
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_RAM_2GB
+          description: Set VM RAM to 2GB
+          guid: cf1570b2-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_memory
+          options:
+            :value: 2048
+      Condition:
+      - name: 34218558-3909-11de-b6d5-005056a11a54
+        description: Service Level Platinum - VM RAM and CPU check
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            or:
+            - "!=":
+                value: 2048
+                field: Vm.hardware-memory_cpu
+            - "!=":
+                value: 2
+                field: Vm.hardware-numvcpus
+        towhat: Vm
+        file_mtime: 
+        guid: 34218558-3909-11de-b6d5-005056a11a54
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000070
+        notes: 
+        read_only: 
+    - name: 24b92088-399c-11de-ae27-005056a11a54
+      description: Service Level Gold - RAM must be 1GB and 1 vCPU - off
+      expression: !ruby/object:MiqExpression
+        exp:
+          and:
+          - CONTAINS:
+              tag: Vm.managed-service_level
+              value: gold
+          - "=":
+              value: 'off'
+              field: Vm-power_state
+        context_type: 
+      towhat: Vm
+      guid: 24b92088-399c-11de-ae27-005056a11a54
+      created_by: 
+      updated_by: admin
+      notes: This policy verifies that a vm that has a service level tag of gold has
+        1vCPU and 1GB of memory. If not it changes the vm to these values. This policy
+        is used on a powered off vm.
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_CPU_1
+          description: Set VM CPU to 1
+          guid: d97dafba-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_cpus
+          options:
+            :value: '1'
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_RAM_1GB
+          description: Set VM RAM to 1GB
+          guid: 2d8445f2-9aec-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_memory
+          options:
+            :value: 1024
+      Condition:
+      - name: 1c6ec35e-3908-11de-b6d5-005056a11a54
+        description: Service Level Gold - VM RAM and CPU check
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            or:
+            - "!=":
+                value: 1024
+                field: Vm.hardware-memory_cpu
+            - "!=":
+                value: 1
+                field: Vm.hardware-numvcpus
+        towhat: Vm
+        file_mtime: 
+        guid: 1c6ec35e-3908-11de-b6d5-005056a11a54
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000069
+        notes: 
+        read_only: 
+    - name: Service Level Policy Verify Virtual Hardware - Silver Level
+      description: Service Level Silver - RAM must be 512MB and 1 vCPU - off
+      expression: !ruby/object:MiqExpression
+        exp:
+          and:
+          - CONTAINS:
+              tag: Vm.managed-service_level
+              value: silver
+          - "=":
+              value: 'off'
+              field: Vm-power_state
+        context_type: 
+      towhat: Vm
+      guid: 3659b8bc-2866-11de-af2a-0050568026c2
+      created_by: 
+      updated_by: admin
+      notes: This policy verifies that a vm that has a service level tag of silver
+        has 1 vCPU and 512MB of memory. If not it changes the vm to these values.
+        This policy is used on a powered off vm.
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_RAM_512MB
+          description: Set VM RAM to 512MB
+          guid: bab04cb4-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_memory
+          options:
+            :value: 512
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_CPU_1
+          description: Set VM CPU to 1
+          guid: d97dafba-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_cpus
+          options:
+            :value: '1'
+      Condition:
+      - name: Service Level Validation Silver - Powered Off
+        description: Service Level Silver - VM RAM and CPU check
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            or:
+            - "!=":
+                value: 512
+                field: Vm.hardware-memory_cpu
+            - "!=":
+                value: 1
+                field: Vm.hardware-numvcpus
+        towhat: Vm
+        file_mtime: 
+        guid: 531575ae-9b1c-11dd-bbd7-005056ac7d2c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000068
+        notes: 
+        read_only: 
+    - name: 7a91f3ac-3908-11de-b6d5-005056a11a54
+      description: Service Level Gold - RAM must be 1GB and 1 vCPU - on
+      expression: !ruby/object:MiqExpression
+        exp:
+          and:
+          - CONTAINS:
+              tag: Vm.managed-service_level
+              value: gold
+          - "=":
+              value: 'on'
+              field: Vm-power_state
+        context_type: 
+      towhat: Vm
+      guid: 7a91f3ac-3908-11de-b6d5-005056a11a54
+      created_by: 
+      updated_by: admin
+      notes: This policy verifies that a vm that has a service level tag of gold has
+        1vCPU and 1GB of memory. If not it changes the vm to these values. This policy
+        is used on a powered on vm.
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_start
+          description: Start Virtual Machine
+          guid: 55b5a422-3348-11de-bde2-005056a170fa
+          action_type: default
+          options: {}
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_CPU_1
+          description: Set VM CPU to 1
+          guid: d97dafba-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_cpus
+          options:
+            :value: '1'
+      - qualifier: success
+        success_sequence: 3
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_RAM_1GB
+          description: Set VM RAM to 1GB
+          guid: 2d8445f2-9aec-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_memory
+          options:
+            :value: 1024
+      - qualifier: success
+        success_sequence: 4
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      Condition:
+      - name: 1c6ec35e-3908-11de-b6d5-005056a11a54
+        description: Service Level Gold - VM RAM and CPU check
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            or:
+            - "!=":
+                value: 1024
+                field: Vm.hardware-memory_cpu
+            - "!=":
+                value: 1
+                field: Vm.hardware-numvcpus
+        towhat: Vm
+        file_mtime: 
+        guid: 1c6ec35e-3908-11de-b6d5-005056a11a54
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000069
+        notes: 
+        read_only: 
+    - name: 4cb4d05c-3909-11de-b6d5-005056a11a54
+      description: Service Level Platinum - RAM must be 2GB and 2 vCPUs - on
+      expression: !ruby/object:MiqExpression
+        exp:
+          and:
+          - CONTAINS:
+              tag: Vm.managed-service_level
+              value: platinum
+          - "=":
+              value: 'on'
+              field: Vm-power_state
+        context_type: 
+      towhat: Vm
+      guid: 4cb4d05c-3909-11de-b6d5-005056a11a54
+      created_by: 
+      updated_by: admin
+      notes: This policy verifies that a vm that has a service level tag of platinum
+        has 2 vCPUs and 2GB of memory. If not it changes the vm to these values. This
+        policy is used on a powered on vm.
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_start
+          description: Start Virtual Machine
+          guid: 55b5a422-3348-11de-bde2-005056a170fa
+          action_type: default
+          options: {}
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_CPU_2
+          description: Set VM CPU to 2
+          guid: e2c3d64e-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_cpus
+          options:
+            :value: '2'
+      - qualifier: success
+        success_sequence: 3
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_RAM_2GB
+          description: Set VM RAM to 2GB
+          guid: cf1570b2-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_memory
+          options:
+            :value: 2048
+      - qualifier: success
+        success_sequence: 4
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      Condition:
+      - name: 34218558-3909-11de-b6d5-005056a11a54
+        description: Service Level Platinum - VM RAM and CPU check
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            or:
+            - "!=":
+                value: 2048
+                field: Vm.hardware-memory_cpu
+            - "!=":
+                value: 2
+                field: Vm.hardware-numvcpus
+        towhat: Vm
+        file_mtime: 
+        guid: 34218558-3909-11de-b6d5-005056a11a54
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000070
+        notes: 
+        read_only: 
+    - name: d16643b6-3905-11de-b6d5-005056a11a54
+      description: Service Level Silver - RAM must be 512MB and 1 vCPU - on
+      expression: !ruby/object:MiqExpression
+        exp:
+          and:
+          - CONTAINS:
+              tag: Vm.managed-service_level
+              value: silver
+          - "=":
+              value: 'on'
+              field: Vm-power_state
+        context_type: 
+      towhat: Vm
+      guid: d16643b6-3905-11de-b6d5-005056a11a54
+      created_by: 
+      updated_by: admin
+      notes: This policy verifies that a vm that has a service level tag of silver
+        has 1 vCPU and 512MB of memory. If not it changes the vm to these values.
+        This policy is used on a powered on vm.
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_start
+          description: Start Virtual Machine
+          guid: 55b5a422-3348-11de-bde2-005056a170fa
+          action_type: default
+          options: {}
+      - qualifier: success
+        success_sequence: 2
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_CPU_1
+          description: Set VM CPU to 1
+          guid: d97dafba-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_cpus
+          options:
+            :value: '1'
+      - qualifier: success
+        success_sequence: 3
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: VM_RAM_512MB
+          description: Set VM RAM to 512MB
+          guid: bab04cb4-9af1-11dd-8e55-005056ac7d2c
+          action_type: reconfigure_memory
+          options:
+            :value: 512
+      - qualifier: success
+        success_sequence: 4
+        MiqEventDefinition:
+          name: assigned_company_tag
+          description: Tag Complete
+          guid: e384ecb6-1e1e-11de-8918-0050568005db
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      Condition:
+      - name: Service Level Validation Silver - Powered Off
+        description: Service Level Silver - VM RAM and CPU check
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            or:
+            - "!=":
+                value: 512
+                field: Vm.hardware-memory_cpu
+            - "!=":
+                value: 1
+                field: Vm.hardware-numvcpus
+        towhat: Vm
+        file_mtime: 
+        guid: 531575ae-9b1c-11dd-bbd7-005056ac7d2c
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000068
+        notes: 
+        read_only: 

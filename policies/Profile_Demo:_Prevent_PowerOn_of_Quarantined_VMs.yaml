@@ -1,0 +1,76 @@
+---
+- MiqPolicySet:
+    name: 74de8372-bbd6-11e1-a4a4-005056b25af6
+    description: 'Demo: Prevent PowerOn of Quarantined VMs'
+    set_type: MiqPolicySet
+    guid: 74de8372-bbd6-11e1-a4a4-005056b25af6
+    read_only: 
+    set_data: 
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: f4f0e916-bbd5-11e1-a4a4-005056b25af6
+      description: Prevent PowerOn of Quarantined VM
+      expression: 
+      towhat: Vm
+      guid: f4f0e916-bbd5-11e1-a4a4-005056b25af6
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: request_vm_start
+          description: VM Power On Request
+          guid: 48b02c4a-ae7c-11e1-a76f-005056b25af6
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_stop
+          description: Stop Virtual Machine
+          guid: 37f2da3e-21a8-11e2-b47a-0050568b19a3
+          action_type: default
+          options: {}
+      Condition:
+      - name: 1cbc27da-bbd6-11e1-ac0c-005056b25af6
+        description: VM Tagged as Do Not PowerOn
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            CONTAINS:
+              tag: Vm.managed-exclusions
+              value: do_not_power_on
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 1cbc27da-bbd6-11e1-ac0c-005056b25af6
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 
+        notes: 
+        read_only: 

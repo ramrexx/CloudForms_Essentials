@@ -1,0 +1,118 @@
+---
+- MiqPolicySet:
+    name: 97c27462-1592-11df-b613-0050568a1ed6
+    description: 'Compliance: VM'
+    set_type: MiqPolicySet
+    guid: 97c27462-1592-11df-b613-0050568a1ed6
+    read_only: 
+    set_data:
+      :notes: This policy profile validates that a vm meets the standard defined in
+        VMWare's security hardening documentation
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 2d6bfc2c-fa3b-11de-83ca-005056ba0614
+      description: Limit Log Size
+      expression: 
+      towhat: Vm
+      guid: 2d6bfc2c-fa3b-11de-83ca-005056ba0614
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: 8b9cf076-fa3b-11de-83ca-005056ba0614
+        description: Log Size Limit <= 100KB
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                "<=":
+                  value: '100000'
+                  field: Vm.advanced_settings-value
+              search:
+                "=":
+                  value: log.rotateSize
+                  field: Vm.advanced_settings-name
+        towhat: Vm
+        file_mtime: 
+        guid: 8b9cf076-fa3b-11de-83ca-005056ba0614
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000061
+        notes: 
+        read_only: 
+    - name: f1af8b44-fa3b-11de-83ca-005056ba0614
+      description: Limit Number of Log Files
+      expression: 
+      towhat: Vm
+      guid: f1af8b44-fa3b-11de-83ca-005056ba0614
+      created_by: admin
+      updated_by: admin
+      notes: 
+      active: true
+      mode: compliance
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: failure
+        failure_sequence: 1
+        MiqEventDefinition:
+          name: vm_compliance_check
+          description: VM Compliance Check
+          guid: 42b1bd96-317e-11e3-88e1-005056b80000
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: compliance_failed
+          description: Mark as Non-Compliant
+          guid: 339f0cc8-317e-11e3-88e1-005056b80000
+          action_type: default
+          options: {}
+      Condition:
+      - name: f2ad72ac-fa3d-11de-83ca-005056ba0614
+        description: Number of Log Files to Keep <= 10
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            FIND:
+              checkall:
+                "<=":
+                  value: '10'
+                  field: Vm.advanced_settings-value
+              search:
+                "=":
+                  value: log.keepOld
+                  field: Vm.advanced_settings-name
+        towhat: Vm
+        file_mtime: 
+        guid: f2ad72ac-fa3d-11de-83ca-005056ba0614
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 10000000000060
+        notes: 
+        read_only: 

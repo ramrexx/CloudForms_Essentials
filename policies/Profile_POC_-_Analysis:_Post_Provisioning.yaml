@@ -1,0 +1,46 @@
+---
+- MiqPolicySet:
+    name: 3be240d8-2866-11de-af2a-0050568026c2
+    description: 'POC - Analysis: Post Provisioning'
+    set_type: MiqPolicySet
+    guid: 3be240d8-2866-11de-af2a-0050568026c2
+    read_only: 
+    set_data:
+      :notes: |-
+        1) Entitle Policy to desired provider(s) or cluster(s)
+        2) After a VM provisioning is complete a SSA will be kicked off
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: 427a4378-6519-11df-b637-005056a435be
+      description: 'Analysis: Post Provisioning'
+      expression: 
+      towhat: Vm
+      guid: 427a4378-6519-11df-b637-005056a435be
+      created_by: admin
+      updated_by: admin
+      notes: This policy triggers a vm analysis of any newly provisioned VM
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        MiqEventDefinition:
+          name: vm_provisioned
+          description: VM Provision Complete
+          guid: 2a17a20a-3e8e-11df-9fe2-005056a435be
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: vm_analyze
+          description: Initiate SmartState Analysis for VM
+          guid: 5cbe1082-ce35-11de-a117-005056b0503e
+          action_type: default
+          options: {}
+      Condition: []
