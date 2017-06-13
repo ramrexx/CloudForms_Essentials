@@ -1,6 +1,6 @@
-<!--
- README.md
-
+////
+ previous-versions.adoc
+-------------------------------------------------------------------------------
    Copyright 2017 Kevin Morey <kevin@redhat.com>
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +14,14 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
--->
+-------------------------------------------------------------------------------
+////
 
-# Welcome to the CloudForms Essentials Project
+== Previous CloudForms Essentials versions can be found here:
 
-This project was designed to augment Red Hat (R) [CloudForms](https://www.redhat.com/en/technologies/cloud-computing/cloudforms)
-installations.
+* https://github.com/ramrexx/CloudFormsPOC
+* https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.0
+* https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.1
+* https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.2
 
-## Current supported CloudForms version: 4.5
-
-
-### Previous versions can be found here: 
-
-* [4.0](https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.0)
-* [4.1](https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.1)
-* [4.2](https://github.com/ramrexx/CloudForms_Essentials/tree/cf4.2)
-
-
-## Installation (Coming Soon)
-
+link:../README.adoc[ Home ]

@@ -1,0 +1,43 @@
+////
+ README.adoc
+-------------------------------------------------------------------------------
+   Copyright 2017 Kevin Morey <kevin@redhat.com>
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-------------------------------------------------------------------------------
+////
+
+= Welcome to the CloudForms Essentials Project
+
+This project was designed to augment Red Hat (R) https://www.redhat.com/en/technologies/cloud-computing/cloudforms[CloudForms] installations.
+
+Current supported version: *cf4.5*
+
+link:docs/previous-versions.adoc[ Previous CloudForms Essentials versions can be found here ]
+
+== Installation
+CloudForms Essentials can be installed via an Ansible Playbook!
+
+IMPORTANT: CloudForms must be running with a database region configured
+
+* Log into your CloudForms appliance and make sure you are in roots home directory
+* Download the installation playbook
+
+ curl -O https://raw.githubusercontent.com/ramrexx/CloudForms_Essentials/master/ansible/cloudforms_essentials_install.yml
+
+* Execute the installation playbook
+
+ ansible-playbook cloudforms_essentials_install.yml -v
+
+<<top>>
+
