@@ -1,7 +1,7 @@
 ---
 - MiqAlert:
     guid: 24b6b136-b3fc-11e5-b9ae-52540020fe8d
-    description: CloudForms_Essentials - MiqServer High DB Disk Usage
+    description: DEMO_miqserver_high_db_disk_usage
     options:
       :notifications:
         :delay_next_evaluation: 600

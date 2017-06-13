@@ -1,7 +1,7 @@
 ---
 - MiqAlert:
     guid: 5bfdef56-13d2-11e2-a735-005056b057a8
-    description: CloudForms_Essentials - VM CPU ssage exceeds 90 percent
+    description: DEMO_vm_cpu_usage_exceeds_90_percent
     options:
       :notifications:
         :delay_next_evaluation: 600

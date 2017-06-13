@@ -1,7 +1,7 @@
 ---
 - MiqAlert:
     guid: 3f75d4a2-b3fc-11e5-b9ae-52540020fe8d
-    description: CloudForms_Essentials - MiqServer High System Disk Usage
+    description: DEMO_miqserver_high_system_disk_usage
     options:
       :notifications:
         :delay_next_evaluation: 3600

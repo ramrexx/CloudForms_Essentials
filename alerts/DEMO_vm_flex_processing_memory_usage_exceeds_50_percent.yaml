@@ -1,7 +1,7 @@
 ---
 - MiqAlert:
-    guid: f023a6a8-b3fc-11e5-b9ae-52540020fe8d
-    description: 'CloudForms_Essentials - VM flex_processing CPU percent Used gt 40 '
+    guid: 21eef9f8-b3fd-11e5-b9ae-52540020fe8d
+    description: DEMO_vm_flex_processing_memory_usage_exceeds_50_percent
     options:
       :notifications:
         :delay_next_evaluation: 1800
@@ -13,9 +13,9 @@
       :eval_method: realtime_performance
       :mode: internal
       :options:
-        :perf_column: v_pct_cpu_used_delta_summation
+        :perf_column: mem_usage_absolute_average
         :operator: ">"
-        :value_threshold: '40'
+        :value_threshold: '50'
         :trend_direction: none
         :trend_steepness: 
         :debug_trace: 'false'

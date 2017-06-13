@@ -1,7 +1,7 @@
 ---
 - MiqAlert:
     guid: 655cccda-6ae5-11e0-bdef-005056a461b8
-    description: CloudForms_Essentials - Datastore free space <= 10 percent
+    description: DEMO_datastore_free_space_le_10_percent
     options:
       :notifications:
         :delay_next_evaluation: 86400

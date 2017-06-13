@@ -1,7 +1,7 @@
 ---
 - MiqAlert:
-    guid: 6c150cee-b3fc-11e5-b9ae-52540020fe8d
-    description: CloudForms_Essentials - MiqServer Start
+    guid: 885802bc-b3fc-11e5-b9ae-52540020fe8d
+    description: DEMO_miqserver_stop
     options:
       :notifications:
         :delay_next_evaluation: 600
@@ -11,6 +11,6 @@
       :eval_method: nothing
       :mode: internal
       :options: {}
-    responds_to_events: evm_server_start
+    responds_to_events: evm_server_stop
     enabled: true
     read_only: 

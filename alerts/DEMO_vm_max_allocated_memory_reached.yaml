@@ -1,7 +1,7 @@
 ---
 - MiqAlert:
     guid: 45abec88-b3fe-11e5-b9ae-52540020fe8d
-    description: CloudForms_Essentials - VM max allocated memory reached on power
+    description: DEMO_vm_max_allocated_memory_reached
       on
     options:
       :notifications:

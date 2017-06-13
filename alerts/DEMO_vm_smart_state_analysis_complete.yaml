@@ -1,16 +1,16 @@
 ---
 - MiqAlert:
-    guid: 885802bc-b3fc-11e5-b9ae-52540020fe8d
-    description: CloudForms_Essentials - MiqServer Stop
+    guid: faaf61be-b3fe-11e5-b9ae-52540020fe8d
+    description: DEMO_vm_smart_state_analysis_complete
     options:
       :notifications:
         :delay_next_evaluation: 600
         :evm_event: {}
-    db: MiqServer
+    db: Vm
     expression:
       :eval_method: nothing
       :mode: internal
       :options: {}
-    responds_to_events: evm_server_stop
+    responds_to_events: vm_scan_complete
     enabled: true
     read_only: 

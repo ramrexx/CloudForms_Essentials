@@ -1,7 +1,7 @@
 ---
 - MiqAlert:
     guid: d035ccf2-b3fe-11e5-b9ae-52540020fe8d
-    description: 'CloudForms_Essentials - Cluster max hosts reached '
+    description: DEMO_cluster_max_hosts_reached
     options:
       :notifications:
         :delay_next_evaluation: 3600
