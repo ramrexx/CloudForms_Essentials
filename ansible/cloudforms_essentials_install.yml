@@ -1,0 +1,62 @@
+---
+- name: CloudForms Essentials Install
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  user: root
+
+  vars:
+    dest_dir: /root/
+    github_user: ramrexx
+    cfe_base_dir: "{{ dest_dir }}CloudForms_Essentials"
+
+  tasks:
+  - name: Clone cfme-rhconsulting-scripts
+    git:
+      repo: https://github.com/rhtconsulting/cfme-rhconsulting-scripts.git
+      dest: "{{ dest_dir }}cfme-rhconsulting-scripts"
+
+  - name:  Install the cfme-rhconsulting-scripts
+    shell: make clean install
+    args:
+      chdir: "{{ dest_dir }}cfme-rhconsulting-scripts"
+
+  - name: Clone CloudForms_Essentials
+    git:
+      repo: "https://github.com/{{ github_user }}/CloudForms_Essentials.git"
+      dest: "{{ cfe_base_dir }}"
+
+  - name: Import automate domain
+    shell: miqimport domain CloudForms_Essentials "{{ cfe_base_dir }}/automate"
+    args:
+      chdir: "{{ cfe_base_dir }}"
+
+  - name: Import dialogs
+    shell: "miqimport service_dialogs service_dialogs/"
+    args:
+      chdir: "{{ cfe_base_dir }}"
+
+  - name: Import buttons
+    shell: "miqimport buttons buttons/"
+    args:
+     chdir: "{{ cfe_base_dir }}"
+
+  - name: Import alerts
+    shell: "miqimport alerts alerts/"
+    args:
+     chdir: "{{ cfe_base_dir }}"
+
+  - name: Import policies
+    shell: "miqimport policies policies/"
+    args:
+     chdir: "{{ cfe_base_dir }}"
+
+  - name: Import reports
+    shell: "miqimport reports reports/"
+    args:
+     chdir: "{{ cfe_base_dir }}"
+
+  - name: Import widgets
+    shell: "miqimport widgets widgets/"
+    args:
+     chdir: "{{ cfe_base_dir }}"
