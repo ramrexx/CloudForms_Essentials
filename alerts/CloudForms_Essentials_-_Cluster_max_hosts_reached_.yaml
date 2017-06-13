@@ -1,0 +1,18 @@
+---
+- MiqAlert:
+    guid: d035ccf2-b3fe-11e5-b9ae-52540020fe8d
+    description: 'CloudForms_Essentials - Cluster max hosts reached '
+    options:
+      :notifications:
+        :delay_next_evaluation: 3600
+        :evm_event: {}
+    db: EmsCluster
+    expression: !ruby/object:MiqExpression
+      exp:
+        ">":
+          count: EmsCluster.hosts
+          value: '32'
+      context_type: 
+    responds_to_events: host_connect
+    enabled: true
+    read_only: 

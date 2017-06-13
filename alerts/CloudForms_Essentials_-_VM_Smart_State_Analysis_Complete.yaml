@@ -1,0 +1,16 @@
+---
+- MiqAlert:
+    guid: faaf61be-b3fe-11e5-b9ae-52540020fe8d
+    description: CloudForms_Essentials - VM Smart State Analysis Complete
+    options:
+      :notifications:
+        :delay_next_evaluation: 600
+        :evm_event: {}
+    db: Vm
+    expression:
+      :eval_method: nothing
+      :mode: internal
+      :options: {}
+    responds_to_events: vm_scan_complete
+    enabled: true
+    read_only: 

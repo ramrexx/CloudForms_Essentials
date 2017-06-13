@@ -1,0 +1,30 @@
+---
+- MiqAlert:
+    guid: 655cccda-6ae5-11e0-bdef-005056a461b8
+    description: CloudForms_Essentials - Datastore free space <= 10 percent
+    options:
+      :notifications:
+        :delay_next_evaluation: 86400
+        :snmp:
+          :variables:
+          - :value: 'MIQ Datatstore Alert: DEMO'
+            :oid: category
+            :var_type: OctetString
+          - :value: Datastore Free Space <= 10%
+            :oid: message
+            :var_type: OctetString
+          :host:
+          - 204.130.60.75
+          :trap_id: critical
+          :snmp_version: v2
+        :evm_event: {}
+    db: Storage
+    expression: !ruby/object:MiqExpression
+      exp:
+        "<=":
+          value: '10'
+          field: Storage-v_free_space_percent_of_total
+      context_type: 
+    responds_to_events: _hourly_timer_
+    enabled: true
+    read_only: 

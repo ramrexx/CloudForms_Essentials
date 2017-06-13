@@ -1,0 +1,19 @@
+---
+- MiqAlert:
+    guid: 45abec88-b3fe-11e5-b9ae-52540020fe8d
+    description: CloudForms_Essentials - VM max allocated memory reached on power
+      on
+    options:
+      :notifications:
+        :delay_next_evaluation: 600
+        :evm_event: {}
+    db: Vm
+    expression: !ruby/object:MiqExpression
+      exp:
+        ">":
+          field: Vm-mem_cpu
+          value: '4096'
+      context_type: 
+    responds_to_events: vm_start
+    enabled: true
+    read_only: 

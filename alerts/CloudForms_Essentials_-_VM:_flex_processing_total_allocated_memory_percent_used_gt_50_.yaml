@@ -1,0 +1,26 @@
+---
+- MiqAlert:
+    guid: 21eef9f8-b3fd-11e5-b9ae-52540020fe8d
+    description: 'CloudForms_Essentials - VM: flex_processing total allocated memory
+      percent used gt 50 '
+    options:
+      :notifications:
+        :delay_next_evaluation: 1800
+        :evm_event: {}
+        :automate:
+          :event_name: Flex_Processing
+    db: Vm
+    expression:
+      :eval_method: realtime_performance
+      :mode: internal
+      :options:
+        :perf_column: mem_usage_absolute_average
+        :operator: ">"
+        :value_threshold: '50'
+        :trend_direction: none
+        :trend_steepness: 
+        :debug_trace: 'false'
+        :rt_time_threshold: 60
+    responds_to_events: vm_perf_complete
+    enabled: true
+    read_only: 

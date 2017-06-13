@@ -1,0 +1,59 @@
+---
+- MiqAlert:
+    guid: 5bfdef56-13d2-11e2-a735-005056b057a8
+    description: CloudForms_Essentials - VM CPU ssage exceeds 90 percent
+    options:
+      :notifications:
+        :delay_next_evaluation: 600
+        :snmp:
+          :host:
+          - 192.168.255.26
+          :trap_id: 1.3.6.1.4.1.33482.3
+          :snmp_version: v2
+          :variables:
+          - :oid: description
+            :var_type: OctetString
+            :value: Virtual Machine
+          - :oid: category
+            :var_type: OctetString
+            :value: Perfomance
+          - :oid: Message
+            :var_type: OctetString
+            :value: "${cause.description}"
+          - :oid: object
+            :var_type: OctetString
+            :value: Name:${object.name}
+          - :oid: location
+            :var_type: OctetString
+            :value: Datastore:${object.path}
+          - :oid: platform
+            :var_type: OctetString
+            :value: OS:${object.platform}
+          - :oid: url
+            :var_type: OctetString
+            :value: http://10.10.1.200/VM/${object.id}
+          - :oid: source
+            :var_type: OctetString
+            :value: EVM:${object.ems}
+          - :oid: custom1
+            :var_type: OctetString
+            :value: Created:${object.created_on} Retires:${retires_on}
+          - :oid: custom2
+            :var_type: OctetString
+            :value: 'Cluster:${object.ems_cluster_name} Host: ${object.host_name}'
+        :evm_event: {}
+    db: Vm
+    expression:
+      :eval_method: realtime_performance
+      :mode: internal
+      :options:
+        :value_threshold: '90'
+        :perf_column: v_pct_cpu_used_delta_summation
+        :trend_steepness: 
+        :rt_time_threshold: 60
+        :trend_direction: none
+        :operator: ">"
+        :debug_trace: 'false'
+    responds_to_events: vm_perf_complete
+    enabled: true
+    read_only: 

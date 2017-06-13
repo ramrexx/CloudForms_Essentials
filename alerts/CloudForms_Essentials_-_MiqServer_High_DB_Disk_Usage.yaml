@@ -1,0 +1,16 @@
+---
+- MiqAlert:
+    guid: 24b6b136-b3fc-11e5-b9ae-52540020fe8d
+    description: CloudForms_Essentials - MiqServer High DB Disk Usage
+    options:
+      :notifications:
+        :delay_next_evaluation: 600
+        :evm_event: {}
+    db: MiqServer
+    expression:
+      :eval_method: nothing
+      :mode: internal
+      :options: {}
+    responds_to_events: evm_server_db_disk_high_usage
+    enabled: true
+    read_only: 
