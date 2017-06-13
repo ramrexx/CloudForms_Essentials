@@ -1,0 +1,139 @@
+---
+- MiqWidget:
+    guid: 88899d14-9ede-11e5-97b5-52540020fe8d
+    description: Top CPU Consumers (last 7 days)
+    title: Top CPU Consumers (last 7 days)
+    content_type: report
+    options:
+      :row_count: 5
+      :col_order:
+      - resource_name
+      - cpu_usage_rate_average__avg
+      - vm.vendor
+    visibility:
+      :roles:
+      - _ALL_
+    user_id: 
+    resource_id: 148
+    resource_type: MiqReport
+    enabled: true
+    read_only: false
+    MiqReportContent:
+    - MiqReport:
+        title: Top CPU Consumers (last 7 days)
+        rpt_group: Custom
+        rpt_type: Custom
+        priority: 160
+        db: VmPerformance
+        cols:
+        - resource_name
+        - cpu_usage_rate_average
+        include:
+          ems_cluster:
+            columns:
+            - name
+          host:
+            columns:
+            - name
+          vm:
+            columns:
+            - vendor
+        col_order:
+        - resource_name
+        - ems_cluster.name
+        - host.name
+        - cpu_usage_rate_average__avg
+        - vm.vendor
+        headers:
+        - VM Name
+        - Cluster Name
+        - Host Name
+        - CPU - Usage Rate (%) (Avg)
+        - VM and Instance Vendor
+        conditions: !ruby/object:MiqExpression
+          exp:
+            "!=":
+              field: VmPerformance-cpu_usage_rate_average
+              value: '0'
+          context_type: 
+        order: Descending
+        sortby:
+        - cpu_usage_rate_average__avg
+        group: 
+        graph: 
+        dims: 
+        filename: 
+        file_mtime: 
+        categories: []
+        timeline: 
+        template_type: report
+        where_clause: 
+        db_options:
+          :interval: daily
+          :calc_avgs_by: 
+          :end_offset: 0
+          :start_offset: 604800
+        generate_cols: 
+        generate_rows: 
+        col_formats:
+        - 
+        - 
+        - 
+        - 
+        - 
+        tz: UTC
+        time_profile_id: 1
+        display_filter: 
+        col_options:
+          cpu_usage_rate_average__avg:
+            :style:
+            - :class: :miq_rpt_red_bg
+              :operator: ">="
+              :value: '80'
+            - :class: :miq_rpt_yellow_bg
+              :operator: ">="
+              :value: '50'
+        rpt_options:
+          :pdf:
+            :page_size: US-Letter
+          :queue_timeout: 
+          :pivot:
+            :group_cols:
+            - resource_name
+        miq_group_id: 2
+        user_id: 1
+        menu_name: Top CPU Consumers (last 7 days)
+    MiqSchedule:
+      name: Top CPU Consumers (last 7 days)
+      description: Top CPU Consumers (last 7 days)
+      sched_action:
+        :method: generate_widget
+      filter: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: MiqWidget.id
+            value: 12
+        context_type: 
+        col_details:
+          MiqWidget.id:
+            :data_type: 
+            :virtual_reflection: true
+            :virtual_column: true
+            :excluded_by_preprocess_options: false
+            :tag: false
+            :include:
+              :id: {}
+        pexp: 
+        ruby: <value ref=miqwidget, type=string>/virtual/id</value> == "12"
+      towhat: MiqWidget
+      run_at:
+        :start_time: 2015-12-09 13:55:00.000000000 Z
+        :tz: Pacific Time (US & Canada)
+        :interval:
+          :unit: daily
+          :value: '1'
+      enabled: true
+      userid: system
+      prod_default: system
+      adhoc: 
+      file_depot_id: 

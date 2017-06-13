@@ -1,0 +1,61 @@
+---
+- MiqReport:
+    title: Openstack - Top Security Groups Used
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: SecurityGroup
+    cols:
+    - name
+    - description
+    - total_vms
+    - type
+    include: {}
+    col_order:
+    - name
+    - description
+    - total_vms
+    - type
+    headers:
+    - Name
+    - Description
+    - Total Vms
+    - Type
+    conditions: !ruby/object:MiqExpression
+      exp:
+        REGULAR EXPRESSION MATCHES:
+          field: SecurityGroup-type
+          value: "/openstack/i"
+      context_type: 
+    order: Descending
+    sortby:
+    - total_vms
+    - name
+    group: 
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options: {}
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 360000000000001
+    user_id: 360000000000001
+    menu_name: Openstack - Top Security Groups Used

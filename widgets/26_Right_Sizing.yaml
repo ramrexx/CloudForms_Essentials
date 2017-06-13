@@ -1,0 +1,149 @@
+---
+- MiqWidget:
+    guid: 8559a68a-01e0-11e4-85f7-005056b3585a
+    description: Right Sizing
+    title: Right Sizing - CPU
+    content_type: report
+    options:
+      :row_count: 5
+      :col_order:
+      - name
+      - num_cpu
+      - conservative_recommended_vcpus
+      - conservative_vcpus_recommended_change
+    visibility:
+      :roles:
+      - _ALL_
+    user_id: 
+    resource_id: 147
+    resource_type: MiqReport
+    enabled: true
+    read_only: false
+    MiqReportContent:
+    - MiqReport:
+        title: Cloud - Right-Sizing Recommendations
+        rpt_group: Custom
+        rpt_type: Custom
+        priority: 
+        db: Vm
+        cols:
+        - v_owning_cluster
+        - name
+        - num_cpu
+        - conservative_recommended_vcpus
+        - conservative_vcpus_recommended_change
+        - mem_cpu
+        - conservative_recommended_mem
+        - conservative_mem_recommended_change
+        include: {}
+        col_order:
+        - v_owning_cluster
+        - name
+        - num_cpu
+        - conservative_recommended_vcpus
+        - conservative_vcpus_recommended_change
+        - mem_cpu
+        - conservative_recommended_mem
+        - conservative_mem_recommended_change
+        headers:
+        - Parent Cluster
+        - Name
+        - Number of CPUs
+        - CPU - Sizing
+        - CPU - Savings
+        - Memory
+        - Memory - Sizing
+        - Memory -  Savings
+        conditions: !ruby/object:MiqExpression
+          exp:
+            and:
+            - IS NOT EMPTY:
+                field: Vm-v_owning_cluster
+                value: ''
+            - ">":
+                value: '0'
+                field: Vm-conservative_recommended_vcpus
+            - "!=":
+                value: '0'
+                field: Vm-conservative_vcpus_recommended_change
+          context_type: 
+        order: Ascending
+        sortby:
+        - v_owning_cluster
+        - name
+        group: c
+        graph: 
+        dims: 
+        filename: 
+        file_mtime: 
+        categories: []
+        timeline: 
+        template_type: report
+        where_clause: 
+        db_options: {}
+        generate_cols: 
+        generate_rows: 
+        col_formats:
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        tz: 
+        time_profile_id: 
+        display_filter: 
+        col_options:
+          v_owning_cluster:
+            :break_label: 'Parent Cluster: '
+          conservative_vcpus_recommended_change:
+            :grouping:
+            - :total
+          conservative_mem_recommended_change:
+            :grouping:
+            - :total
+        rpt_options:
+          :summary:
+            :hide_detail_rows: false
+          :pdf:
+            :page_size: US-Letter
+          :queue_timeout: 
+        miq_group_id: 1000000000001
+        user_id: 1000000000001
+        menu_name: Cloud - Right-Sizing Recommendations
+    MiqSchedule:
+      name: Right Sizing - CPU
+      description: Right Sizing
+      sched_action:
+        :method: generate_widget
+      filter: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: MiqWidget.id
+            value: ''
+        context_type: 
+        col_details:
+          MiqWidget.id:
+            :data_type: 
+            :virtual_reflection: true
+            :virtual_column: true
+            :excluded_by_preprocess_options: false
+            :tag: false
+            :include:
+              :id: {}
+        pexp: 
+        ruby: "<value ref=miqwidget, type=string>/virtual/id</value> == ''"
+      towhat: MiqWidget
+      run_at:
+        :start_time: 2014-07-03 00:00:00.000000000 Z
+        :tz: UTC
+        :interval:
+          :unit: hourly
+          :value: '1'
+      enabled: true
+      userid: system
+      prod_default: system
+      adhoc: 
+      file_depot_id: 

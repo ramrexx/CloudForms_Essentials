@@ -1,0 +1,82 @@
+---
+- MiqReport:
+    title: Top CPU Consumers (last hour)
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: VmPerformance
+    cols:
+    - resource_name
+    - cpu_usage_rate_average
+    - derived_vm_numvcpus
+    - timestamp
+    include:
+      vm:
+        columns:
+        - vendor
+    col_order:
+    - resource_name
+    - cpu_usage_rate_average
+    - derived_vm_numvcpus
+    - timestamp
+    - vm.vendor
+    headers:
+    - VM Name
+    - CPU Usage
+    - Allocated vCPUs
+    - Activity Sample - Timestamp (Day/Time)
+    - VM Vendor
+    conditions: !ruby/object:MiqExpression
+      exp:
+        and:
+        - IS:
+            field: VmPerformance-timestamp
+            value: Last Hour
+        - ">":
+            field: VmPerformance-cpu_usage_rate_average
+            value: '0'
+      context_type: 
+    order: Descending
+    sortby:
+    - cpu_usage_rate_average
+    group: 
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options:
+      :interval: hourly
+      :calc_avgs_by: active_data
+      :end_offset: 0
+      :start_offset: 86400
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: UTC
+    time_profile_id: 1
+    display_filter: 
+    col_options:
+      cpu_usage_rate_average:
+        :style:
+        - :class: :miq_rpt_red_bg
+          :operator: ">="
+          :value: '80'
+        - :class: :miq_rpt_yellow_bg
+          :operator: ">="
+          :value: '50'
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 2
+    user_id: 1
+    menu_name: Top CPU Consumers (last hour)

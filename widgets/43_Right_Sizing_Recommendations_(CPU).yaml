@@ -1,0 +1,170 @@
+---
+- MiqWidget:
+    guid: 6c708276-a782-11e5-8d87-52540020fe8d
+    description: Right Sizing Recommendations (CPU)
+    title: Right Sizing Recommendations (CPU)
+    content_type: report
+    options:
+      :row_count: 5
+      :col_order:
+      - name
+      - num_cpu
+      - conservative_recommended_vcpus
+    visibility:
+      :roles:
+      - _ALL_
+    user_id: 
+    resource_id: 144
+    resource_type: MiqReport
+    enabled: true
+    read_only: false
+    MiqReportContent:
+    - MiqReport:
+        title: Right-Sizing Recommendations
+        rpt_group: Custom
+        rpt_type: Custom
+        priority: 
+        db: Vm
+        cols:
+        - name
+        - v_owning_cluster
+        - num_cpu
+        - conservative_recommended_vcpus
+        - conservative_vcpus_recommended_change
+        - conservative_vcpus_recommended_change_pct
+        - mem_cpu
+        - conservative_recommended_mem
+        - conservative_mem_recommended_change
+        - conservative_mem_recommended_change_pct
+        include: {}
+        col_order:
+        - name
+        - v_owning_cluster
+        - num_cpu
+        - conservative_recommended_vcpus
+        - conservative_vcpus_recommended_change
+        - conservative_vcpus_recommended_change_pct
+        - mem_cpu
+        - conservative_recommended_mem
+        - conservative_mem_recommended_change
+        - conservative_mem_recommended_change_pct
+        headers:
+        - VM Name
+        - Cluster
+        - CPUs
+        - CPU - Conservative Recommendation
+        - CPU - Conservative Recommendation Savings
+        - CPU - Conservative Recommendation Savings (%)
+        - Memory
+        - Memory - Conservative Recommendation
+        - Memory - Conservative Recommendation Savings
+        - Memory - Conservative Recommendation Savings (%)
+        conditions: !ruby/object:MiqExpression
+          exp:
+            and:
+            - IS NOT EMPTY:
+                field: Vm-v_owning_cluster
+                value: ''
+            - "!=":
+                value: '0'
+                field: Vm-conservative_vcpus_recommended_change
+          context_type: 
+        order: Descending
+        sortby:
+        - conservative_vcpus_recommended_change_pct
+        - name
+        group: c
+        graph: 
+        dims: 
+        filename: 
+        file_mtime: 
+        categories: []
+        timeline: 
+        template_type: report
+        where_clause: 
+        db_options: {}
+        generate_cols: 
+        generate_rows: 
+        col_formats:
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        tz: 
+        time_profile_id: 
+        display_filter: 
+        col_options:
+          v_owning_cluster:
+            :break_label: 'Parent Cluster: '
+          conservative_vcpus_recommended_change:
+            :grouping:
+            - :total
+          conservative_mem_recommended_change:
+            :grouping:
+            - :total
+          conservative_vcpus_recommended_change_pct:
+            :style:
+            - :class: :miq_rpt_red_bg
+              :operator: ">="
+              :value: '50'
+            - :class: :miq_rpt_yellow_bg
+              :operator: ">="
+              :value: '30'
+            :break_label: 'CPU - Conservative Recommendation Savings (%): '
+          conservative_mem_recommended_change_pct:
+            :style:
+            - :class: :miq_rpt_red_bg
+              :operator: ">="
+              :value: '50'
+            - :class: :miq_rpt_yellow_bg
+              :operator: ">="
+              :value: '30'
+        rpt_options:
+          :summary:
+            :hide_detail_rows: false
+          :pdf:
+            :page_size: US-Letter
+          :queue_timeout: 
+        miq_group_id: 2
+        user_id: 1
+        menu_name: Right-Sizing Recommendations
+    MiqSchedule:
+      name: Right Sizing Recommendations (CPU)
+      description: Right Sizing Recommendations (CPU)
+      sched_action:
+        :method: generate_widget
+      filter: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: MiqWidget.id
+            value: 15
+        context_type: 
+        col_details:
+          MiqWidget.id:
+            :data_type: 
+            :virtual_reflection: true
+            :virtual_column: true
+            :excluded_by_preprocess_options: false
+            :tag: false
+            :include:
+              :id: {}
+        pexp: 
+        ruby: <value ref=miqwidget, type=string>/virtual/id</value> == "15"
+      towhat: MiqWidget
+      run_at:
+        :start_time: 2015-12-20 14:05:00.000000000 Z
+        :tz: Pacific Time (US & Canada)
+        :interval:
+          :unit: daily
+          :value: '1'
+      enabled: true
+      userid: system
+      prod_default: system
+      adhoc: 
+      file_depot_id: 

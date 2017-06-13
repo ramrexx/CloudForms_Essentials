@@ -1,0 +1,77 @@
+---
+- MiqReport:
+    title: VMs Pending Retirement
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: Vm
+    cols:
+    - name
+    - retires_on
+    - evm_owner_name
+    - evm_owner_email
+    - owning_ldap_group
+    include: {}
+    col_order:
+    - name
+    - retires_on
+    - evm_owner_name
+    - evm_owner_email
+    - owning_ldap_group
+    headers:
+    - VM Name
+    - Retires On
+    - Owner
+    - Owner Email
+    - Group
+    conditions: !ruby/object:MiqExpression
+      exp:
+        and:
+        - IS NOT EMPTY:
+            value: ''
+            field: Vm-retires_on
+        - AFTER:
+            value: Today
+            field: Vm-retires_on
+      context_type: 
+    order: Ascending
+    sortby:
+    - retires_on
+    - name
+    group: 
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options:
+      retires_on:
+        :style:
+        - :class: :miq_rpt_red_bg
+          :value: This Month
+          :operator: IS
+        - :class: :miq_rpt_yellow_bg
+          :operator: IS
+          :value: This Quarter
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 2
+    user_id: 1
+    menu_name: VMs Pending Retirement

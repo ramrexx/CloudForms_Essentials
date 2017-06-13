@@ -1,0 +1,116 @@
+---
+- MiqWidget:
+    guid: ab6d87b0-3614-11e5-8c06-005056bfb0bc
+    description: Openstack - Tenant VMs
+    title: Openstack - Tenant VMs
+    content_type: report
+    options:
+      :row_count: 5
+      :col_order:
+      - name
+      - ext_management_system.name
+      - total_vms
+    visibility:
+      :roles:
+      - _ALL_
+    user_id: 
+    resource_id: 151
+    resource_type: MiqReport
+    enabled: true
+    read_only: false
+    MiqReportContent:
+    - MiqReport:
+        title: Openstack - Tenants
+        rpt_group: Custom
+        rpt_type: Custom
+        priority: 
+        db: CloudTenant
+        cols:
+        - name
+        - description
+        - total_vms
+        - enabled
+        include:
+          ext_management_system:
+            columns:
+            - name
+        col_order:
+        - name
+        - description
+        - total_vms
+        - enabled
+        - ext_management_system.name
+        headers:
+        - Name
+        - Description
+        - Total Vms
+        - Active
+        - Cloud Provider Name
+        conditions: 
+        order: Ascending
+        sortby:
+        - enabled
+        - ext_management_system.name
+        group: 
+        graph: 
+        dims: 
+        filename: 
+        file_mtime: 
+        categories: []
+        timeline: 
+        template_type: report
+        where_clause: 
+        db_options: {}
+        generate_cols: 
+        generate_rows: 
+        col_formats:
+        - 
+        - 
+        - 
+        - 
+        - 
+        tz: 
+        time_profile_id: 
+        display_filter: 
+        col_options: {}
+        rpt_options:
+          :pdf:
+            :page_size: US-Letter
+          :queue_timeout: 
+        miq_group_id: 360000000000001
+        user_id: 360000000000001
+        menu_name: Openstack - Tenants
+    MiqSchedule:
+      name: Openstack - Tenant VMs
+      description: Openstack - Tenant VMs
+      sched_action:
+        :method: generate_widget
+      filter: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: MiqWidget.id
+            value: 360000000000039
+        context_type: 
+        col_details:
+          MiqWidget.id:
+            :data_type: 
+            :virtual_reflection: true
+            :virtual_column: true
+            :excluded_by_preprocess_options: false
+            :tag: false
+            :include:
+              :id: {}
+        pexp: 
+        ruby: <value ref=miqwidget, type=string>/virtual/id</value> == "360000000000039"
+      towhat: MiqWidget
+      run_at:
+        :start_time: 2015-09-08 07:05:00.000000000 Z
+        :tz: Pacific Time (US & Canada)
+        :interval:
+          :unit: hourly
+          :value: '2'
+      enabled: true
+      userid: system
+      prod_default: system
+      adhoc: 
+      file_depot_id: 

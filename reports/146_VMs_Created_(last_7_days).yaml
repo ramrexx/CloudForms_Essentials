@@ -1,0 +1,115 @@
+---
+- MiqReport:
+    title: VMs Created (last 7 days)
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: Vm
+    cols:
+    - created_on
+    - name
+    - mem_cpu
+    - num_cpu
+    include:
+      ext_management_system:
+        columns:
+        - name
+      ems_cluster:
+        columns:
+        - name
+      storage:
+        columns:
+        - name
+      host:
+        columns:
+        - name
+    col_order:
+    - ext_management_system.name
+    - created_on
+    - name
+    - mem_cpu
+    - num_cpu
+    - ems_cluster.name
+    - storage.name
+    - host.name
+    headers:
+    - Provider
+    - Date Created
+    - VM Name
+    - Memory
+    - CPUs
+    - Cluster
+    - Datastore
+    - Host
+    conditions: !ruby/object:MiqExpression
+      exp:
+        and:
+        - "=":
+            value: 'false'
+            field: Vm-template
+        - "=":
+            value: 'false'
+            field: Vm-orphaned
+        - "=":
+            field: Vm-archived
+            value: 'false'
+        - FROM:
+            field: Vm-created_on
+            value:
+            - 7 Days Ago
+            - Today
+      context_type: 
+    order: Descending
+    sortby:
+    - created_on
+    group: 
+    graph:
+      :type: StackedBar
+      :mode: false
+      :column: 
+      :count: 10
+      :other: true
+    dims: 1
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options:
+      name:
+        :break_label: 'Management System : Name: '
+      datacenter:
+        :break_label: 'Comcast Tags : Data Center: '
+      num_cpu:
+        :grouping:
+        - :avg
+        - :total
+      "<<< Nothing >>>":
+        :break_label: ": "
+      mem_cpu:
+        :grouping:
+        - :avg
+        - :total
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 2
+    user_id: 1
+    menu_name: VMs Created (last 7 days)

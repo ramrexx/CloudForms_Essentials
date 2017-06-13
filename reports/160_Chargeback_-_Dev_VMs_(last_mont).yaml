@@ -1,0 +1,193 @@
+---
+- MiqReport:
+    title: Chargeback - Development VMs Summary for last month
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: ChargebackVm
+    cols:
+    - start_date
+    - display_range
+    - vm_name
+    - fixed_compute_1_cost
+    - fixed_compute_2_cost
+    - fixed_storage_1_cost
+    - cpu_allocated_metric
+    - cpu_allocated_cost
+    - memory_allocated_metric
+    - memory_allocated_cost
+    - storage_allocated_cost
+    - storage_used_cost
+    - total_cost
+    include: {}
+    col_order:
+    - display_range
+    - vm_name
+    - fixed_compute_1_cost
+    - fixed_compute_2_cost
+    - fixed_storage_1_cost
+    - cpu_allocated_metric
+    - cpu_allocated_cost
+    - memory_allocated_metric
+    - memory_allocated_cost
+    - storage_allocated_cost
+    - storage_used_cost
+    - total_cost
+    headers:
+    - Date Range
+    - VM Name
+    - Hardware Lease Cost
+    - Hardware Internal Support Cost
+    - Storage Cost
+    - CPU Allocated
+    - CPU Allocated Cost
+    - Memory Allocated
+    - Memory Allocated Cost
+    - Storage Allocated Cost
+    - Backup Cost
+    - Total Cost
+    conditions: 
+    order: Ascending
+    sortby:
+    - start_date
+    - vm_name
+    group: y
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options:
+      :rpt_type: ChargebackVm
+      :options:
+        :interval: weekly
+        :interval_size: 4
+        :end_interval_offset: 0
+        :tag: "/managed/environment/dev"
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: Pacific Time (US & Canada)
+    time_profile_id: 
+    display_filter: 
+    col_options:
+      cpu_allocated_cost:
+        :grouping:
+        - :total
+      cpu_allocated_metric:
+        :grouping:
+        - :total
+      cpu_cost:
+        :grouping:
+        - :total
+      cpu_metric:
+        :grouping:
+        - :total
+      cpu_used_cost:
+        :grouping:
+        - :total
+      cpu_used_metric:
+        :grouping:
+        - :total
+      disk_io_cost:
+        :grouping:
+        - :total
+      disk_io_metric:
+        :grouping:
+        - :total
+      disk_io_used_cost:
+        :grouping:
+        - :total
+      disk_io_used_metric:
+        :grouping:
+        - :total
+      fixed_compute_1_cost:
+        :grouping:
+        - :total
+      fixed_compute_2_cost:
+        :grouping:
+        - :total
+      fixed_cost:
+        :grouping:
+        - :total
+      fixed_storage_1_cost:
+        :grouping:
+        - :total
+      fixed_storage_2_cost:
+        :grouping:
+        - :total
+      memory_allocated_cost:
+        :grouping:
+        - :total
+      memory_allocated_metric:
+        :grouping:
+        - :total
+      memory_cost:
+        :grouping:
+        - :total
+      memory_metric:
+        :grouping:
+        - :total
+      memory_used_cost:
+        :grouping:
+        - :total
+      memory_used_metric:
+        :grouping:
+        - :total
+      net_io_cost:
+        :grouping:
+        - :total
+      net_io_metric:
+        :grouping:
+        - :total
+      net_io_used_cost:
+        :grouping:
+        - :total
+      net_io_used_metric:
+        :grouping:
+        - :total
+      storage_allocated_cost:
+        :grouping:
+        - :total
+      storage_allocated_metric:
+        :grouping:
+        - :total
+      storage_cost:
+        :grouping:
+        - :total
+      storage_metric:
+        :grouping:
+        - :total
+      storage_used_cost:
+        :grouping:
+        - :total
+      storage_used_metric:
+        :grouping:
+        - :total
+      total_cost:
+        :grouping:
+        - :total
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+      :summary:
+        :hide_detail_rows: false
+    miq_group_id: 2
+    user_id: 1
+    menu_name: Chargeback - Dev VMs (last mont)

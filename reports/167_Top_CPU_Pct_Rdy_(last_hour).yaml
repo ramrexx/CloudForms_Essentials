@@ -1,0 +1,78 @@
+---
+- MiqReport:
+    title: Top CPU Pct Rdy (last hour)
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: VmPerformance
+    cols:
+    - resource_name
+    - v_pct_cpu_ready_delta_summation
+    - timestamp
+    include:
+      host:
+        columns:
+        - name
+    col_order:
+    - resource_name
+    - v_pct_cpu_ready_delta_summation
+    - host.name
+    - timestamp
+    headers:
+    - VM Name
+    - CPU - % Ready
+    - Host Name
+    - Activity Sample - Timestamp (Day/Time)
+    conditions: !ruby/object:MiqExpression
+      exp:
+        and:
+        - IS:
+            field: VmPerformance-timestamp
+            value: Last Hour
+        - ">":
+            field: VmPerformance-v_pct_cpu_ready_delta_summation
+            value: '0'
+      context_type: 
+    order: Descending
+    sortby:
+    - v_pct_cpu_ready_delta_summation
+    group: 
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options:
+      :interval: hourly
+      :calc_avgs_by: active_data
+      :end_offset: 0
+      :start_offset: 86400
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    tz: UTC
+    time_profile_id: 1
+    display_filter: 
+    col_options:
+      v_pct_cpu_ready_delta_summation:
+        :style:
+        - :class: :miq_rpt_red_bg
+          :operator: ">="
+          :value: '10'
+        - :class: :miq_rpt_yellow_bg
+          :operator: ">="
+          :value: '5'
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 2
+    user_id: 1
+    menu_name: Top CPU Pct Rdy (last hour)

@@ -1,0 +1,64 @@
+---
+- MiqReport:
+    title: Datastores with low freespace
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: Storage
+    cols:
+    - name
+    - v_free_space_percent_of_total
+    - free_space
+    include: {}
+    col_order:
+    - name
+    - v_free_space_percent_of_total
+    - free_space
+    headers:
+    - Storage Name
+    - Free Space Pct of Total
+    - Free Space
+    conditions: !ruby/object:MiqExpression
+      exp:
+        "!=":
+          field: Storage-free_space
+          value: '0'
+      context_type: 
+    order: Ascending
+    sortby:
+    - v_free_space_percent_of_total
+    group: 
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options:
+      v_free_space_percent_of_total:
+        :style:
+        - :class: :miq_rpt_red_bg
+          :value: '10'
+          :operator: "<="
+        - :class: :miq_rpt_yellow_bg
+          :value: '25'
+          :operator: "<="
+    rpt_options:
+      :queue_timeout: 
+      :pdf:
+        :page_size: US-Letter
+    miq_group_id: 2
+    user_id: 1
+    menu_name: Datastores with low freespace

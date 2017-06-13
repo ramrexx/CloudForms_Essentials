@@ -1,0 +1,94 @@
+---
+- MiqReport:
+    title: Cloud - Right-Sizing Recommendations
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: Vm
+    cols:
+    - v_owning_cluster
+    - name
+    - num_cpu
+    - conservative_recommended_vcpus
+    - conservative_vcpus_recommended_change
+    - mem_cpu
+    - conservative_recommended_mem
+    - conservative_mem_recommended_change
+    include: {}
+    col_order:
+    - v_owning_cluster
+    - name
+    - num_cpu
+    - conservative_recommended_vcpus
+    - conservative_vcpus_recommended_change
+    - mem_cpu
+    - conservative_recommended_mem
+    - conservative_mem_recommended_change
+    headers:
+    - Parent Cluster
+    - Name
+    - Number of CPUs
+    - CPU - Sizing
+    - CPU - Savings
+    - Memory
+    - Memory - Sizing
+    - Memory -  Savings
+    conditions: !ruby/object:MiqExpression
+      exp:
+        and:
+        - IS NOT EMPTY:
+            field: Vm-v_owning_cluster
+            value: ''
+        - ">":
+            value: '0'
+            field: Vm-conservative_recommended_vcpus
+        - "!=":
+            value: '0'
+            field: Vm-conservative_vcpus_recommended_change
+      context_type: 
+    order: Ascending
+    sortby:
+    - v_owning_cluster
+    - name
+    group: c
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options:
+      v_owning_cluster:
+        :break_label: 'Parent Cluster: '
+      conservative_vcpus_recommended_change:
+        :grouping:
+        - :total
+      conservative_mem_recommended_change:
+        :grouping:
+        - :total
+    rpt_options:
+      :summary:
+        :hide_detail_rows: false
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 1000000000001
+    user_id: 1000000000001
+    menu_name: Cloud - Right-Sizing Recommendations

@@ -1,0 +1,115 @@
+---
+- MiqWidget:
+    guid: 09921172-af1e-11e4-8ff5-00505693ad6a
+    description: Amazon - Top Security Groups Used
+    title: Amazon - Top Security Groups Used
+    content_type: report
+    options:
+      :row_count: 5
+      :col_order:
+      - name
+      - description
+      - total_vms
+    visibility:
+      :roles:
+      - _ALL_
+    user_id: 
+    resource_id: 157
+    resource_type: MiqReport
+    enabled: true
+    read_only: false
+    MiqReportContent:
+    - MiqReport:
+        title: Amazon - Top Security Groups Used
+        rpt_group: Custom
+        rpt_type: Custom
+        priority: 
+        db: SecurityGroup
+        cols:
+        - name
+        - description
+        - total_vms
+        - type
+        include: {}
+        col_order:
+        - name
+        - description
+        - total_vms
+        - type
+        headers:
+        - Name
+        - Description
+        - Total Vms
+        - Type
+        conditions: !ruby/object:MiqExpression
+          exp:
+            REGULAR EXPRESSION MATCHES:
+              field: SecurityGroup-type
+              value: "/amazon/i"
+          context_type: 
+        order: Descending
+        sortby:
+        - total_vms
+        - name
+        group: 
+        graph: 
+        dims: 
+        filename: 
+        file_mtime: 
+        categories: []
+        timeline: 
+        template_type: report
+        where_clause: 
+        db_options: {}
+        generate_cols: 
+        generate_rows: 
+        col_formats:
+        - 
+        - 
+        - 
+        - 
+        tz: 
+        time_profile_id: 
+        display_filter: 
+        col_options: {}
+        rpt_options:
+          :pdf:
+            :page_size: US-Letter
+          :queue_timeout: 
+        miq_group_id: 360000000000001
+        user_id: 360000000000001
+        menu_name: Amazon - Top Security Groups Used
+    MiqSchedule:
+      name: Amazon - Top Security Groups Used
+      description: Amazon - Top Security Groups Used
+      sched_action:
+        :method: generate_widget
+      filter: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: MiqWidget.id
+            value: 360000000000033
+        context_type: 
+        col_details:
+          MiqWidget.id:
+            :data_type: 
+            :virtual_reflection: true
+            :virtual_column: true
+            :excluded_by_preprocess_options: false
+            :tag: false
+            :include:
+              :id: {}
+        pexp: 
+        ruby: <value ref=miqwidget, type=string>/virtual/id</value> == "360000000000033"
+      towhat: MiqWidget
+      run_at:
+        :start_time: 2015-09-11 04:50:00.000000000 Z
+        :tz: Eastern Time (US & Canada)
+        :interval:
+          :unit: hourly
+          :value: '1'
+      enabled: true
+      userid: system
+      prod_default: system
+      adhoc: 
+      file_depot_id: 

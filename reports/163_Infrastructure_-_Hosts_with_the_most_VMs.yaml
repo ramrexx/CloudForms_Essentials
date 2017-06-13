@@ -1,0 +1,77 @@
+---
+- MiqReport:
+    title: Infrastructure - Hosts with the most VMs
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: Host
+    cols:
+    - name
+    - ipaddress
+    - v_total_vms
+    include:
+      ext_management_system:
+        columns:
+        - name
+      ems_cluster:
+        columns:
+        - name
+    col_order:
+    - name
+    - ipaddress
+    - v_total_vms
+    - ext_management_system.name
+    - ems_cluster.name
+    headers:
+    - Name
+    - IP Address
+    - Total VMs
+    - Provider
+    - Cluster
+    conditions: !ruby/object:MiqExpression
+      exp:
+        INCLUDES:
+          field: Host-type
+          value: InfraManager
+      context_type: 
+    order: Descending
+    sortby:
+    - v_total_vms
+    - ems_cluster.name
+    group: 
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options:
+      v_total_vms:
+        :style:
+        - :class: :miq_rpt_red_bg
+          :operator: ">="
+          :value: '30'
+        - :class: :miq_rpt_yellow_bg
+          :operator: ">="
+          :value: '20'
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 2
+    user_id: 1
+    menu_name: Infrastructure - Hosts with the most VMs

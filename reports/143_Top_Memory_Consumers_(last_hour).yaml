@@ -1,0 +1,92 @@
+---
+- MiqReport:
+    title: Top Memory Consumers (last hour)
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 160
+    db: VmPerformance
+    cols:
+    - resource_name
+    - mem_usage_absolute_average
+    - derived_memory_available
+    - timestamp
+    include:
+      vm:
+        columns:
+        - vendor
+    col_order:
+    - resource_name
+    - mem_usage_absolute_average
+    - derived_memory_available
+    - timestamp
+    - vm.vendor
+    headers:
+    - VM Name
+    - " Memory Usage"
+    - Allocated Memory
+    - Activity Sample - Timestamp  (Day/Time)
+    - VM and Instance Vendor
+    conditions: !ruby/object:MiqExpression
+      exp:
+        and:
+        - IS:
+            value: Last Hour
+            field: VmPerformance-timestamp
+        - ">":
+            value: '0'
+            field: VmPerformance-derived_memory_used
+      context_type: 
+    order: Descending
+    sortby:
+    - mem_usage_absolute_average
+    group: 
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options:
+      :interval: hourly
+      :calc_avgs_by: active_data
+      :end_offset: 0
+      :start_offset: 86400
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: UTC
+    time_profile_id: 1
+    display_filter: 
+    col_options:
+      cpu_usage_rate_average__avg:
+        :style:
+        - :class: :miq_rpt_red_bg
+          :value: '90'
+          :operator: ">="
+        - :class: :miq_rpt_yellow_bg
+          :value: '75'
+          :operator: ">="
+      resource_name:
+        :break_label: 'Asset Name: '
+      mem_usage_absolute_average:
+        :style:
+        - :class: :miq_rpt_red_bg
+          :value: '95'
+          :operator: ">="
+        - :class: :miq_rpt_yellow_bg
+          :value: '85'
+          :operator: ">="
+    rpt_options:
+      :queue_timeout: 
+      :pdf:
+        :page_size: US-Letter
+    miq_group_id: 2
+    user_id: 1
+    menu_name: Top Memory Consumers (last hour)

@@ -1,0 +1,68 @@
+---
+- MiqReport:
+    title: Top Storage Consumers By Use Disk Space
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 180
+    db: Vm
+    cols:
+    - name
+    - used_disk_storage
+    - provisioned_storage
+    include:
+      ems_cluster:
+        columns:
+        - name
+      host:
+        columns:
+        - name
+    col_order:
+    - name
+    - ems_cluster.name
+    - host.name
+    - used_disk_storage
+    - provisioned_storage
+    headers:
+    - VM Name
+    - Cluster Name
+    - Host Name
+    - " Total Used Disk Space"
+    - Total Provisioned Space
+    conditions: !ruby/object:MiqExpression
+      exp:
+        ">":
+          field: Vm-used_disk_storage
+          value: '0'
+      context_type: 
+    order: Descending
+    sortby:
+    - used_disk_storage
+    group: 
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options: {}
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 2
+    user_id: 1
+    menu_name: Top Storage Consumers By Use Disk Space

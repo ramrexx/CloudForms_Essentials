@@ -1,0 +1,147 @@
+---
+- MiqWidget:
+    guid: 3dd258ee-aee1-11e4-8ff5-00505693ad6a
+    description: Amazon - Top CPU Consumers (last hour)
+    title: Amazon - Top CPU Consumers (last hour)
+    content_type: report
+    options:
+      :row_count: 5
+      :col_order:
+      - resource_name
+      - cpu_usage_rate_average
+      - derived_vm_numvcpus
+    visibility:
+      :roles:
+      - _ALL_
+    user_id: 
+    resource_id: 155
+    resource_type: MiqReport
+    enabled: true
+    read_only: false
+    MiqReportContent:
+    - MiqReport:
+        title: Amazon - Top CPU Consumers (last hour)
+        rpt_group: Custom
+        rpt_type: Custom
+        priority: 160
+        db: VmPerformance
+        cols:
+        - resource_name
+        - cpu_usage_rate_average
+        - derived_vm_numvcpus
+        - timestamp
+        include:
+          vm:
+            columns:
+            - type
+        col_order:
+        - resource_name
+        - cpu_usage_rate_average
+        - derived_vm_numvcpus
+        - timestamp
+        - vm.type
+        headers:
+        - VM Name
+        - " CPU Usage"
+        - Allocated vCPUs
+        - Activity Sample - Timestamp  (Day/Time)
+        - Instance Type
+        conditions: !ruby/object:MiqExpression
+          exp:
+            and:
+            - IS:
+                field: VmPerformance-timestamp
+                value: Last Hour
+            - ">":
+                value: '0'
+                field: VmPerformance-cpu_usage_rate_average
+            - INCLUDES:
+                field: VmPerformance.vm-type
+                value: Amazon
+          context_type: 
+        order: Descending
+        sortby:
+        - cpu_usage_rate_average
+        group: 
+        graph: 
+        dims: 
+        filename: 
+        file_mtime: 
+        categories: []
+        timeline: 
+        template_type: report
+        where_clause: 
+        db_options:
+          :interval: hourly
+          :calc_avgs_by: active_data
+          :end_offset: 0
+          :start_offset: 86400
+        generate_cols: 
+        generate_rows: 
+        col_formats:
+        - 
+        - 
+        - 
+        - 
+        - 
+        tz: UTC
+        time_profile_id: 
+        display_filter: 
+        col_options:
+          cpu_usage_rate_average__avg:
+            :style:
+            - :class: :miq_rpt_red_bg
+              :operator: ">="
+              :value: '90'
+            - :class: :miq_rpt_yellow_bg
+              :operator: ">="
+              :value: '75'
+          cpu_usage_rate_average:
+            :style:
+            - :class: :miq_rpt_red_bg
+              :operator: ">="
+              :value: '15'
+            - :class: :miq_rpt_yellow_bg
+              :operator: ">="
+              :value: '8'
+        rpt_options:
+          :pdf:
+            :page_size: US-Letter
+          :queue_timeout: 
+        miq_group_id: 360000000000001
+        user_id: 360000000000001
+        menu_name: Amazon - Top CPU Consumers (last hour)
+    MiqSchedule:
+      name: Amazon - Top CPU Consumers (last hour)
+      description: Amazon - Top CPU Consumers (last hour)
+      sched_action:
+        :method: generate_widget
+      filter: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: MiqWidget.id
+            value: 360000000000031
+        context_type: 
+        col_details:
+          MiqWidget.id:
+            :data_type: 
+            :virtual_reflection: true
+            :virtual_column: true
+            :excluded_by_preprocess_options: false
+            :tag: false
+            :include:
+              :id: {}
+        pexp: 
+        ruby: <value ref=miqwidget, type=string>/virtual/id</value> == "360000000000031"
+      towhat: MiqWidget
+      run_at:
+        :start_time: 2015-09-11 04:05:00.000000000 Z
+        :tz: Eastern Time (US & Canada)
+        :interval:
+          :unit: hourly
+          :value: '1'
+      enabled: true
+      userid: system
+      prod_default: system
+      adhoc: 
+      file_depot_id: 

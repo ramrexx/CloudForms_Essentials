@@ -1,0 +1,118 @@
+---
+- MiqWidget:
+    guid: d2483102-a782-11e5-8d87-52540020fe8d
+    description: Datastores with Low Freespace
+    title: Datastores with Low Freespace
+    content_type: report
+    options:
+      :row_count: 5
+      :col_order:
+      - name
+      - free_space
+      - v_free_space_percent_of_total
+    visibility:
+      :roles:
+      - _ALL_
+    user_id: 
+    resource_id: 161
+    resource_type: MiqReport
+    enabled: true
+    read_only: false
+    MiqReportContent:
+    - MiqReport:
+        title: Datastores with low freespace
+        rpt_group: Custom
+        rpt_type: Custom
+        priority: 
+        db: Storage
+        cols:
+        - name
+        - v_free_space_percent_of_total
+        - free_space
+        include: {}
+        col_order:
+        - name
+        - v_free_space_percent_of_total
+        - free_space
+        headers:
+        - Storage Name
+        - Free Space Pct of Total
+        - Free Space
+        conditions: !ruby/object:MiqExpression
+          exp:
+            "!=":
+              field: Storage-free_space
+              value: '0'
+          context_type: 
+        order: Ascending
+        sortby:
+        - v_free_space_percent_of_total
+        group: 
+        graph: 
+        dims: 
+        filename: 
+        file_mtime: 
+        categories: []
+        timeline: 
+        template_type: report
+        where_clause: 
+        db_options: {}
+        generate_cols: 
+        generate_rows: 
+        col_formats:
+        - 
+        - 
+        - 
+        tz: 
+        time_profile_id: 
+        display_filter: 
+        col_options:
+          v_free_space_percent_of_total:
+            :style:
+            - :class: :miq_rpt_red_bg
+              :value: '10'
+              :operator: "<="
+            - :class: :miq_rpt_yellow_bg
+              :value: '25'
+              :operator: "<="
+        rpt_options:
+          :queue_timeout: 
+          :pdf:
+            :page_size: US-Letter
+        miq_group_id: 2
+        user_id: 1
+        menu_name: Datastores with low freespace
+    MiqSchedule:
+      name: Datastores with Low Freespace
+      description: Datastores with Low Freespace
+      sched_action:
+        :method: generate_widget
+      filter: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: MiqWidget.id
+            value: ''
+        context_type: 
+        col_details:
+          MiqWidget.id:
+            :data_type: 
+            :virtual_reflection: true
+            :virtual_column: true
+            :excluded_by_preprocess_options: false
+            :tag: false
+            :include:
+              :id: {}
+        pexp: 
+        ruby: <value ref=miqwidget, type=string>/virtual/id</value> == ""
+      towhat: MiqWidget
+      run_at:
+        :start_time: 2015-12-20 08:40:00.000000000 Z
+        :tz: Pacific Time (US & Canada)
+        :interval:
+          :unit: hourly
+          :value: '1'
+      enabled: true
+      userid: system
+      prod_default: system
+      adhoc: 
+      file_depot_id: 

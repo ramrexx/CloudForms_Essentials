@@ -1,0 +1,99 @@
+---
+- MiqReport:
+    title: Top Snapshot count by VM
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 36
+    db: Vm
+    cols:
+    - name
+    - v_total_snapshots
+    include:
+      snapshots:
+        columns:
+        - name
+        - current
+        - description
+        - create_time
+        - total_size
+    col_order:
+    - name
+    - snapshots.name
+    - snapshots.current
+    - snapshots.description
+    - snapshots.create_time
+    - snapshots.total_size
+    - v_total_snapshots
+    headers:
+    - VM Name
+    - Snapshot Name
+    - Active Snapshot (0/1)
+    - Description
+    - Create Time
+    - Total Size
+    - Total Snapshots
+    conditions: !ruby/object:MiqExpression
+      exp:
+        and:
+        - IS NOT NULL:
+            value: ''
+            field: Vm.snapshots-name
+        - FIND:
+            checkcount:
+              ">":
+                value: 0
+                field: "<count>"
+            search:
+              IS NOT EMPTY:
+                field: Vm.snapshots-name
+                value: ''
+      context_type: 
+    order: Descending
+    sortby:
+    - v_total_snapshots
+    group: 
+    graph:
+      :type: PieThreed
+      :mode: false
+      :column: 
+      :count: '6'
+      :other: false
+    dims: 1
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options:
+      name:
+        :break_label: 'Name: '
+      snapshots.current:
+        :style:
+        - :class: :miq_rpt_red_bg
+          :operator: ">="
+          :value: '5'
+        - :class: :miq_rpt_yellow_bg
+          :operator: ">="
+          :value: '3'
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+    miq_group_id: 2
+    user_id: 1
+    menu_name: Top Snapshot count by VM

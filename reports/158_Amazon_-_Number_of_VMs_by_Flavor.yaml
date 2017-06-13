@@ -1,0 +1,96 @@
+---
+- MiqReport:
+    title: Amazon - Number of VMs by Flavor
+    rpt_group: Custom
+    rpt_type: Custom
+    priority: 
+    db: Flavor
+    cols:
+    - name
+    - enabled
+    - block_storage_based_only
+    - cpu_cores
+    - cpus
+    - description
+    - ems_ref
+    - memory
+    - total_vms
+    - type
+    include:
+      ext_management_system:
+        columns:
+        - provider_region
+    col_order:
+    - name
+    - enabled
+    - block_storage_based_only
+    - cpu_cores
+    - cpus
+    - description
+    - ems_ref
+    - memory
+    - total_vms
+    - type
+    - ext_management_system.provider_region
+    headers:
+    - Name
+    - Active
+    - Block Storage Based Only
+    - Cpu Cores
+    - Cpus
+    - Description
+    - Ems Ref
+    - Memory
+    - Total Vms
+    - Type
+    - Provider Region
+    conditions: !ruby/object:MiqExpression
+      exp:
+        REGULAR EXPRESSION MATCHES:
+          field: Flavor-type
+          value: "/amazon/i"
+      context_type: 
+    order: Descending
+    sortby:
+    - total_vms
+    group: y
+    graph: 
+    dims: 
+    filename: 
+    file_mtime: 
+    categories: []
+    timeline: 
+    template_type: report
+    where_clause: 
+    db_options: {}
+    generate_cols: 
+    generate_rows: 
+    col_formats:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    tz: 
+    time_profile_id: 
+    display_filter: 
+    col_options:
+      total_vms:
+        :break_label: 'Total Vms: '
+        :grouping:
+        - :total
+    rpt_options:
+      :pdf:
+        :page_size: US-Letter
+      :queue_timeout: 
+      :summary:
+        :hide_detail_rows: false
+    miq_group_id: 360000000000015
+    user_id: 360000000000003
+    menu_name: Amazon - Number of VMs by Flavor
