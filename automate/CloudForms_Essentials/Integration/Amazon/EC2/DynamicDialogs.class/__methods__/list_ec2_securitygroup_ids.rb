@@ -110,11 +110,14 @@ $evm.root.attributes.sort.each { |k, v| log(:info, "\t Attribute: #{k} = #{v}")}
 dialog_hash = {}
 
 provider = get_provider(query_catalogitem(:src_ems_id)) || get_provider_from_template()
+cloud_network_id = query_catalogitem(:cloud_network)
+log(:info, "cloud_network_id: #{cloud_network_id}")
 
 if provider
   provider.security_groups.each do |security_group|
     next if security_group.name.nil? || security_group.ext_management_system.nil?
     next unless object_eligible?(security_group)
+    next unless security_group.cloud_network_id == cloud_network_id
     dialog_hash[security_group.id] = "#{security_group.name} on #{security_group.ext_management_system.name}"
   end
 else
@@ -122,6 +125,7 @@ else
   $evm.vmdb(:ManageIQ_Providers_Amazon_CloudManager_SecurityGroup).all.each do |security_group|
     next if security_group.name.nil? || security_group.ext_management_system.nil?
     next unless object_eligible?(security_group)
+    next unless security_group.cloud_network_id == cloud_network_id
     dialog_hash[security_group.id] = "#{security_group.name} on #{security_group.ext_management_system.name}"
   end
 end

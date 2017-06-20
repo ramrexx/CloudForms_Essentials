@@ -73,7 +73,39 @@ def query_catalogitem(option_key, option_value=nil)
   option_value ? (return option_value) : (return nil)
 end
 
+def get_user
+  user_search = $evm.root.attributes.detect { |k,v| k.end_with?('_evm_owner_id') } ||
+    $evm.root.attributes.detect { |k,v| k.end_with?('_userid') }
+  user = $evm.vmdb(:user).find_by_id(user_search) || $evm.vmdb(:user).find_by_userid(user_search) ||
+    $evm.root['user']
+  user
+end
+
+def get_current_group_rbac_array
+  rbac_array = []
+  if !@user.current_group.filters.blank?
+    @user.current_group.filters['managed'].flatten.each do |filter|
+      next unless /(?<category>\w*)\/(?<tag>\w*)$/i =~ filter
+      rbac_array << {category=>tag}
+    end
+  end
+  log(:info, "@user: #{@user.userid} RBAC filters: #{rbac_array}")
+  rbac_array
+end
+
+def object_eligible?(obj)
+  @rbac_array.each do |rbac_hash|
+    rbac_hash.each do |rbac_category, rbac_tags|
+      Array.wrap(rbac_tags).each {|rbac_tag_entry| return false unless obj.tagged_with?(rbac_category, rbac_tag_entry) }
+    end
+    true
+  end
+end
+
 $evm.root.attributes.sort.each { |k, v| log(:info, "\t Attribute: #{k} = #{v}")}
+
+@user = get_user
+@rbac_array = get_current_group_rbac_array
 
 dialog_hash = {}
 
@@ -83,6 +115,7 @@ provider = get_provider(query_catalogitem(:src_ems_id)) || get_provider_from_tem
 if provider
   provider.key_pairs.each do |key_pair|
     next if key_pair.name.nil?
+    next unless object_eligible?(key_pair)
     dialog_hash[key_pair.id] = "#{key_pair.name} on #{provider.name}"
   end
 else
@@ -90,6 +123,7 @@ else
   $evm.vmdb(:ManageIQ_Providers_Amazon_CloudManager_AuthKeyPair).all.each do |key_pair|
     provider = $evm.vmdb(:ManageIQ_Providers_Amazon_CloudManager).find_by_id(key_pair.resource_id)
     next if key_pair.name.nil?
+    next unless object_eligible?(key_pair)
     dialog_hash[key_pair.id] = "#{key_pair.name} on #{provider.name}"
   end
 end
@@ -103,3 +137,4 @@ end
 
 $evm.object['values'] = dialog_hash
 log(:info, "$evm.object['values']: #{$evm.object['values'].inspect}")
+
