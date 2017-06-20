@@ -125,6 +125,7 @@ else
   $evm.vmdb(:ManageIQ_Providers_Amazon_CloudManager_SecurityGroup).all.each do |security_group|
     next if security_group.name.nil? || security_group.ext_management_system.nil?
     next unless object_eligible?(security_group)
+    next unless security_group.cloud_network_id == cloud_network_id
     dialog_hash[security_group.id] = "#{security_group.name} on #{security_group.ext_management_system.name}"
   end
 end
@@ -138,4 +139,3 @@ end
 
 $evm.object["values"]     = dialog_hash
 log(:info, "$evm.object['values']: #{$evm.object['values'].inspect}")
-
