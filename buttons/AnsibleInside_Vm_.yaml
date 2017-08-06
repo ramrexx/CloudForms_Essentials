@@ -30,7 +30,7 @@
       ae_message: 
       ae_attributes:
         hosts: vmdb_object
-        service_template_name: myplabook
+        service_template_name: enter-your-playbook-name-here
         request: Order_Ansible_Playbook
   set_data:
     :button_order:
