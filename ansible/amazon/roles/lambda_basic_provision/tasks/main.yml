@@ -1,0 +1,20 @@
+---
+- name: Create Lambda Application
+  local_action:
+    module: lambda
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ ec2_region }}"
+    role: "{{ role }}"
+    handler: "index.handler"
+    s3_bucket: "{{ s3_bucket }}"
+    s3_key: "{{ s3_key }}"
+    name: "{{ name }}"
+    state: present
+    runtime: "{{ runtime }}"
+    environment_variables:
+      key1: foo
+      key2: bar
+  register: lamda_output
+
+- debug: var=lamda_output

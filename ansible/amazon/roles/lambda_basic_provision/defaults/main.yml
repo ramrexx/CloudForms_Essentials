@@ -1,0 +1,15 @@
+---
+aws_access_key: 
+aws_secret_key:
+name: https-request-demo
+runtime: nodejs4.3
+ec2_region: us-west-2
+zip_file: https-request.zip
+s3_bucket: mybucket
+s3_bucket_keypath: lambda
+s3_key: "{{ s3_bucket_keypath }}/{{ zip_file }}"
+iam_user: 777777777777
+role: "arn:aws:iam::{{ iam_user }}:role/lambda_basic_execution"
+
+# custom vars
+verbose: false

@@ -1,0 +1,15 @@
+---
+- name: lambda_basic_create
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+    - name: logging manageiq object
+      debug: var=manageiq
+      when: manageiq is defined
+
+  roles:
+    - role: lambda_basic_provision
+      tags: 
+        - appserver
+

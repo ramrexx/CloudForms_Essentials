@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: ramrexx
+  description: CloudForms_Essentials - lambda_basic_provision
+  company: 
+  license: Apache
+  issue_tracker_url: 
+  github_branch:
+  min_ansible_version: 2.3
+  platforms:
+    name: EL
+    versions:
+      - 7
+  categories:
+    - cloudforms
+    - amazon
+    - lambda
+dependencies: []
