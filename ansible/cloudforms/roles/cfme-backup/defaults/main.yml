@@ -1,0 +1,17 @@
+---
+verbose: false
+dest_fileprefix: cfmebackup
+dest_path: /tmp/
+database_username: root
+database_password: 
+database_port: 5432
+database_name: vmdb_production
+database_dumpfile: "{{ dest_path }}{{ database_name }}.dump"
+backup_file_list:
+  - /var/www/miq/vmdb/GUID
+  - /var/www/miq/vmdb/REGION
+  - /var/www/miq/vmdb/VERSION
+  - /var/www/miq/vmdb/certs/v2_key
+  - /var/www/miq/vmdb/config/database.yml
+  - /var/www/miq/vmdb/config/settings.yml
+  - "{{ database_dumpfile }}"
