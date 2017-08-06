@@ -105,7 +105,7 @@
           ae_instance: list_ec2_provider_ids
           ae_message: 
           ae_attributes: {}
-      - name: param_name
+      - name: param_lambda_name
         description: 
         data_type: string
         notes: 
