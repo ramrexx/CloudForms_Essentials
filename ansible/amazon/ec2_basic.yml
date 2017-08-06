@@ -19,6 +19,7 @@
 
 - name: Perform tasks on instances
   hosts: ec2_hosts
+  become: true
 
   roles:
     - role: ec2_basic_runonce
