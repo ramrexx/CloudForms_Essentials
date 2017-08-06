@@ -9,7 +9,7 @@
     handler: "index.handler"
     s3_bucket: "{{ s3_bucket }}"
     s3_key: "{{ s3_key }}"
-    name: "{{ name }}"
+    name: "{{ lambda_name }}"
     state: present
     runtime: "{{ runtime }}"
     environment_variables:

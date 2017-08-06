@@ -1,7 +1,7 @@
 ---
 aws_access_key: 
 aws_secret_key:
-name: https-request-demo
+lambda_name: my_lambda_function
 runtime: nodejs4.3
 ec2_region: us-west-2
 zip_file: https-request.zip
