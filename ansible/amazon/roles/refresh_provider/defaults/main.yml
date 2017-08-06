@@ -1,0 +1,6 @@
+---
+provider_id: 3 # CloudForms id of the provider that needs to be refreshed. 
+# curl -v -k -u admin:smartvm -X GET https://localhost/api/providers?expand=resources| python -m json.tool|grep \"id -A 3 -B 2
+max_retries: 10
+retry_interval: 20
+verbose: false

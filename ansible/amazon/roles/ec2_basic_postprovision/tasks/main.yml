@@ -1,0 +1,104 @@
+---
+- name: Lookup CloudForms VM via uid_ems
+  uri:
+    url: "{{ manageiq.api_url }}/api/vms?filter[]=uid_ems={{ item.id }}&expand=resources"
+    method: GET
+    body:
+      action: refresh
+    body_format: json
+    validate_certs: false
+    headers:
+      X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: lookup_output
+  with_items: "{{ vms.instances }}"
+
+- debug: var=lookup_output.results
+  when: verbose
+
+- name: Set the service URL
+  set_fact:
+    svc_url: "/api/{{ manageiq.service }}"
+
+- debug: var=svc_url
+  when: verbose
+
+- name: Initialize an empty list for vms
+  set_fact:
+    empty_list: []
+
+- debug: var=empty_list
+  when: verbose
+
+- name: Append resource href to vms list
+  set_fact:
+    vms: "{{ empty_list }} + [ { 'href': svc_url, 'resource': { 'href': '/api/vms/{{ item.json.resources[0].id }}' } } ]"
+  with_items: "{{ lookup_output.results }}"
+
+- debug: var=vms
+  when: verbose
+
+- name: Add vms to the service
+  uri:
+    url: "{{ manageiq.api_url }}/api/services"
+    method: POST
+    body_format: json
+    body:
+      action: add_resource
+      resources: "{{ vms }}"
+    validate_certs: false
+    headers:
+      X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: add_output
+
+- debug: var=add_output.json.results[0].success
+  when: verbose
+  
+- name: Check if the VM was successfully attached to service
+  fail: msg="{{ add_output.json.results[0].message }}"
+  when: add_output.json.results[0].success == false
+
+- name: Assign tag to CloudForms service "{{ category }}:{{ tag }}"
+  uri:
+    url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}/tags"
+    method: POST
+    body_format: json
+    body:
+      action: assign
+      resources: 
+        - category: "{{ category }}"
+          name: "{{ tag }}"
+    validate_certs: false
+    headers:
+      X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: tag_service_output
+
+- debug: var=tag_service_output
+
+- name: Assign CF tag to VM
+  uri:
+    url: "{{ manageiq.api_url }}/api/vms/{{ item.json.resources[0].id }}/tags"
+    method: POST
+    body:
+      action: assign
+      resources: 
+        - category: "{{ category }}"
+          name: "{{ tag }}"      
+    body_format: json
+    validate_certs: false
+    headers:
+      X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: assign_vmtag_output
+  with_items: "{{ lookup_output.results }}"
+
+- debug: var=assign_vmtag_output
+  when: verbose
+
+

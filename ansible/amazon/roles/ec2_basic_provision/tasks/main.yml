@@ -1,0 +1,43 @@
+---
+- name: Launch ec2 instance
+  local_action:
+    module: ec2
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    key_name: "{{ key_name }}"
+    group_id: "{{ group_id }}"
+    instance_type: "{{ instance_type }}"
+    image: "{{ image }}"
+    vpc_subnet_id: "{{ vpc_subnet_id | random }}"
+    region: "{{ region }}"
+    instance_tags: "{{ instance_tags }}"
+    assign_public_ip: "{{ assign_public_ip }}"
+    wait: "{{ wait }}"
+    count: "{{ count }}"
+    volumes:
+      - device_name: "{{ device_name }}"
+        volume_size: "{{ volume_size }}"
+        delete_on_termination: "{{ delete_on_termination }}"
+    user_data: "{{ user_data }}"
+  register: vms
+
+- debug: var=item
+  with_items: "{{ vms.instances }}"
+  when: verbose
+  
+- name: Wait for SSH
+  wait_for:
+    host: "{{ item.public_dns_name }}"
+    port: 22
+    delay: 60
+    timeout: 320
+    state: started
+  with_items: "{{ vms.instances }}"  
+  when: assign_public_ip
+  
+- add_host: 
+    name: "{{ item.public_ip }}"
+    ansible_user: "{{ ec2_user | default('ec2-user') }}"
+    # ansible_ssh_private_key_file: "{{ ssh_private_key_file }}"
+    groups: ec2_hosts
+  with_items: "{{ vms.instances }}"

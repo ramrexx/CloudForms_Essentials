@@ -1,0 +1,24 @@
+---
+- name: ec2_basic
+  hosts: localhost
+  gather_facts: false
+      
+  roles:
+    - role: ec2_basic_preprovision
+      when: manageiq is defined
+
+    - role: ec2_basic_provision
+      tags: 
+        - appserver
+
+    - role: refresh_provider
+      when: provider_id is defined and manageiq is defined
+
+    - role: ec2_basic_postprovision
+      when: vms is defined and manageiq is defined
+
+- name: Perform tasks on instances
+  hosts: ec2_hosts
+
+  roles:
+    - role: ec2_basic_runonce

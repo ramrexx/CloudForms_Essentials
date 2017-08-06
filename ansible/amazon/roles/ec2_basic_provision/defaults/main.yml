@@ -1,0 +1,33 @@
+---
+aws_access_key: 
+aws_secret_key: 
+
+key_name: lab-demo-env    # key pair to use on the instance
+group_id: sg-1e76c264     # security group id (or list of ids) to use with the instance
+instance_type: t2.micro   # instance type to use for the instance
+image: ami-b55a51cc       # ami ID to use for the instance
+vpc_subnet_id:            # list the subnet ID(s) in which to launch the instance (VPC), it will randomly choose one
+  - subnet-3a46524e
+region: us-west-2         # The AWS region to use. Must be specified if ec2_url is not used.
+instance_tags:
+  Name: "{{ vm_name | default('demovm') }}" # Name of the vm
+  environment: "{{ tag_0_environment | default('dev') }}" # environment tag
+assign_public_ip: true    # when provisioning within vpc, assign a public IP address.
+count: 1                  # number of instances to launch
+wait: true                # wait for the instance to reach its desired state before returning. Does not wait for SSH.
+termination_protection: false # Enable or Disable the Termination Protection
+
+# volume stuff
+device_name: /dev/sda1    # name of the volume
+volume_size: 16           # size of the volume
+delete_on_termination: true # delete volume on termination
+
+# custom variables
+verbose: false
+
+# user_data/cloud-init script
+user_data: |              
+      #cloud-config
+      runcmd:
+      ## setup motd
+      - echo Provisioned by Red Hat CloudForms > /etc/motd
