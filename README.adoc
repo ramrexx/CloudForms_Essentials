@@ -33,7 +33,7 @@ IMPORTANT: CloudForms must be running with a database region configured
 * Log into your CloudForms appliance and make sure you are in roots home directory
 * Download the installation playbook
 
- curl -O https://raw.githubusercontent.com/ramrexx/CloudForms_Essentials/master/ansible/cloudforms_essentials_install.yml
+ curl -O https://raw.githubusercontent.com/ramrexx/CloudForms_Essentials/master/cloudforms_essentials_install.yml
 
 * Execute the installation playbook
 
