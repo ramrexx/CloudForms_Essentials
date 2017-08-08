@@ -1,0 +1,7 @@
+---
+- name: run ipconfig
+  win_command: ipconfig
+  register: ipconfig
+
+- debug: var=ipconfig
+  when: verbose
