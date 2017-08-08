@@ -1,0 +1,9 @@
+---
+ansible_winrm_transport: ntlm
+ansible_user: Administrator
+ansible_password: 
+ansible_port: 5985
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore
+ansible_winrm_operation_timeout_sec: 45
+verbose: false

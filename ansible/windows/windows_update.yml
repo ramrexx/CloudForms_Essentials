@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: true
+
+  pre_tasks:
+    - name: logging manageiq object
+      debug: var=manageiq
+      when: manageiq is defined
+
+  roles:
+     - windows_update

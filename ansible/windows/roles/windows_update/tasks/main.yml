@@ -1,0 +1,12 @@
+---
+# Install all security, critical, and rollup updates
+- name: Executing windows update
+  win_updates:
+    category_names:
+      - SecurityUpdates
+      - CriticalUpdates
+      - UpdateRollups
+  register: windows_update_output
+
+- debug: var=windows_update_output
+  when: verbose
