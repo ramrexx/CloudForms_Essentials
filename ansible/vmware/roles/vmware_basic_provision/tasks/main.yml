@@ -1,0 +1,28 @@
+---
+- name: Launch VMware VM
+  vmware_guest:
+    hostname: "{{ hostname }}"
+    username: "{{ username }}"
+    password: "{{ password }}"
+    name: "{{ vm_name }}"
+    template: "{{ template }}"
+    datacenter: "{{ datacenter }}"
+    cluster: "{{ cluster }}"
+    folder: "{{ folder }}"
+    guest_id: "{{ guest_id }}"
+    annotation: "{{ annotation }}"
+    hardware:
+      memory_mb: "{{ memory_mb }}"
+      num_cpus: "{{ num_cpus }}"
+    customization:
+      domain: "{{ domain }}"
+      dns_servers: "{{ dns_servers }}"
+    wait_for_ip_address: "{{ wait_for_ip_address }}"
+    state: present
+  register: vm
+
+- debug: 
+    var: vm
+    msg: "{{ item.ipv4 }} {{ vm_name }}"
+  with_items: "{{ vm.instance }}"
+  when: verbose

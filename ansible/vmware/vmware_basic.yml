@@ -1,0 +1,22 @@
+---
+- name: vmware_basic
+  hosts: localhost
+  gather_facts: false
+      
+  roles:
+    - role: vmware_basic_preprovision
+      when: manageiq is defined
+
+    - role: vmware_basic_provision
+      tags: 
+        - appserver
+
+    - role: vmware_basic_postprovision
+      when: vms is defined and manageiq is defined
+
+- name: Perform tasks on instances
+  hosts: vmware_hosts
+  # become: true
+
+  roles:
+    - role: vmware_basic_runonce
