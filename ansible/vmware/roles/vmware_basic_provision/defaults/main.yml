@@ -15,6 +15,5 @@ wait_for_ip_address: "{{ wait_for_ip_address | default(true) }}"
 memory_mb: "{{ memory_mb | default(1024) }}"
 num_cpus: "{{ num_cpus | default(1) }}"
 
-provider_id: "{{ provider_id }}"
 max_retries: 9
 retry_interval: 20
