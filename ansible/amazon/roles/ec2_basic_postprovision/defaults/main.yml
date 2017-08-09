@@ -2,7 +2,7 @@
 category: lifecycle
 tag: retire_full
 verbose: false
-miq_username: "{{miq_username | default('admin'}} "
+miq_username: "{{ miq_username | default('admin') }} "
 miq_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           36303065313464383964313762353333386337373030613262373062396664313833323630366133
