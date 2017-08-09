@@ -14,8 +14,9 @@
       action: refresh
     body_format: json
     validate_certs: false
+    user: "{{ miq_username }}"
+    password: "{{ miq_password }}"
     headers:
-      Authorization: "Basic {{ miq_creds | b64encode }}"
       # X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
@@ -36,8 +37,9 @@
     url: "{{ task_url }}"
     method: GET
     validate_certs: false
+    user: "{{ miq_username }}"
+    password: "{{ miq_password }}"
     headers:
-      Authorization: "Basic {{ miq_creds | b64encode }}"
       # X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
