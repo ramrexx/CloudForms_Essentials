@@ -3,7 +3,7 @@ provider_id: 3 # CloudForms id of the provider that needs to be refreshed.
 # curl -v -k -u admin:smartvm -X GET https://localhost/api/providers?expand=resources| python -m json.tool|grep \"id -A 3 -B 2
 max_retries: 10
 retry_interval: 20
-miq_username: "{{ miq_username | default('admin') }}"
+miq_username: "{{ cloudforms_username | default('admin') }}"
 miq_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           36303065313464383964313762353333386337373030613262373062396664313833323630366133
