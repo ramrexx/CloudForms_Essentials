@@ -106,7 +106,8 @@
   when: verbose
 
 - name: Lookup CloudForms User
-  url: "{{ manageiq.api_url }}/api/{{ manageiq.user }}"
+  uri:
+    url: "{{ manageiq.api_url }}/api/{{ manageiq.user }}"
     method: GET
     validate_certs: false
     headers:
@@ -123,13 +124,17 @@
   set_fact:
     userid: "{{ lookup_user_output.results.userid }}"
 
+- debug: var=userid
+  when: verbose
+  
 - name: Assign CloudForms User
-  url: "{{ manageiq.api_url }}/api/vms/{{ item.json.resources[0].id }}/tags"
+  uri:
+    url: "{{ manageiq.api_url }}/api/vms/{{ item.json.resources[0].id }}/tags"
     method: POST
     body:
       action: set_owner
       resources: 
-        - owner: userid
+        - owner: "{{ userid }}"
     body_format: json
     validate_certs: false
     headers:
