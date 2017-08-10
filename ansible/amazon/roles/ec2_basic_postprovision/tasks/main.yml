@@ -129,11 +129,11 @@
 
 - name: Assign CloudForms User
   uri:
-    url: "{{ manageiq.api_url }}/api/vms/{{ item.json.resources[0].id }}/tags"
+    url: "{{ manageiq.api_url }}/api/vms/{{ item.json.resources[0].id }}"
     method: POST
     body:
       action: set_owner
-      resources: 
+      resource: 
         - owner: "{{ userid }}"
     body_format: json
     validate_certs: false
