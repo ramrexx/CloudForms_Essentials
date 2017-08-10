@@ -105,9 +105,9 @@
 - debug: var=assign_vmtag_output.results
   when: verbose
 
-- name: Lookup CloudForms User
+- name: Lookup CloudForms userid
   uri:
-    url: "{{ manageiq.api_url }}/api/{{ manageiq.user }}"
+    url: "{{ manageiq.api_url }}/api/{{ manageiq.user }}?attributes=userid"
     method: GET
     validate_certs: false
     headers:
@@ -117,16 +117,16 @@
     status_code: 200
   register: lookup_user_output
 
-- debug: var=lookup_user_output.results
+- debug: var=lookup_user_output
   when: verbose
 
 - name: Setting CloudForms userid
   set_fact:
-    userid: "{{ lookup_user_output.results.userid }}"
+    userid: "{{ lookup_user_output.userid }}"
 
 - debug: var=userid
   when: verbose
-  
+
 - name: Assign CloudForms User
   uri:
     url: "{{ manageiq.api_url }}/api/vms/{{ item.json.resources[0].id }}/tags"
