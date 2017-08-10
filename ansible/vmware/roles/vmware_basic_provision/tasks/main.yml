@@ -1,6 +1,7 @@
 ---
 - name: Launch VMware VM
-  vmware_guest:
+  local_action:
+    module: vmware_guest
     hostname: "{{ hostname }}"
     username: "{{ username }}"
     password: "{{ password }}"
