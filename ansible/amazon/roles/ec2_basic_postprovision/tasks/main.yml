@@ -122,7 +122,7 @@
 
 - name: Setting CloudForms userid
   set_fact:
-    userid: "{{ lookup_user_output.userid }}"
+    userid: "{{ lookup_user_output.json.userid }}"
 
 - debug: var=userid
   when: verbose
