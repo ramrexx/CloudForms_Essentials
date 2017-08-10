@@ -12,5 +12,4 @@ miq_password: !vault |
           3662366436613664660a656163396335313530633764396139346462336261656439323238326161
           3733
 miq_creds: "{{ miq_username }}:{{ miq_password }}"
-
 verbose: false
