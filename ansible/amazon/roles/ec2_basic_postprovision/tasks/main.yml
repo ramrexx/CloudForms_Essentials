@@ -127,14 +127,14 @@
 - debug: var=userid
   when: verbose
 
-- name: Assign CloudForms User
+- name: Assign CloudForms userid to VM
   uri:
-    url: "{{ manageiq.api_url }}/api/vms/{{ item.json.resources[0].id }}"
+    url: "{{ item.json.resources[0].href }}"
     method: POST
     body:
       action: set_owner
       resource: 
-        - owner: "{{ userid }}"
+        owner: "{{ userid }}"
     body_format: json
     validate_certs: false
     headers:
@@ -142,10 +142,10 @@
       # X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
-  register: assign_user_output
-  with_items: "{{ vms.instances }}"
+  register: assign_cfowner_output
+  with_items: "{{ lookup_vms_output.results }}"
 
-- debug: var=assign_user_output
+- debug: var=assign_cfowner_output
   when: verbose
 
 
