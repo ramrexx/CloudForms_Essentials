@@ -12,10 +12,10 @@
       # X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
-  register: lookup_output
+  register: lookup_vms_output
   with_items: "{{ vms.instances }}"
 
-- debug: var=lookup_output.results
+- debug: var=lookup_vms_output.results
   when: verbose
 
 - name: Set the service URL
@@ -35,7 +35,7 @@
 - name: Append resource href to vms list
   set_fact:
     vms: "{{ empty_list }} + [ { 'href': svc_url, 'resource': { 'href': '/api/vms/{{ item.json.resources[0].id }}' } } ]"
-  with_items: "{{ lookup_output.results }}"
+  with_items: "{{ lookup_vms_output.results }}"
 
 - debug: var=vms
   when: verbose
@@ -100,9 +100,47 @@
       Content-Type: "application/json"
     status_code: 200
   register: assign_vmtag_output
-  with_items: "{{ lookup_output.results }}"
+  with_items: "{{ lookup_vms_output.results }}"
 
-- debug: var=assign_vmtag_output
+- debug: var=assign_vmtag_output.results
+  when: verbose
+
+- name: Lookup CloudForms User
+  url: "{{ manageiq.api_url }}/api/{{ manageiq.user }}"
+    method: GET
+    validate_certs: false
+    headers:
+      Authorization: "Basic {{ miq_creds | b64encode }}"
+      # X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: lookup_user_output
+
+- debug: var=lookup_user_output.results
+  when: verbose
+
+- name: Setting CloudForms userid
+  set_fact:
+    userid: "{{ lookup_user_output.results.userid }}"
+
+- name: Assign CloudForms User
+  url: "{{ manageiq.api_url }}/api/vms/{{ item.json.resources[0].id }}/tags"
+    method: POST
+    body:
+      action: set_owner
+      resources: 
+        - owner: userid
+    body_format: json
+    validate_certs: false
+    headers:
+      Authorization: "Basic {{ miq_creds | b64encode }}"
+      # X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: assign_user_output
+  with_items: "{{ lookup_vms_output.results }}"
+
+- debug: var=assign_user_output.results
   when: verbose
 
 
