@@ -143,9 +143,9 @@
       Content-Type: "application/json"
     status_code: 200
   register: assign_user_output
-  with_items: "{{ lookup_vms_output.results }}"
+  with_items: "{{ vms.instances }}"
 
-- debug: var=assign_user_output.results
+- debug: var=assign_user_output
   when: verbose
 
 
