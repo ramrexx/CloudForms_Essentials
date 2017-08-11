@@ -5,7 +5,7 @@
     hostname: "{{ hostname }}"
     username: "{{ username }}"
     password: "{{ password }}"
-    name: "{{ name }}"
+    name: "{{ vm_name }}"
     template: "{{ template }}"
     datacenter: "{{ datacenter }}"
     cluster: "{{ cluster }}"
@@ -16,10 +16,10 @@
     hardware:
       memory_mb: "{{ memory_mb }}"
       num_cpus: "{{ num_cpus }}"
-    customization:
-      domain: "{{ domain }}"
-      dns_servers: "{{ dns_servers }}"
     wait_for_ip_address: "{{ wait_for_ip_address }}"
+    networks: 
+      - name: VM Network 2
+
     state: present
   register: vm
 

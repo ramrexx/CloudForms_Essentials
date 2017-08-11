@@ -17,8 +17,8 @@ wait_for_ip_address: "{{ vcenter_wait_for_ip_address | default(true) }}"
 validate_certs: "{{ vcenter_validate_certs | default(false) }}"
 
 # vm parameters
-name: "{{ vm_name | default('demovmwarevm') }}" # Name of the vm
-guest_id: "{{ vm_guest_id }}"
+vm_name: "{{ vm_name | default('demovmwarevm') }}" # Name of the vm
+vm_guest_id: "{{ vm_guest_id }}"
 memory_mb: "{{ vm_memory_mb | default(1024) }}"
 num_cpus: "{{ vm_num_cpus | default(1) }}"
 annotation: "{{ vm_annotation | default('Provisioned by CloudForms') }}"
