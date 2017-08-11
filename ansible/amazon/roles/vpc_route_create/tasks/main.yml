@@ -1,0 +1,23 @@
+---
+- name: Set up subnet route table
+  local_action:
+    module: ec2_vpc_route_table
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ aws_region }}"
+    tags:
+      Name: "{{ route_name }}"
+    vpc_id: "{{ vpc_id }}"
+    subnets:
+      - "{{ subnet_id }}"
+    routes:
+      - dest: "{{ dest_cidr }}"
+        gateway_id: "{{ gateway_id }}"
+  register: created_route
+
+- debug: var=created_route
+  when: verbose
+
+- name: Set route_id
+  set_fact:
+    route_id: "{{ created_route.route.id }}"

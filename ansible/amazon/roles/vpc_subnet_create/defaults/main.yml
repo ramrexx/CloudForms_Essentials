@@ -1,0 +1,12 @@
+---
+aws_access_key: "{{ aws_access_key }}"
+aws_secret_key: "{{ aws_secret_key }}"
+region: "{{ aws_region }}"
+
+subnet_name: "{{ subnet_name }}" 
+subnet_cidr: "{{ subnet_cidr }}"
+subnet_az: "{{ region }}a"
+
+vpc_id: "{{ vpc_id }}"
+
+verbose: false
