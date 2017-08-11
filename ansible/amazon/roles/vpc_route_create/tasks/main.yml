@@ -6,7 +6,8 @@
     aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ aws_region }}"
     tags:
-      Name: "{{ route_name }}"
+      cloudforms: true
+      Name: "{{ vpc_name }}_route"
     vpc_id: "{{ vpc_id }}"
     subnets:
       - "{{ subnet_id }}"

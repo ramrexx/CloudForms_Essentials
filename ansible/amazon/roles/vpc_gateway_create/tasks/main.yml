@@ -1,7 +1,4 @@
 ---
-- fail: msg="vpc_id missing"
-  when: vpc_id is not defined
-
 - name: Create VPC Gateway
   local_action:
     module: ec2_vpc_igw
@@ -9,6 +6,9 @@
     aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ aws_region }}"
     vpc_id: "{{ vpc_id }}"
+    tags:
+      cloudforms: true
+      Name: "{{ vpc_name }}_gateway"
     state: present
   register: created_gateway
 

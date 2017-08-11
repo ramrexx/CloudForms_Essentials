@@ -7,9 +7,9 @@
     region: "{{ aws_region }}"
     vpc_id: "{{ vpc_id }}"
     cidr: "{{ subnet_cidr }}"
-    az:  "{{ subnet_az }}"
+    az:  "{{ aws_region }}{{ subnet_az }}"
     tags:
-      Name: "{{ subnet_name }}"
+      Name: "{{ vpc_name }}_subnet"
       cloudforms: true
     state: present
   register: created_subnet

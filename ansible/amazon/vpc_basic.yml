@@ -13,12 +13,14 @@
 
     - role: vpc_subnet_create
       vpc_id: "{{ vpc_id }}"
+      vpc_name: "{{ vpc_name }}"
 
     - role: vpc_gateway_create
+      vpc_name: "{{ vpc_name }}"
       vpc_id: "{{ vpc_id }}"
       
     - role: vpc_route_create
+      vpc_name: "{{ vpc_name }}"
       vpc_id: "{{ vpc_id }}"
       subnet_id: "{{ subnet_id }}"
       gateway_id: "{{ gateway_id }}"
-

@@ -5,8 +5,8 @@ region: "{{ aws_region }}"
 
 subnet_name: "{{ subnet_name }}" 
 subnet_cidr: "{{ subnet_cidr }}"
-subnet_az: "{{ region }}a"
-
+subnet_az: "{{ subnet_az | default('a') }}"
+vpc_name:
 vpc_id: "{{ vpc_id }}"
 
 verbose: false

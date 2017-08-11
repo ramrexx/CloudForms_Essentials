@@ -4,6 +4,7 @@ aws_secret_key: "{{ aws_secret_key }}"
 region: "{{ aws_region }}"
 
 route_name: "{{ route_name }}"
+vpc_name: 
 vpc_id: "{{ vpc_id }}"
 subnet_id: "{{ subnet_id }}"
 gateway_id: "{{ gateway_id }}"
