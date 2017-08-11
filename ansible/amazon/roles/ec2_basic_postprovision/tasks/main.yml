@@ -82,6 +82,7 @@
   register: tag_service_output
 
 - debug: var=tag_service_output
+  when: verbose
 
 - name: Assign CF tag to VM
   uri:
