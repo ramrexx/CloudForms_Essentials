@@ -12,40 +12,32 @@ public_subnet_cidr: "{{ aws_public_subnet_cidr | default('10.0.0.0/24')}}"
 az: "{{ aws_az | default('a') }}"
 
 # Security Group
-cidr_ip: "{{ aws_cidr_ip | default('0.0.0.0/0')}}"
-cidr_ipv6: "{{ aws_cidr_ipv6 | default('::/0')}}"
-
+cidr_ip: "{{ aws_cidr_ip | default('0.0.0.0/0') }}"
 sg_rules:
   - proto: tcp
     from_port: 80
     to_port: 80
     cidr_ip: "{{ cidr_ip }}"
-    cidr_ipv6: "{{ cidr_ipv6 }}"
   - proto: tcp
     from_port: 22
     to_port: 22
     cidr_ip: "{{ cidr_ip }}"
-    cidr_ipv6: "{{ cidr_ipv6 }}"
   - proto: tcp
     from_port: 443
     to_port: 443
     cidr_ip: "{{ cidr_ip }}"
-    cidr_ipv6: "{{ cidr_ipv6 }}"
   - proto: tcp
     from_port: 5986
     to_port: 5986
     cidr_ip: "{{ cidr_ip }}"
-    cidr_ipv6: "{{ cidr_ipv6 }}"
   - proto: tcp
     from_port: 5985
     to_port: 5985
     cidr_ip: "{{ cidr_ip }}"
-    cidr_ipv6: "{{ cidr_ipv6 }}"
   - proto: tcp
     from_port: 3389
     to_port: 3389
     cidr_ip: "{{ cidr_ip }}"
-    cidr_ipv6: "{{ cidr_ipv6 }}"
 
 # custom
 verbose: false
