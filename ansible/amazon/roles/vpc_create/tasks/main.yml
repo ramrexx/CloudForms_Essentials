@@ -13,7 +13,7 @@
 - debug: var=my_vpc
   when: verbose
 
-- name: Set vpc_id
+- name: Set Fact vpc_id
   set_fact:
     vpc_id: "{{ my_vpc.vpc.id }}"
 
@@ -35,9 +35,9 @@
 - debug: var=my_public_subnet
   when: verbose
 
-- name: Set Subnet ID in variable
+- name: Set Fact subnet_id
   set_fact:
-    public_subnet_id: "{{ my_public_subnet.subnet.id }}"
+    subnet_id: "{{ my_public_subnet.subnet.id }}"
 
 - name: Create Internet Gateway for VPC
   local_action:
@@ -52,9 +52,9 @@
 - debug: var=my_vpc_igw
   when: verbose
 
-- name: Set Internet Gateway ID in variable
+- name: Set Fact gateway_id
   set_fact:
-    igw_id: "{{ my_vpc_igw.gateway_id }}"
+    gateway_id: "{{ my_vpc_igw.gateway_id }}"
 
 - name: Set up public subnet route table
   local_action:
@@ -67,16 +67,16 @@
       Name: "Public"
       cloudforms_managed: true
     subnets:
-      - "{{ public_subnet_id }}"
+      - "{{ subnet_id }}"
     routes:
       - dest: "0.0.0.0/0"
-        gateway_id: "{{ igw_id }}"
+        gateway_id: "{{ gateway_id }}"
   register: my_route
 
 - debug: var=my_route
   when: verbose
 
-- name: Set route_id
+- name: Set Fact route_id
   set_fact:
     route_id: "{{ my_route.route_table.id }}"
 
@@ -98,7 +98,40 @@
 - debug: var=my_security_group
   when: verbose
 
-# - name: Set sg_id
-#   set_fact:
-#     route_id: "{{ my_security_group.group_id }}"
+- name: Set group_id
+  set_fact:
+    group_id: "{{ my_security_group.group_id }}"
+
+- name: Set custom attributes
+  set_fact: 
+    custom_attributes_list:
+      - name: vpc_id
+        value: "{{vpc_id}}"
+      - name: subnet_id
+        value: "{{ subnet_id }}"
+      - name: gateway_id
+        value: "{{ gateway_id }}"
+      - name: route_id
+        value: "{{ route_id }}"
+      - name: group_id
+        value: "{{ group_id }}"
+
+- name: Add service custom custom attributes
+  uri: 
+    url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}/custom_attributes"
+    method: POST
+    body:
+      action: add
+      resources: "{{ custom_attributes_list }}"
+    body_format: json
+    validate_certs: False
+    headers:
+      X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: service_output
+  when: manageiq is defined
+
+- debug: var=service_output
+  when: verbose and manageiq is defined 
 
