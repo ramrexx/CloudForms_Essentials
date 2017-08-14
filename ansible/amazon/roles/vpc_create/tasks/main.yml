@@ -17,7 +17,7 @@
   set_fact:
     vpc_id: "{{ my_vpc.vpc.id }}"
 
-- name: Create Public Subnet
+- name: Create Subnet
   local_action:
     module: ec2_vpc_subnet
     state:  present
@@ -28,7 +28,7 @@
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
     tags:
-      Name: "Public Subnet"
+      Name: "My Subnet"
       cloudforms_managed: true
   register: my_public_subnet
 
@@ -105,15 +105,15 @@
 - name: Set custom attributes
   set_fact: 
     custom_attributes_list:
-      - name: vpc_id
-        value: "{{vpc_id}}"
-      - name: subnet_id
+      - name: 'vpc_id'
+        value: "{{ vpc_id }}"
+      - name: 'subnet_id'
         value: "{{ subnet_id }}"
-      - name: gateway_id
+      - name: 'gateway_id'
         value: "{{ gateway_id }}"
-      - name: route_id
+      - name: 'route_id'
         value: "{{ route_id }}"
-      - name: group_id
+      - name: 'group_id'
         value: "{{ group_id }}"
 
 - name: Add service custom custom attributes
