@@ -23,7 +23,7 @@
     state:  present
     vpc_id: "{{ vpc_id }}"
     cidr: "{{ public_subnet_cidr }}"
-    az: "{{ aws_region }}a"
+    az: "{{ aws_region }}{{ az }}"
     region: "{{ aws_region }}"
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
