@@ -93,9 +93,6 @@
     region: "{{ aws_region }}"
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
-    tags:
-      Name: "My Security Group"
-      cloudforms_managed: true
     rules:
       - proto: "{{ item.protocol }}"
         from_port: "{{ item.from_port }}"
