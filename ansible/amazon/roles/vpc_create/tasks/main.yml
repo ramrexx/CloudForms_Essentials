@@ -80,8 +80,7 @@
   set_fact:
     route_id: "{{ my_route.route_table.id }}"
 
-- debug: var=item
-  with_items: "{{ sg_rules }}"
+- debug: var=sg_rules
   when: verbose
 
 - name: Create Security Group
@@ -93,13 +92,8 @@
     region: "{{ aws_region }}"
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
-    rules:
-      - proto: "{{ item.protocol }}"
-        from_port: "{{ item.from_port }}"
-        to_port: "{{ item.to_port }}"
-        cidr_ip: "{{ cidr_ip }}"
+    rules: "{{ sg_rules }}"
   register: my_security_group
-  with_items: "{{ sg_rules }}"
 
 - debug: var=my_security_group
   when: verbose
