@@ -1,0 +1,109 @@
+---
+- name: Create VPC
+  local_action:
+    module: ec2_vpc_net
+    name: "{{ vpc_name }}"
+    cidr_block: "{{ vpc_cidr_block }}"
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    state: present
+  register: my_vpc
+
+- debug: var=my_vpc
+  when: verbose
+
+- name: Set vpc_id
+  set_fact:
+    vpc_id: "{{ my_vpc.vpc.id }}"
+
+- name: Create Public Subnet
+  local_action:
+    module: ec2_vpc_subnet
+    state:  present
+    vpc_id: "{{ vpc_id }}"
+    cidr: "{{ public_subnet_cidr }}"
+    az: "{{ aws_region }}a"
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    tags:
+      Name: "Public Subnet"
+      cloudforms_managed: true
+  register: my_public_subnet
+
+- debug: var=my_public_subnet
+  when: verbose
+
+- name: Set Subnet ID in variable
+  set_fact:
+    public_subnet_id: "{{ my_public_subnet.subnet.id }}"
+
+- name: Create Internet Gateway for VPC
+  local_action:
+    module: ec2_vpc_igw
+    vpc_id: "{{ vpc_id }}"
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    state: present
+  register: my_vpc_igw
+
+- debug: var=my_vpc_igw
+  when: verbose
+
+- name: Set Internet Gateway ID in variable
+  set_fact:
+    igw_id: "{{ my_vpc_igw.gateway_id }}"
+
+- name: Set up public subnet route table
+  local_action:
+    module: ec2_vpc_route_table
+    vpc_id: "{{ vpc_id }}"
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    tags:
+      Name: "Public"
+      cloudforms_managed: true
+    subnets:
+      - "{{ public_subnet_id }}"
+    routes:
+      - dest: "0.0.0.0/0"
+        gateway_id: "{{ igw_id }}"
+  register: my_route
+
+- debug: var=my_route
+  when: verbose
+
+# - name: Set route_id
+#   set_fact:
+#     route_id: "{{ my_route.route_id }}"
+
+- name: Create Security Group
+  local_action:
+    module: ec2_group
+    name: "My Security Group"
+    description: "My Security Group"
+    vpc_id: "{{ vpc_id }}"
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    tags:
+      Name: "My Security Group"
+      cloudforms_managed: true
+    rules:
+      - proto: "{{ item.protocol }}"
+        from_port: "{{ item.from_port }}"
+        to_port: "{{ item.to_port }}"
+        cidr_ip: "{{ cidr_ip }}"
+  register: my_security_group
+  with_items: sg_rules
+
+- debug: var=my_security_group
+  when: verbose
+
+# - name: Set sg_id
+#   set_fact:
+#     route_id: "{{ my_security_group.route_id }}"
+
