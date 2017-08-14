@@ -76,9 +76,13 @@
 - debug: var=my_route
   when: verbose
 
-# - name: Set route_id
-#   set_fact:
-#     route_id: "{{ my_route.route_id }}"
+- name: Set route_id
+  set_fact:
+    route_id: "{{ my_route.route_table.id }}"
+
+- debug: var=item
+  with_items: sg_rules
+  when: verbose
 
 - name: Create Security Group
   local_action:
@@ -105,5 +109,5 @@
 
 # - name: Set sg_id
 #   set_fact:
-#     route_id: "{{ my_security_group.route_id }}"
+#     route_id: "{{ my_security_group.group_id }}"
 

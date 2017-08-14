@@ -14,12 +14,12 @@ az: "{{ aws_az | default('a') }}"
 # Security Group
 cidr_ip: "{{ aws_cidr_ip | default('0.0.0.0/0')}}"
 sg_rules:
-  - { protocol: 'tcp', from_port: 22, to_port: 22 } # SSH
-  - { protocol: 'tcp', from_port: 443, to_port: 443 } # HTTPS
-  - { protocol: 'tcp', from_port: 80, to_port: 80 } # HTTP
-  - { protocol: 'tcp', from_port: 5986, to_port: 5986 } # WinRM
-  - { protocol: 'tcp', from_port: 5985, to_port: 5985 } # WinRM
-  - { protocol: 'tcp', from_port: 3389, to_port: 3389 } # RDP
+  - { protocol: 'tcp', from_port: '22', to_port: '22' } # SSH
+  - { protocol: 'tcp', from_port: '443', to_port: '443' } # HTTPS
+  - { protocol: 'tcp', from_port: '80', to_port: '80' } # HTTP
+  - { protocol: 'tcp', from_port: '5986', to_port: '5986' } # WinRM
+  - { protocol: 'tcp', from_port: '5985', to_port: '5985' } # WinRM
+  - { protocol: 'tcp', from_port: '3389', to_port: '3389' } # RDP
 
 # custom
 verbose: false
