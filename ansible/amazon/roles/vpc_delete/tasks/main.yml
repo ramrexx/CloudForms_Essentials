@@ -15,18 +15,18 @@
 - debug: var=service_output
   when: verbose and manageiq is defined
 
-- name: Set vpc_id From Service Description
+- name: Set vpc_name From Service Description
   set_fact: 
-    vpc_id: "{{ service_output.json.description }}"
+    vpc_name: "{{ service_output.json.description }}"
 
-- debug: var=vpc_id
+- debug: var=vpc_name
   when: verbose and manageiq is defined
 
 - name: Get VPC Facts
   ec2_vpc_net_facts:
     region: "{{ region }}"
     filters:
-      vpc-id: "{{ vpc_id }}"
+      "tag:Name": "{{ vpc_name }}"
   register: vpc_facts
 
 - debug: var=vpc_facts
@@ -34,9 +34,9 @@
 
 - name: Delete VPC
   ec2_vpc_net:
+    region: "{{ region }}"
     name: "{{ vpc_name }}"
     cidr_block: "{{ vpc_facts[0].cidr_block }}"
-    region: "{{ region }}"
     state: absent
   register: delete_vpc
 
