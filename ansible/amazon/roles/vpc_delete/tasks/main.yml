@@ -55,7 +55,7 @@
     region: "{{ region }}"
     name: "{{ item.group_name }}"
     state: absent
-    ignore_errors: true
+  when: item.group_name != 'default'
   with_items: "{{ sgs_facts.security_groups }}"
 
 - name: Get Route Table Facts
