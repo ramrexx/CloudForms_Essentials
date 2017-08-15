@@ -1,0 +1,45 @@
+---
+- name: Get Service Information
+  uri: 
+    url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
+    method: GET
+    body_format: json
+    validate_certs: False
+    headers:
+      X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: service_output
+  when: manageiq is defined
+
+- debug: var=service_output
+  when: verbose and manageiq is defined
+
+- name: Set vpc_id From Service Description
+  set_fact: 
+    vpc_id: "{{ service_output.json.description }}"
+
+- debug: var=vpc_id
+  when: verbose and manageiq is defined
+
+- name: Get VPC Facts
+    local_action:
+      module: ec2_vpc_net_facts
+      region: "{{ region }}"
+      filters:
+        vpc-id: "{{ vpc_id }}"
+    register: vpc_facts
+
+- debug: var=vpc_facts
+  when: verbose
+
+- name: Delete VPC
+    ec2_vpc_net:
+      name: "{{ vpc_name }}"
+      cidr_block: "{{ vpc_facts[0].cidr_block }}"
+      region: "{{ region }}"
+      state: absent
+    register: delete_vpc
+
+- debug: var=delete_vpc
+  when: verbose

@@ -1,0 +1,12 @@
+---
+- name: vpc_create
+  hosts: localhost
+  gather_facts: false
+
+  pre_tasks:
+    - name: logging manageiq object
+      debug: var=manageiq
+      when: manageiq is defined
+
+  roles:
+    - role: vpc_delete

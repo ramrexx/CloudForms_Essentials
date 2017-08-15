@@ -1,0 +1,11 @@
+---
+aws_access_key:
+aws_secret_key:
+region: "{{ aws_region | default('us-west-1') }}"
+
+# VPC Information
+vpc_name: 
+vpc_cidr_block:
+
+# custom
+verbose: false

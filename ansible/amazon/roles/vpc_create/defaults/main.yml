@@ -1,14 +1,14 @@
 ---
 aws_access_key:
 aws_secret_key:
-region: "{{ aws_region }}"
+region: "{{ aws_region | default('us-west-2') }}"
 
 # VPC Information
-vpc_name: "{{ aws_vpc_name | default('my_vpc')}}"
-vpc_cidr_block: "{{ aws_vpc_cidr_block | default('10.0.0.0/16')}}"
+vpc_name: "{{ aws_vpc_name | default('my_vpc') }}"
+vpc_cidr_block: "{{ aws_vpc_cidr_block | default('10.0.0.0/16') }}"
 
 # Subnets
-public_subnet_cidr: "{{ aws_public_subnet_cidr | default('10.0.0.0/24')}}"
+public_subnet_cidr: "{{ aws_public_subnet_cidr | default('10.0.0.0/24') }}"
 az: "{{ aws_az | default('a') }}"
 
 # Security Group
