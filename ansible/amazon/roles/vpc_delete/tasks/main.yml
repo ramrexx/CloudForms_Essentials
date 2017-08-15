@@ -74,7 +74,7 @@
   ec2_vpc_route_table:
     state: absent
     route_table_id: "{{ item.id }}"
-    vpc_id: "{{ vpc_net.vpcs[0].id }}"
+    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
     region: "{{ region }}"
   with_items: "{{ routes.route_tables }}"
 
@@ -93,7 +93,7 @@
 - name: Delete Internet Gateway
   ec2_vpc_igw:
     region: "{{ region }}"
-    vpc_id: "{{ vpc_net.vpcs[0].id }}"
+    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
     state: absent
     region: "{{ region }}"
   with_items: "{{ gateways.internet_gateways }}"
