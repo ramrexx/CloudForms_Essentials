@@ -23,23 +23,22 @@
   when: verbose and manageiq is defined
 
 - name: Get VPC Facts
-    local_action:
-      module: ec2_vpc_net_facts
-      region: "{{ region }}"
-      filters:
-        vpc-id: "{{ vpc_id }}"
-    register: vpc_facts
+  ec2_vpc_net_facts:
+    region: "{{ region }}"
+    filters:
+      vpc-id: "{{ vpc_id }}"
+  register: vpc_facts
 
 - debug: var=vpc_facts
   when: verbose
 
 - name: Delete VPC
-    ec2_vpc_net:
-      name: "{{ vpc_name }}"
-      cidr_block: "{{ vpc_facts[0].cidr_block }}"
-      region: "{{ region }}"
-      state: absent
-    register: delete_vpc
+  ec2_vpc_net:
+    name: "{{ vpc_name }}"
+    cidr_block: "{{ vpc_facts[0].cidr_block }}"
+    region: "{{ region }}"
+    state: absent
+  register: delete_vpc
 
 - debug: var=delete_vpc
   when: verbose
