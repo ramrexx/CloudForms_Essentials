@@ -52,9 +52,10 @@
 
 - name: Print sgs_facts.security_groups[0]
   debug: 
-    var: "{{ sgs_facts.security_groups[0] }}"
+    var: item
+  with_items: "{{ sgs_facts.security_groups[0] }}"
   when: verbose
-  
+
 - name: Delete Security Group
   ec2_group:
     group_id: "{{ item.group_id }}"
