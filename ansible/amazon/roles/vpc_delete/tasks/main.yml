@@ -58,7 +58,7 @@
 
 - name: Delete Security Group
   ec2_group:
-    group_id: "{{ item.group_id }}"
+    name: "{{ item.group_name }}"
     state: absent
   with_items: "{{ sgs_facts.security_groups }}"
 
