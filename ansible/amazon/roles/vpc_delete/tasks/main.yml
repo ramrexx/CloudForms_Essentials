@@ -54,7 +54,7 @@
   ec2_group:
     group_id: "{{ item.group_id }}"
     state: absent
-  with_items: sgs_facts.security_groups
+  with_items: sgs_facts.security_groups[0]
 
 - name: Get Route Table Facts
   ec2_vpc_route_table_facts:
