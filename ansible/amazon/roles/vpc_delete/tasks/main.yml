@@ -53,7 +53,7 @@
 - name: Print sgs_facts.security_groups
   debug: 
     var: item
-  with_items: sgs_facts.security_groups
+  with_items: "{{ sgs_facts.security_groups[0] }}"
   when: verbose
 
 - name: Delete Security Group
@@ -80,7 +80,7 @@
     route_table_id: "{{ item.route_table_id }}"
     vpc_id: "{{ vpc_net.vpcs[0].id }}"
     region: "{{ region }}"
-  with_items: routes
+  with_items: "{{ routes }}"
 
 - name: Delete Internet Gateway
   ec2_vpc_igw:
