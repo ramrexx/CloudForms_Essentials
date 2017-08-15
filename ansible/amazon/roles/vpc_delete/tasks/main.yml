@@ -98,6 +98,26 @@
     region: "{{ region }}"
   with_items: "{{ gateways.internet_gateways }}"
 
+- name: Get Subnet Facts
+  ec2_vpc_subnet_facts:
+    region: "{{ region }}"
+    filters:
+      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
+  register: subnets
+
+- name: Print subnets
+  debug: 
+    var: subnets
+  when: verbose
+
+- name: Delete Subnet
+  ec2_vpc_subnet:
+    region: "{{ region }}"
+    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
+    state: absent
+    region: "{{ region }}"
+  with_items: "{{ subnets }}"
+
 - name: Delete VPC
   ec2_vpc_net:
     region: "{{ region }}"
