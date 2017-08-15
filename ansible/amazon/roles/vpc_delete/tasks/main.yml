@@ -50,17 +50,12 @@
     var: sgs_facts
   when: verbose
 
-- name: Print sgs_facts.security_groups
-  debug: 
-    var: item
-  with_items: "{{ sgs_facts.security_groups }}"
-  when: verbose
-
 - name: Delete Security Group
   ec2_group:
     region: "{{ region }}"
     name: "{{ item.group_name }}"
     state: absent
+    ignore_errors: true
   with_items: "{{ sgs_facts.security_groups }}"
 
 - name: Get Route Table Facts
