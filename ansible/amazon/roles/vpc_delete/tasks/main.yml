@@ -73,17 +73,30 @@
 - name: Delete Route Table
   ec2_vpc_route_table:
     state: absent
-    route_table_id: "{{ item.route_table_id }}"
+    route_table_id: "{{ item.id }}"
     vpc_id: "{{ vpc_net.vpcs[0].id }}"
     region: "{{ region }}"
-  with_items: "{{ routes }}"
+  with_items: "{{ routes.route_tables }}"
+
+- name: Get Internet Gateway Facts
+  ec2_vpc_igw_facts:
+    region: "{{ region }}"
+    filters:
+      attachment.vpc-id: "{{ vpc_facts.vpcs[0].id }}"
+  register: gateways
+
+- name: Print gateways
+  debug: 
+    var: gateways
+  when: verbose
 
 - name: Delete Internet Gateway
   ec2_vpc_igw:
+    region: "{{ region }}"
     vpc_id: "{{ vpc_net.vpcs[0].id }}"
     state: absent
     region: "{{ region }}"
-  register: igws
+  with_items: "{{ gateways.internet_gateways }}"
 
 - name: Delete VPC
   ec2_vpc_net:
