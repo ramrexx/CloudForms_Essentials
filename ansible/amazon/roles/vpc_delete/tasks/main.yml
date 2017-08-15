@@ -38,6 +38,51 @@
     var: vpc_facts
   when: verbose
 
+- name: Get Security Group Facts
+  ec2_group_facts:
+    region: "{{ region }}"
+    filters:
+      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
+  register: sgs_facts
+
+- name: Print sgs_facts
+  debug: 
+    var: sgs_facts
+  when: verbose
+
+- name: Delete Security Group
+  ec2_group:
+    group_id: "{{ item.group_id }}"
+    state: absent
+  with_items: sgs_facts.security_groups
+
+- name: Get Route Table Facts
+  ec2_vpc_route_table_facts:
+    region: "{{ region }}"
+    filters:
+      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
+  register: routes
+
+- name: Print routes
+  debug: 
+    var: routes
+  when: verbose
+
+- name: Delete Route Table
+  ec2_vpc_route_table:
+    state: absent
+    route_table_id: "{{ item.route_table_id }}"
+    vpc_id: "{{ vpc_net.vpcs[0].id }}"
+    region: "{{ region }}"
+  with_items: routes
+
+- name: Delete Internet Gateway
+  ec2_vpc_igw:
+    vpc_id: "{{ vpc_net.vpcs[0].id }}"
+    state: absent
+    region: "{{ region }}"
+  register: igws
+
 - name: Delete VPC
   ec2_vpc_net:
     region: "{{ region }}"

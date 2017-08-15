@@ -10,7 +10,9 @@
     state: present
   register: my_vpc
 
-- debug: var=my_vpc
+- name: Print my_vpc
+  debug: 
+    var: my_vpc
   when: verbose
 
 - name: Set Fact vpc_id
@@ -32,7 +34,9 @@
       cloudforms_managed: true
   register: my_public_subnet
 
-- debug: var=my_public_subnet
+- name: Print my_public_subnet
+  debug: 
+    var: my_public_subnet
   when: verbose
 
 - name: Set Fact subnet_id
@@ -49,7 +53,9 @@
     state: present
   register: my_vpc_igw
 
-- debug: var=my_vpc_igw
+- name: Print my_vpc_igw
+  debug: 
+    var: my_vpc_igw
   when: verbose
 
 - name: Set Fact gateway_id
@@ -73,14 +79,18 @@
         gateway_id: "{{ gateway_id }}"
   register: my_route
 
-- debug: var=my_route
+- name: Print my_route
+  debug: 
+    var: my_route
   when: verbose
 
 - name: Set Fact route_id
   set_fact:
     route_id: "{{ my_route.route_table.id }}"
 
-- debug: var=sg_rules
+- name: Print sg_rules
+  debug: 
+    var: sg_rules
   when: verbose
 
 - name: Create Security Group
@@ -95,7 +105,9 @@
     rules: "{{ sg_rules }}"
   register: my_security_group
 
-- debug: var=my_security_group
+- name: Print my_security_group
+  debug: 
+    var: my_security_group
   when: verbose
 
 - name: Set group_id
@@ -119,6 +131,8 @@
   register: service_output
   when: manageiq is defined
 
-- debug: var=service_output
+- name: Print service_output
+  debug: 
+    var: service_output
   when: verbose and manageiq is defined
 
