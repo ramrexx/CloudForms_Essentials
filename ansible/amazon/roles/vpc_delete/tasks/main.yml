@@ -162,6 +162,7 @@
     route_table_id: "{{ item.id }}"
     vpc_id: "{{ vpc_facts.vpcs[0].id }}"
     region: "{{ region }}"
+  when: item.associations == []
   register: delete_rtb
   with_items: "{{ rtb_facts.route_tables }}"
 
