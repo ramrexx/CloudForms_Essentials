@@ -4,8 +4,6 @@
     name: "{{ vpc_name }}"
     cidr_block: "{{ vpc_cidr_block }}"
     region: "{{ aws_region }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
     state: present
   register: my_vpc
 
@@ -25,8 +23,6 @@
     cidr: "{{ public_subnet_cidr }}"
     az: "{{ aws_region }}{{ az }}"
     region: "{{ aws_region }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
     tags:
       Name: "My Subnet"
       cloudforms_managed: true
@@ -45,8 +41,6 @@
   ec2_vpc_igw:
     vpc_id: "{{ vpc_id }}"
     region: "{{ aws_region }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
     state: present
   register: my_vpc_igw
 
@@ -63,8 +57,6 @@
   ec2_vpc_route_table:
     vpc_id: "{{ vpc_id }}"
     region: "{{ aws_region }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
     tags:
       Name: "My Route Table"
       cloudforms_managed: true
@@ -95,8 +87,6 @@
     description: "My Security Group"
     vpc_id: "{{ vpc_id }}"
     region: "{{ aws_region }}"
-    aws_access_key: "{{ aws_access_key }}"
-    aws_secret_key: "{{ aws_secret_key }}"
     rules: "{{ sg_rules }}"
   register: my_security_group
 
