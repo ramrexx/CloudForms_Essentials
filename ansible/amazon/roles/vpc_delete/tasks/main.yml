@@ -127,8 +127,6 @@
     var: nacl_facts
   when: verbose
 
-waiting for ansible 2.4 to come out
-
 - name: Delete NACL
   ec2_vpc_nacl:
     region: "{{ region }}"
