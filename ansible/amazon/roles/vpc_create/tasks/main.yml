@@ -1,7 +1,6 @@
 ---
 - name: Create VPC
-  local_action:
-    module: ec2_vpc_net
+  ec2_vpc_net:
     name: "{{ vpc_name }}"
     cidr_block: "{{ vpc_cidr_block }}"
     region: "{{ aws_region }}"
@@ -20,8 +19,7 @@
     vpc_id: "{{ my_vpc.vpc.id }}"
 
 - name: Create Subnet
-  local_action:
-    module: ec2_vpc_subnet
+  ec2_vpc_subnet:
     state:  present
     vpc_id: "{{ vpc_id }}"
     cidr: "{{ public_subnet_cidr }}"
@@ -44,8 +42,7 @@
     subnet_id: "{{ my_public_subnet.subnet.id }}"
 
 - name: Create Internet Gateway for VPC
-  local_action:
-    module: ec2_vpc_igw
+  ec2_vpc_igw:
     vpc_id: "{{ vpc_id }}"
     region: "{{ aws_region }}"
     aws_access_key: "{{ aws_access_key }}"
@@ -63,14 +60,13 @@
     gateway_id: "{{ my_vpc_igw.gateway_id }}"
 
 - name: Create Route Table
-  local_action:
-    module: ec2_vpc_route_table
+  ec2_vpc_route_table:
     vpc_id: "{{ vpc_id }}"
     region: "{{ aws_region }}"
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
     tags:
-      Name: "Public"
+      Name: "My Route Table"
       cloudforms_managed: true
     subnets:
       - "{{ subnet_id }}"
@@ -94,8 +90,7 @@
   when: verbose
 
 - name: Create Security Group
-  local_action:
-    module: ec2_group
+  ec2_group:
     name: "My Security Group"
     description: "My Security Group"
     vpc_id: "{{ vpc_id }}"

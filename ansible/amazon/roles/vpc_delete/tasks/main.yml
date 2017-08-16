@@ -127,22 +127,22 @@
     var: nacl_facts
   when: verbose
 
-# - name: Delete NACL
-#   ec2_vpc_nacl:
-#     region: "{{ region }}"
-#     vpc_id: "{{ vpc_facts.vpcs[0].id }}"
-#     name: "{{ item.name }}"
-#     state: absent
-#   register: delete_nacl
-#   with_items: "{{ nacl_facts.nacls }}"
-  
-# - name: Print delete_nacl
-#   debug: 
-#     var: delete_nacl
-#   when: verbose
+waiting for ansible 2.4 to come out
 
-# wait 5 seconds
-- pause: seconds=5
+- name: Delete NACL
+  ec2_vpc_nacl:
+    region: "{{ region }}"
+    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
+    name: "{{ item.name }}"
+    state: absent
+  when: item.name is defined
+  register: delete_nacl
+  with_items: "{{ nacl_facts.nacls }}"
+  
+- name: Print delete_nacl
+  debug: 
+    var: delete_nacl
+  when: verbose
 
 - name: Get Route Table Facts
   ec2_vpc_route_table_facts:
