@@ -105,10 +105,10 @@
 - name: Delete Route Table
   ec2_vpc_route_table:
     state: absent
-    route_table_id: "{{ item.id }}"
     vpc_id: "{{ vpc_facts.vpcs[0].id }}"
     region: "{{ region }}"
-  when: item.associations == []
+    tags:
+      cloudforms_managed: true
   register: delete_rtb
   with_items: "{{ rtb_facts.route_tables }}"
 
@@ -116,7 +116,7 @@
   debug: 
     var: delete_rtb
   when: verbose
-  
+
 - name: Get Internet Gateway Facts
   ec2_vpc_igw_facts:
     region: "{{ region }}"
@@ -154,58 +154,20 @@
     var: nacl_facts
   when: verbose
 
-- name: Add NACL Tags
-  ec2_vpc_nacl:
-    region: "{{ region }}"
-    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
-    tags: 
-      Name: "{{ item.id }}"
-    state: present
-  when: item.name is undefined
-  register: delete_nacl
-  with_items: "{{ nacl_facts.nacls }}"
+# - name: Delete NACL
+#   ec2_vpc_nacl:
+#     region: "{{ region }}"
+#     vpc_id: "{{ vpc_facts.vpcs[0].id }}"
+#     name: "{{ item.name }}"
+#     state: absent
+#   when: item.name is defined
+#   register: delete_nacl
+#   with_items: "{{ nacl_facts.nacls }}"
 
-- name: Delete NACL
-  ec2_vpc_nacl:
-    region: "{{ region }}"
-    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
-    name: "{{ item.name }}"
-    state: absent
-  when: item.name is defined
-  register: delete_nacl
-  with_items: "{{ nacl_facts.nacls }}"
-
-- name: Print delete_nacl
-  debug: 
-    var: delete_nacl
-  when: verbose
-
-- name: Get Route Table Facts
-  ec2_vpc_route_table_facts:
-    region: "{{ region }}"
-    filters:
-      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
-  register: rtb_facts
-
-- name: Print rtb_facts
-  debug: 
-    var: rtb_facts
-  when: verbose
-
-- name: Delete Route Table
-  ec2_vpc_route_table:
-    state: absent
-    route_table_id: "{{ item.id }}"
-    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
-    region: "{{ region }}"
-  when: item.associations == []
-  register: delete_rtb
-  with_items: "{{ rtb_facts.route_tables }}"
-
-- name: Print delete_rtb
-  debug: 
-    var: delete_rtb
-  when: verbose
+# - name: Print delete_nacl
+#   debug: 
+#     var: delete_nacl
+#   when: verbose
 
 - name: Delete VPC
   ec2_vpc_net:
