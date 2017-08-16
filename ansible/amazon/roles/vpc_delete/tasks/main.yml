@@ -89,32 +89,6 @@
   debug: 
     var: delete_subnet
   when: verbose
-  
-- name: Get Route Table Facts
-  ec2_vpc_route_table_facts:
-    region: "{{ region }}"
-    filters:
-      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
-  register: rtb_facts
-
-- name: Print rtb_facts
-  debug: 
-    var: rtb_facts
-  when: verbose
-
-- name: Delete Route Table
-  ec2_vpc_route_table:
-    state: absent
-    route_table_id: "{{ item.id }}"
-    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
-    region: "{{ region }}"
-  register: delete_rtb
-  with_items: "{{ rtb_facts.route_tables }}"
-
-- name: Print delete_rtb
-  debug: 
-    var: delete_rtb
-  when: verbose
 
 - name: Get Internet Gateway Facts
   ec2_vpc_igw_facts:
@@ -141,20 +115,20 @@
     var: delete_igw
   when: verbose
 
-# - name: Get NACL Facts
-#   ec2_vpc_nacl_facts:
-#     region: "{{ region }}"
-#     filters:
-#       vpc-id: "{{ vpc_facts.vpcs[0].id }}"
-#   register: nacl_facts
+- name: Get NACL Facts
+  ec2_vpc_nacl_facts:
+    region: "{{ region }}"
+    filters:
+      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
+  register: nacl_facts
 
-# - name: Print nacl_facts
-#   debug: 
-#     var: nacl_facts
-#   when: verbose
+- name: Print nacl_facts
+  debug: 
+    var: nacl_facts
+  when: verbose
 
 # - name: Delete NACL
-#   ec2_vpc_subnet:
+#   ec2_vpc_nacl:
 #     region: "{{ region }}"
 #     vpc_id: "{{ vpc_facts.vpcs[0].id }}"
 #     name: "{{ item.name }}"
@@ -166,6 +140,32 @@
 #   debug: 
 #     var: delete_nacl
 #   when: verbose
+
+- name: Get Route Table Facts
+  ec2_vpc_route_table_facts:
+    region: "{{ region }}"
+    filters:
+      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
+  register: rtb_facts
+
+- name: Print rtb_facts
+  debug: 
+    var: rtb_facts
+  when: verbose
+
+- name: Delete Route Table
+  ec2_vpc_route_table:
+    state: absent
+    route_table_id: "{{ item.id }}"
+    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
+    region: "{{ region }}"
+  register: delete_rtb
+  with_items: "{{ rtb_facts.route_tables }}"
+
+- name: Print delete_rtb
+  debug: 
+    var: delete_rtb
+  when: verbose
 
 - name: Delete VPC
   ec2_vpc_net:
