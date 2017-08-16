@@ -43,11 +43,11 @@
     region: "{{ region }}"
     filters:
       vpc-id: "{{ vpc_facts.vpcs[0].id }}"
-  register: sgs_facts
+  register: sg_facts
 
-- name: Print sgs_facts
+- name: Print sg_facts
   debug: 
-    var: sgs_facts
+    var: sg_facts
   when: verbose
 
 - name: Delete Security Group
@@ -56,18 +56,24 @@
     name: "{{ item.group_name }}"
     state: absent
   when: item.group_name != 'default'
-  with_items: "{{ sgs_facts.security_groups }}"
+  register: delete_sg
+  with_items: "{{ sg_facts.security_groups }}"
+
+- name: Print delete_sg
+  debug: 
+    var: delete_sg
+  when: verbose
 
 - name: Get Route Table Facts
   ec2_vpc_route_table_facts:
     region: "{{ region }}"
     filters:
       vpc-id: "{{ vpc_facts.vpcs[0].id }}"
-  register: routes
+  register: rtb_facts
 
-- name: Print routes
+- name: Print rtb_facts
   debug: 
-    var: routes
+    var: rtb_facts
   when: verbose
 
 - name: Delete Route Table
@@ -76,18 +82,24 @@
     route_table_id: "{{ item.id }}"
     vpc_id: "{{ vpc_facts.vpcs[0].id }}"
     region: "{{ region }}"
-  with_items: "{{ routes.route_tables }}"
+  register: delete_rtb
+  with_items: "{{ rtb_facts.route_tables }}"
+
+- name: Print delete_rtb
+  debug: 
+    var: delete_rtb
+  when: verbose
 
 - name: Get Internet Gateway Facts
   ec2_vpc_igw_facts:
     region: "{{ region }}"
     filters:
       attachment.vpc-id: "{{ vpc_facts.vpcs[0].id }}"
-  register: gateways
+  register: igw_facts
 
-- name: Print gateways
+- name: Print igw_facts
   debug: 
-    var: gateways
+    var: igw_facts
   when: verbose
 
 - name: Delete Internet Gateway
@@ -96,27 +108,40 @@
     vpc_id: "{{ vpc_facts.vpcs[0].id }}"
     state: absent
     region: "{{ region }}"
-  with_items: "{{ gateways.internet_gateways }}"
+  register: delete_igw
+  with_items: "{{ igw_facts.internet_gateways }}"
+
+- name: Print delete_igw
+  debug: 
+    var: delete_igw
+  when: verbose
 
 - name: Get Subnet Facts
   ec2_vpc_subnet_facts:
     region: "{{ region }}"
     filters:
       vpc-id: "{{ vpc_facts.vpcs[0].id }}"
-  register: subnets
+  register: subnet_facts
 
-- name: Print subnets
+- name: Print subnet_facts
   debug: 
-    var: subnets
+    var: subnet_facts
   when: verbose
 
 - name: Delete Subnet
   ec2_vpc_subnet:
     region: "{{ region }}"
     vpc_id: "{{ vpc_facts.vpcs[0].id }}"
+    cidr: "{{ item.cidr_block }}"
     state: absent
     region: "{{ region }}"
-  with_items: "{{ subnets }}"
+  register: delete_subnet
+  with_items: "{{ subnet_facts.subnets }}"
+  
+- name: Print delete_subnet
+  debug: 
+    var: delete_subnet
+  when: verbose
 
 - name: Delete VPC
   ec2_vpc_net:
@@ -126,7 +151,7 @@
     state: absent
   register: delete_vpc
 
-- name: Print vpc_facts
+- name: Print delete_vpc
   debug: 
     var: delete_vpc
   when: verbose
