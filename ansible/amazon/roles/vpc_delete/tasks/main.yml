@@ -64,6 +64,32 @@
     var: delete_sg
   when: verbose
 
+- name: Get Subnet Facts
+  ec2_vpc_subnet_facts:
+    region: "{{ region }}"
+    filters:
+      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
+  register: subnet_facts
+
+- name: Print subnet_facts
+  debug: 
+    var: subnet_facts
+  when: verbose
+
+- name: Delete Subnet
+  ec2_vpc_subnet:
+    region: "{{ region }}"
+    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
+    cidr: "{{ item.cidr_block }}"
+    state: absent
+  register: delete_subnet
+  with_items: "{{ subnet_facts.subnets }}"
+  
+- name: Print delete_subnet
+  debug: 
+    var: delete_subnet
+  when: verbose
+  
 - name: Get Route Table Facts
   ec2_vpc_route_table_facts:
     region: "{{ region }}"
@@ -115,57 +141,31 @@
     var: delete_igw
   when: verbose
 
-- name: Get Subnet Facts
-  ec2_vpc_subnet_facts:
-    region: "{{ region }}"
-    filters:
-      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
-  register: subnet_facts
+# - name: Get NACL Facts
+#   ec2_vpc_nacl_facts:
+#     region: "{{ region }}"
+#     filters:
+#       vpc-id: "{{ vpc_facts.vpcs[0].id }}"
+#   register: nacl_facts
 
-- name: Print subnet_facts
-  debug: 
-    var: subnet_facts
-  when: verbose
+# - name: Print nacl_facts
+#   debug: 
+#     var: nacl_facts
+#   when: verbose
 
-- name: Delete Subnet
-  ec2_vpc_subnet:
-    region: "{{ region }}"
-    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
-    cidr: "{{ item.cidr_block }}"
-    state: absent
-  register: delete_subnet
-  with_items: "{{ subnet_facts.subnets }}"
+# - name: Delete NACL
+#   ec2_vpc_subnet:
+#     region: "{{ region }}"
+#     vpc_id: "{{ vpc_facts.vpcs[0].id }}"
+#     name: "{{ item.name }}"
+#     state: absent
+#   register: delete_nacl
+#   with_items: "{{ nacl_facts.nacls }}"
   
-- name: Print delete_subnet
-  debug: 
-    var: delete_subnet
-  when: verbose
-
-- name: Get NACL Facts
-  ec2_vpc_nacl_facts:
-    region: "{{ region }}"
-    filters:
-      vpc-id: "{{ vpc_facts.vpcs[0].id }}"
-  register: nacl_facts
-
-- name: Print nacl_facts
-  debug: 
-    var: nacl_facts
-  when: verbose
-
-- name: Delete NACL
-  ec2_vpc_subnet:
-    region: "{{ region }}"
-    vpc_id: "{{ vpc_facts.vpcs[0].id }}"
-    name: "{{ item.name }}"
-    state: absent
-  register: delete_nacl
-  with_items: "{{ nacl_facts.nacl }}"
-  
-- name: Print delete_nacl
-  debug: 
-    var: delete_nacl
-  when: verbose
+# - name: Print delete_nacl
+#   debug: 
+#     var: delete_nacl
+#   when: verbose
 
 - name: Delete VPC
   ec2_vpc_net:
