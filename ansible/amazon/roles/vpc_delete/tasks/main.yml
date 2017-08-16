@@ -141,6 +141,9 @@
 #     var: delete_nacl
 #   when: verbose
 
+# wait 5 seconds
+- pause: seconds=5
+
 - name: Get Route Table Facts
   ec2_vpc_route_table_facts:
     region: "{{ region }}"
