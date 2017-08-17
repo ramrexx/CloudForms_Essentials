@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  gather_facts: true
+  gather_facts: false
 
   pre_tasks:
     - name: logging manageiq object
