@@ -1,6 +1,6 @@
 ---
 - name: run ipconfig
-  win_command: ipconfig
+  win_shell: ipconfig
   register: ipconfig
 
 - debug: var=ipconfig
