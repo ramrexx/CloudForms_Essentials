@@ -3,12 +3,37 @@
 - name: VM Ops|Vm|
   description: VM Operations
   set_type: CustomButtonSet
-  read_only: 
-  mode: 
+  read_only:
+  mode:
   custom_buttons:
+  - description: Launch Remote Console
+    applies_to_class: Vm
+    applies_to_exp:
+    options:
+      :button_image: '12'
+      :display: true
+      :open_url: true
+      :display_for: single
+      :submit_how: one
+    userid: admin
+    wait_for_complete:
+    name: launch_remote_console
+    visibility:
+      :roles:
+      - _ALL_
+    applies_to_id:
+    resource_actions:
+      action:
+      ae_namespace: SYSTEM
+      ae_class: PROCESS
+      ae_instance: Request
+      ae_message:
+      ae_attributes:
+        ms_rdp: 'true'
+        request: launch_remote_console
   - description: VM Extend Retirement
     applies_to_class: Vm
-    applies_to_exp: 
+    applies_to_exp:
     options:
       :button_image: '2'
       :display: true
@@ -16,24 +41,25 @@
       :display_for: single
       :submit_how: one
     userid: admin
-    wait_for_complete: 
+    wait_for_complete:
     name: VM Extend Retirement
     visibility:
       :roles:
       - _ALL_
-    applies_to_id: 
+    applies_to_id:
     resource_actions:
-      action: 
+      action:
       ae_namespace: SYSTEM
       ae_class: PROCESS
       ae_instance: Request
-      ae_message: 
+      ae_message:
       ae_attributes:
         request: vm_retire_extend
       dialog_label: button_vm_retire_extend
   set_data:
     :button_order:
     - VM Extend Retirement
+    - Launch Remote Console
     :button_image: 1
     :display: true
     :group_index: 2
