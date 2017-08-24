@@ -1,4 +1,4 @@
-# embedded_ansible_list_playbooks.rb
+# list_embedded_ansible_playbook_ids.rb
 #
 # Author: Joshua Cornutt <jcornutt@redhat.com>
 # License: GPL v3

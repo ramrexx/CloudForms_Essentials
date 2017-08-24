@@ -4,9 +4,9 @@ version: 1.0
 object:
   attributes:
     display_name: Embedded Ansible - List Repositories
-    name: embedded_ansible_list_repositories
+    name: list_embedded_ansible_repository_ids
     inherits: 
     description: Lists repositories
   fields:
   - execute:
-      value: embedded_ansible_list_repositories
+      value: list_embedded_ansible_repository_ids

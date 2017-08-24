@@ -3,7 +3,7 @@ object_type: method
 version: 1.0
 object:
   attributes:
-    name: embedded_ansible_list_playbooks
+    name: list_embedded_ansible_playbook_ids
     display_name: 
     description: 
     scope: instance

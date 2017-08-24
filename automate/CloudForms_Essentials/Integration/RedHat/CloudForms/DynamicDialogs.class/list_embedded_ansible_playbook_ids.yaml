@@ -4,9 +4,9 @@ version: 1.0
 object:
   attributes:
     display_name: Embedded Ansible - List Playbooks
-    name: embedded_ansible_list_playbooks
+    name: list_embedded_ansible_playbook_ids
     inherits: 
     description: Lists playbooks by repository (expects "dialog_ansible_repo_id")
   fields:
   - execute:
-      value: embedded_ansible_list_playbooks
+      value: list_embedded_ansible_playbook_ids

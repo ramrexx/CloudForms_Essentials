@@ -1,4 +1,4 @@
-# embedded_ansible_list_repositories.rb
+# list_embedded_ansible_repository_ids.rb
 #
 # Author: Joshua Cornutt <jcornutt@redhat.com>
 # License: GPL v3
