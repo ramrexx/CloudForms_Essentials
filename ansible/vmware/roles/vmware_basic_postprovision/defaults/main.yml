@@ -1,5 +1,0 @@
----
-category: lifecycle
-tag: retire_full
-verbose: false
-miq_creds: "{{ miq_credentials | default('Basic YWRtaW46c21hcnR2bQ==') }}"
