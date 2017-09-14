@@ -1,0 +1,150 @@
+---
+- MiqWidget:
+    guid: c04ad1f6-aee2-11e4-8ff5-00505693ad6a
+    description: Azure - Number of VMs by Flavor
+    title: Azure - Number of VMs by Flavor
+    content_type: report
+    options:
+      :row_count: 5
+      :col_order:
+      - name
+      - ext_management_system.provider_region
+      - total_vms
+    visibility:
+      :roles:
+      - _ALL_
+    user_id: 
+    resource_id: 158
+    resource_type: MiqReport
+    enabled: true
+    read_only: false
+    MiqReportContent:
+    - MiqReport:
+        title: Azure - Number of VMs by Flavor
+        rpt_group: Custom
+        rpt_type: Custom
+        priority: 
+        db: Flavor
+        cols:
+        - name
+        - enabled
+        - block_storage_based_only
+        - cpu_cores
+        - cpus
+        - description
+        - ems_ref
+        - memory
+        - total_vms
+        - type
+        include:
+          ext_management_system:
+            columns:
+            - provider_region
+        col_order:
+        - name
+        - enabled
+        - block_storage_based_only
+        - cpu_cores
+        - cpus
+        - description
+        - ems_ref
+        - memory
+        - total_vms
+        - type
+        - ext_management_system.provider_region
+        headers:
+        - Name
+        - Active
+        - Block Storage Based Only
+        - Cpu Cores
+        - Cpus
+        - Description
+        - Ems Ref
+        - Memory
+        - Total Vms
+        - Type
+        - Provider Region
+        conditions: !ruby/object:MiqExpression
+          exp:
+            REGULAR EXPRESSION MATCHES:
+              field: Flavor-type
+              value: "/azure/i"
+          context_type: 
+        order: Descending
+        sortby:
+        - total_vms
+        group: y
+        graph: 
+        dims: 
+        filename: 
+        file_mtime: 
+        categories: []
+        timeline: 
+        template_type: report
+        where_clause: 
+        db_options: {}
+        generate_cols: 
+        generate_rows: 
+        col_formats:
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        - 
+        tz: 
+        time_profile_id: 
+        display_filter: 
+        col_options:
+          total_vms:
+            :break_label: 'Total Vms: '
+            :grouping:
+            - :total
+        rpt_options:
+          :pdf:
+            :page_size: US-Letter
+          :queue_timeout: 
+          :summary:
+            :hide_detail_rows: false
+        miq_group_id: 360000000000015
+        user_id: 360000000000003
+        menu_name: Azure - Number of VMs by Flavor
+    MiqSchedule:
+      name: Azure - Number of VMs by Flavor
+      description: Azure - Number of VMs by Flavor
+      sched_action:
+        :method: generate_widget
+      filter: !ruby/object:MiqExpression
+        exp:
+          "=":
+            field: MiqWidget.id
+            value: 360000000000032
+        context_type: 
+        col_details:
+          MiqWidget.id:
+            :data_type: 
+            :virtual_reflection: true
+            :virtual_column: true
+            :excluded_by_preprocess_options: false
+            :tag: false
+            :include:
+              :id: {}
+        pexp: 
+        ruby: <value ref=miqwidget, type=string>/virtual/id</value> == "360000000000032"
+      towhat: MiqWidget
+      run_at:
+        :start_time: 2015-09-11 04:55:00.000000000 Z
+        :tz: Eastern Time (US & Canada)
+        :interval:
+          :unit: hourly
+          :value: '1'
+      enabled: true
+      userid: system
+      prod_default: system
+      adhoc: 
+      file_depot_id: 
