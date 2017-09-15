@@ -41,7 +41,8 @@ IMPORTANT: CloudForms must be running with a database region configured
 
 <<top>>
 
-== **Offline** Installation
+== Offline Installation
+CloudForms Essentials can be installed in offline mode via an Ansible Playbook
 
 * https://raw.githubusercontent.com/ramrexx/CloudForms_Essentials/master/cloudforms_essentials_install.yml[Download the installation playbook]
 
