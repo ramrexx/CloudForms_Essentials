@@ -8,5 +8,5 @@ object:
     inherits: 
     description: Lists repositories
   fields:
-  - execute:
+  - method2:
       value: list_embedded_ansible_repository_ids

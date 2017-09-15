@@ -8,5 +8,5 @@ object:
     inherits: 
     description: Lists playbooks by repository (expects "dialog_ansible_repo_id")
   fields:
-  - execute:
+  - method2:
       value: list_embedded_ansible_playbook_ids
