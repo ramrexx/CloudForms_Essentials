@@ -8,55 +8,81 @@
   vars:
     dest_dir: /root/
     github_user: ramrexx
-    cfe_base_dir: "{{ dest_dir }}CloudForms_Essentials"
+    cfme_base_dir: "{{ dest_dir }}CloudForms_Essentials"
+    rht_base_dir: "{{ dest_dir }}cfme-rhconsulting-scripts"
+    offline: false
+    offline_rht_zip_file: "{{ dest_dir }}cfme-rhconsulting-scripts-master.zip"
+    offline_cfme_zip_file: "{{ dest_dir }}CloudForms_Essentials-master.zip"
 
   tasks:
   - name: Clone cfme-rhconsulting-scripts
     git:
       repo: https://github.com/rhtconsulting/cfme-rhconsulting-scripts.git
-      dest: "{{ dest_dir }}cfme-rhconsulting-scripts"
+      dest: "{{ rht_base_dir }}"
+    when: not offline
+
+  - name: Unzipping "{{ offline_rht_zip_file }}"
+    unarchive:
+      src: "{{ offline_rht_zip_file }}"
+      dest: "{{ dest_dir }}"
+    when: offline
+
+  - name: Move cfme-rhconsulting-scripts-master to "{{ rht_base_dir }}"
+    command: mv "{{ dest_dir }}cfme-rhconsulting-scripts-master" "{{ rht_base_dir }}"
+    when: offline
 
   - name:  Install the cfme-rhconsulting-scripts
     shell: make clean install
     args:
-      chdir: "{{ dest_dir }}cfme-rhconsulting-scripts"
+      chdir: "{{ rht_base_dir }}"
 
   - name: Clone CloudForms_Essentials
     git:
       repo: "https://github.com/{{ github_user }}/CloudForms_Essentials.git"
-      dest: "{{ cfe_base_dir }}"
+      dest: "{{ cfme_base_dir }}"
+    when: not offline
+
+  - name: Unzipping "{{ offline_cfme_zip_file }}"
+    unarchive:
+      src: "{{ offline_cfme_zip_file }}"
+      dest: "{{ dest_dir }}"
+    when: offline
+
+  - name: Move CloudForms_Essentials-master to "{{ cfme_base_dir }}"
+    command: mv "{{ dest_dir }}CloudForms_Essentials-master" "{{ cfme_base_dir }}"
+    when: offline
 
   - name: Import automate domain
-    shell: miqimport domain CloudForms_Essentials "{{ cfe_base_dir }}/automate"
+    shell: miqimport domain CloudForms_Essentials "{{ cfme_base_dir }}/automate"
     args:
-      chdir: "{{ cfe_base_dir }}"
+      chdir: "{{ cfme_base_dir }}"
 
   - name: Import dialogs
     shell: "miqimport service_dialogs service_dialogs/"
     args:
-      chdir: "{{ cfe_base_dir }}"
+      chdir: "{{ cfme_base_dir }}"
 
   - name: Import buttons
     shell: "miqimport buttons buttons/"
     args:
-     chdir: "{{ cfe_base_dir }}"
+     chdir: "{{ cfme_base_dir }}"
 
   - name: Import alerts
     shell: "miqimport alerts alerts/"
     args:
-     chdir: "{{ cfe_base_dir }}"
+     chdir: "{{ cfme_base_dir }}"
 
   - name: Import policies
     shell: "miqimport policies policies/"
     args:
-     chdir: "{{ cfe_base_dir }}"
+     chdir: "{{ cfme_base_dir }}"
 
   - name: Import reports
     shell: "miqimport reports reports/"
     args:
-     chdir: "{{ cfe_base_dir }}"
+     chdir: "{{ cfme_base_dir }}"
 
   - name: Import widgets
     shell: "miqimport widgets widgets/"
     args:
-     chdir: "{{ cfe_base_dir }}"
+     chdir: "{{ cfme_base_dir }}"

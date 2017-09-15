@@ -41,3 +41,22 @@ IMPORTANT: CloudForms must be running with a database region configured
 
 <<top>>
 
+== **Offline** Installation
+
+* https://raw.githubusercontent.com/ramrexx/CloudForms_Essentials/master/cloudforms_essentials_install.yml[Download the installation playbook]
+
+* https://github.com/ramrexx/CloudForms_Essentials/archive/master.zip[Download CloudForms_Essentials]
+
+* https://github.com/rhtconsulting/cfme-rhconsulting-scripts/archive/master.zip[Download the cfme-rhconsulting-scripts]
+
+* Copy all files to your cloudforms appliance `/root` directory
+
+IMPORTANT: CloudForms must be running with a database region configured
+
+* Log into your CloudForms appliance and make sure you are in roots home directory
+
+* Execute the installation playbook in offline mode
+
+ ansible-playbook cloudforms_essentials_install.yml -v -e "offline=true"
+
+<<top>>
