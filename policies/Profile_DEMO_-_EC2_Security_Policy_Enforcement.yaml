@@ -1,0 +1,166 @@
+---
+- MiqPolicySet:
+    name: 7089898a-0446-11e7-b49f-001a4a160177
+    description: DEMO - EC2 Security Policy Enforcement
+    set_type: MiqPolicySet
+    guid: 7089898a-0446-11e7-b49f-001a4a160177
+    read_only: 
+    set_data: 
+    mode: control
+    owner_type: 
+    owner_id: 
+    userid: 
+    group_id: 
+    MiqPolicy:
+    - name: dd43be28-9d76-11e7-b44e-001a4a160156
+      description: DEMO - EC2 Attach Security Group Policy
+      expression: 
+      towhat: Vm
+      guid: dd43be28-9d76-11e7-b44e-001a4a160156
+      created_by: admin
+      updated_by: admin
+      notes: Ensure that all Amazon production instances in the DMZ have the correct
+        security policy.
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        success_synchronous: true
+        MiqEventDefinition:
+          name: vm_start
+          description: VM Power On
+          guid: 404b4630-21a8-11e2-b47a-0050568b19a3
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 78b61764-0445-11e7-b49f-001a4a160177
+          description: DEMO - EC2 Attach Security Group Action
+          guid: 78b61764-0445-11e7-b49f-001a4a160177
+          action_type: custom_automation
+          options:
+            :ae_message: create
+            :ae_request: ec2_attach_securitygroup
+      - qualifier: success
+        success_sequence: 1
+        success_synchronous: true
+        MiqEventDefinition:
+          name: request_vm_start
+          description: VM Power On Request
+          guid: 48b02c4a-ae7c-11e1-a76f-005056b25af6
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 78b61764-0445-11e7-b49f-001a4a160177
+          description: DEMO - EC2 Attach Security Group Action
+          guid: 78b61764-0445-11e7-b49f-001a4a160177
+          action_type: custom_automation
+          options:
+            :ae_message: create
+            :ae_request: ec2_attach_securitygroup
+      Condition:
+      - name: 0d98871e-0445-11e7-b49f-001a4a160177
+        description: DEMO - EC2 Security Group Condition
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - REGULAR EXPRESSION MATCHES:
+                field: Vm-vendor
+                value: "/amazon/i"
+            - CONTAINS:
+                tag: Vm.managed-environment
+                value: prod
+            - CONTAINS:
+                tag: Vm.managed-network_location
+                value: dmz
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 0d98871e-0445-11e7-b49f-001a4a160177
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 
+        notes: 
+        read_only: 
+    - name: 9ba6f28a-0444-11e7-9047-001a4a16017d
+      description: DEMO - EC2 Detach Security Group Policy
+      expression: 
+      towhat: Vm
+      guid: 9ba6f28a-0444-11e7-9047-001a4a16017d
+      created_by: admin
+      updated_by: admin
+      notes: Ensure that all Amazon production instances in the DMZ have the correct
+        security policy.
+      active: true
+      mode: control
+      read_only: 
+      MiqPolicyContent:
+      - qualifier: success
+        success_sequence: 1
+        success_synchronous: true
+        MiqEventDefinition:
+          name: vm_poweroff
+          description: VM Power Off
+          guid: 48beeadc-ae7c-11e1-a76f-005056b25af6
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 866c7fa0-044b-11e7-b49f-001a4a160177
+          description: DEMO - EC2 Detach Security Group Action
+          guid: 866c7fa0-044b-11e7-b49f-001a4a160177
+          action_type: custom_automation
+          options:
+            :ae_message: create
+            :ae_request: ec2_detach_securitygroup
+      - qualifier: success
+        success_sequence: 1
+        success_synchronous: true
+        MiqEventDefinition:
+          name: request_vm_poweroff
+          description: VM Power Off Request
+          guid: 33b5baee-c240-11e6-b84c-001a4a160177
+          event_type: Default
+          definition: 
+          default: 
+          enabled: 
+        MiqAction:
+          name: 866c7fa0-044b-11e7-b49f-001a4a160177
+          description: DEMO - EC2 Detach Security Group Action
+          guid: 866c7fa0-044b-11e7-b49f-001a4a160177
+          action_type: custom_automation
+          options:
+            :ae_message: create
+            :ae_request: ec2_detach_securitygroup
+      Condition:
+      - name: 0d98871e-0445-11e7-b49f-001a4a160177
+        description: DEMO - EC2 Security Group Condition
+        modifier: allow
+        expression: !ruby/object:MiqExpression
+          exp:
+            and:
+            - REGULAR EXPRESSION MATCHES:
+                field: Vm-vendor
+                value: "/amazon/i"
+            - CONTAINS:
+                tag: Vm.managed-environment
+                value: prod
+            - CONTAINS:
+                tag: Vm.managed-network_location
+                value: dmz
+          context_type: 
+        towhat: Vm
+        file_mtime: 
+        guid: 0d98871e-0445-11e7-b49f-001a4a160177
+        filename: 
+        applies_to_exp: 
+        miq_policy_id: 
+        notes: 
+        read_only: 
