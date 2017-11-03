@@ -3,5 +3,5 @@ category: lifecycle
 tag: retire_full
 verbose: false
 miq_creds: "{{ miq_credentials | default('Basic YWRtaW46c21hcnR2bQ==') }}"
-retries: 10
-delay: 10
+max_retries: 10
+retry_interval: 10

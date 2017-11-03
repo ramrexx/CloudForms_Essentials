@@ -14,8 +14,8 @@
     status_code: 200
   register: lookup_vms_output
   until: lookup_vms_output.json.subcount > 0
-  retries: "{{ retries }}"
-  delay: "{{ delay }}"
+  retries: "{{ max_retries }}"
+  delay: "{{ retry_interval }}"
   with_items: "{{ vms.instances }}"
 
 - debug: var=lookup_vms_output.results
