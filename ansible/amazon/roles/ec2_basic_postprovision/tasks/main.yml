@@ -1,4 +1,41 @@
 ---
+- name: Set the provider url
+  set_fact:
+    provider_url: "{{ manageiq.api_url }}/api/providers/{{ provider_id }}"
+
+- name: Refresh provider in cloudforms
+  uri:
+    url: "{{ provider_url }}"
+    method: POST
+    body:
+      action: refresh
+    body_format: json
+    validate_certs: False
+    headers:
+      X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: refresh_task_output
+
+- name: Set the task href
+  set_fact:
+    task_url: "{{ refresh_task_output.json.task_href}}"
+
+- name: Wait for the provider refresh to end
+  uri:
+    url: "{{ task_url }}"
+    method: GET
+    validate_certs: False
+    headers:
+      X-Auth-Token: "{{ manageiq.api_token }}"
+      Content-Type: "application/json"
+    status_code: 200
+  register: refresh_task_result
+  until: refresh_task_result.json.state == 'Finished' or refresh_task_result.json.status == 'Error'
+  failed_when: refresh_task_result.json.status == 'Error'
+  retries: "{{ max_retries }}"
+  delay: "{{ retry_interval }}"
+
 - name: Lookup CloudForms VM via uid_ems
   uri:
     url: "{{ manageiq.api_url }}/api/vms?filter[]=uid_ems={{ item.id }}&expand=resources"
@@ -8,8 +45,8 @@
     body_format: json
     validate_certs: false
     headers:
-      Authorization: "{{ miq_creds }}"
-      # X-Auth-Token: "{{ manageiq.api_token }}"
+      # Authorization: "{{ miq_creds }}"
+      X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
   register: lookup_vms_output
@@ -25,7 +62,8 @@
   set_fact:
     svc_url: "/api/{{ manageiq.service }}"
 
-- debug: var=svc_url
+- name: Log svc_url
+  debug: var=svc_url
   when: verbose
 
 - name: Initialize an empty list for vms
@@ -40,7 +78,8 @@
     vms: "{{ empty_list }} + [ { 'href': svc_url, 'resource': { 'href': '/api/vms/{{ item.json.resources[0].id }}' } } ]"
   with_items: "{{ lookup_vms_output.results }}"
 
-- debug: var=vms
+- name: Log vms
+  debug: var=vms
   when: verbose
 
 - name: Add vms to the service
@@ -53,13 +92,13 @@
       resources: "{{ vms }}"
     validate_certs: false
     headers:
-      Authorization: "{{ miq_creds }}"
-      # X-Auth-Token: "{{ manageiq.api_token }}"
+      X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
   register: add_output
 
-- debug: var=add_output.json.results[0].success
+- name: Log add_output
+  debug: var=add_output.json.results[0].success
   when: verbose
   
 - name: Check if the VM was successfully attached to service
@@ -78,13 +117,13 @@
           name: "{{ tag }}"
     validate_certs: false
     headers:
-      Authorization: "{{ miq_creds }}"
-      # X-Auth-Token: "{{ manageiq.api_token }}"
+      X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
   register: tag_service_output
 
-- debug: var=tag_service_output
+- name: Log tag_service_output
+  debug: var=tag_service_output
   when: verbose
 
 - name: Assign CF tag to VM
@@ -99,14 +138,14 @@
     body_format: json
     validate_certs: false
     headers:
-      Authorization: "{{ miq_creds }}"
-      # X-Auth-Token: "{{ manageiq.api_token }}"
+      X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
   register: assign_vmtag_output
   with_items: "{{ lookup_vms_output.results }}"
 
-- debug: var=assign_vmtag_output.results
+- name: Log assign_vmtag_output
+  debug: var=assign_vmtag_output.results
   when: verbose
 
 - name: Lookup CloudForms userid
@@ -115,20 +154,21 @@
     method: GET
     validate_certs: false
     headers:
-      Authorization: "{{ miq_creds }}"
-      # X-Auth-Token: "{{ manageiq.api_token }}"
+      X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
   register: lookup_user_output
 
-- debug: var=lookup_user_output
+- name: Log lookup_user_output
+  debug: var=lookup_user_output
   when: verbose
 
 - name: Setting CloudForms userid
   set_fact:
     userid: "{{ lookup_user_output.json.userid }}"
 
-- debug: var=userid
+- name: Log userid
+  debug: var=userid
   when: verbose
 
 - name: Assign CloudForms userid to VM
@@ -142,14 +182,15 @@
     body_format: json
     validate_certs: false
     headers:
-      Authorization: "{{ miq_creds }}"
-      # X-Auth-Token: "{{ manageiq.api_token }}"
+      # Authorization: "{{ miq_creds }}"
+      X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
   register: assign_cfowner_output
   with_items: "{{ lookup_vms_output.results }}"
 
-- debug: var=assign_cfowner_output
+- name: Log assign_cfowner_output
+  debug: var=assign_cfowner_output
   when: verbose
 
 
