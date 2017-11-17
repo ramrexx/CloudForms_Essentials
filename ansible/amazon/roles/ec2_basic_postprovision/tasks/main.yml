@@ -21,20 +21,20 @@
   set_fact:
     task_url: "{{ refresh_task_output.json.task_href}}"
 
-- name: Wait for the provider refresh to end
-  uri:
-    url: "{{ task_url }}"
-    method: GET
-    validate_certs: False
-    headers:
-      X-Auth-Token: "{{ manageiq.api_token }}"
-      Content-Type: "application/json"
-    status_code: 200
-  register: refresh_task_result
-  until: refresh_task_result.json.state == 'Finished' or refresh_task_result.json.status == 'Error'
-  failed_when: refresh_task_result.json.status == 'Error'
-  retries: "{{ max_retries }}"
-  delay: "{{ retry_interval }}"
+# - name: Wait for the provider refresh to end
+#   uri:
+#     url: "{{ task_url }}"
+#     method: GET
+#     validate_certs: False
+#     headers:
+#       X-Auth-Token: "{{ manageiq.api_token }}"
+#       Content-Type: "application/json"
+#     status_code: 200
+#   register: refresh_task_result
+#   until: refresh_task_result.json.state == 'Finished' or refresh_task_result.json.status == 'Error'
+#   failed_when: refresh_task_result.json.status == 'Error'
+#   retries: "{{ max_retries }}"
+#   delay: "{{ retry_interval }}"
 
 - name: Lookup CloudForms VM via uid_ems
   uri:
