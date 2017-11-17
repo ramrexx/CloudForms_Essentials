@@ -15,8 +15,7 @@
     body_format: json
     validate_certs: false
     headers:
-      Authorization: "{{ miq_creds }}"
-      # X-Auth-Token: "{{ manageiq.api_token }}"
+      X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
   register: refresh_output
@@ -37,8 +36,8 @@
     method: GET
     validate_certs: false
     headers:
-      Authorization: "{{ miq_creds }}"
-      # X-Auth-Token: "{{ manageiq.api_token }}"
+      # Authorization: "{{ miq_creds }}"
+      X-Auth-Token: "{{ manageiq.api_token }}"
       Content-Type: "application/json"
     status_code: 200
   register: refresh_output
