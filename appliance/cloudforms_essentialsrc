@@ -37,9 +37,9 @@ alias tailprod='less +F $VMDB_PATH/log/production.log'
 alias tailpolicy='less +F $VMDB_PATH/log/policy.log'
 
 # Clean logging aliases
-alias clean_evm="echo Cleaned: `date` > $VMDB_PATH/log/evm.log"
-alias clean_auto="echo Cleaned: `date` > $VMDB_PATH/log/automation.log"
-alias clean_prod="echo Cleaned: `date` > $VMDB_PATH/log/production.log"
+alias clean_evm="echo Cleaned: \`date\` > $VMDB_PATH/log/evm.log"
+alias clean_auto="echo Cleaned: \`date\` > $VMDB_PATH/log/automation.log"
+alias clean_prod="echo Cleaned: \`date\` > $VMDB_PATH/log/production.log"
 alias clean="clean_evm;clean_auto;clean_prod"
 
 # Rails Console
